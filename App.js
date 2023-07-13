@@ -1,35 +1,19 @@
-import React, { useEffect } from "react";
-import {
-  updateWidth,
-  updateHeight,
-} from "./src/redux/actions/dimensionsActions";
+import React from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
 import TabsNavigation from "./src/routes/tabs-navigation";
-import { Dimensions } from "react-native";
-import { Provider, useDispatch } from "react-redux";
-import { Store } from "./src/redux/store";
+import store from "./src/redux/store";
+import { Provider } from "react-redux";
+
 
 export default function App() {
   return (
-    <Provider store={Store}>
-      <AppWrapper />
+    <Provider store={store}>
+      <NavigationContainer>
+      <TabsNavigation />
+    </NavigationContainer>
     </Provider>
   );
 }
 
-const AppWrapper = () => {
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    const { width, height } = Dimensions.get("window");
-    dispatch(updateWidth(width));
-    dispatch(updateHeight(height));
-  }, [dispatch]);
-
-  return (
-    <NavigationContainer>
-      <TabsNavigation />
-    </NavigationContainer>
-  );
-};
