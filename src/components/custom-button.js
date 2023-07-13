@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { ColorAssets } from '../utils/app-assets'
 
@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
         borderRadius: 40,
         backgroundColor: ColorAssets.greenColor,
         alignItems: "center",
-      }, titleNext: {
+      },
+       titleNext: {
         fontWeight: "bold",
         color: ColorAssets.whiteColor,
         fontSize: 16,
