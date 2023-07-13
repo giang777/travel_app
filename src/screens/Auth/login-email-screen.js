@@ -1,46 +1,47 @@
 import {
-  StyleSheet,
-  StatusBar,
-  Text,
-  View,
-  BackHandler,
-  ScrollView,
-  Image,
   Dimensions,
+  ScrollView,
+  StyleSheet,
+  Text,
   TouchableOpacity,
+  View,StatusBar
 } from "react-native";
 import React from "react";
 import AppBar from "../../components/custom-appbar";
-import { ColorAssets, IconAssets } from "../../utils/app-assets";
 import Sizebox from "../../components/custom-sizebox";
+import { ColorAssets } from "../../utils/app-assets";
 import CustomButton from "../../components/custom-button";
-
+import CustomTextInput from "../../components/custom-textInput";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
-
-const LoginHomeScreen = ({ navigation }) => {
+const LoginEmailScreen = ({ navigation }) => {
   const paddingTop = StatusBar.currentHeight || 0;
   return (
     <View style={[styles.container, { paddingTop }]}>
-      <AppBar onPress={() => BackHandler.exitApp()} />
+      <AppBar onPress={() => navigation.goBack()} />
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollViewContent} >
         <View style={styles.content}>
-          <Text style={styles.title}>Let's your in</Text>
-          <TouchableOpacity style={styles.buttonLoginGoogle} onPress={() => {}}>
-            <View style={styles.contentButton}>
-              <Image style={styles.imageIcon} source={IconAssets.iconGoogle} />
-              <Sizebox width={10} />
-              <Text style={styles.titleGoogle}>Continue with Google</Text>
-            </View>
-          </TouchableOpacity>
-          <Sizebox height={40} />
+          <Text style={styles.title}>Login to your Account</Text>
+
+          <CustomTextInput />
+          <Sizebox height={20} />
+          <CustomTextInput />
+          <Sizebox height={30} />
+
           <CustomButton
             style={styles.button}
-            title="Sign in with Email"
-            onPress={() => navigation.navigate("LoginEmailScreen")}
+            title="Sign in"
+            onPress={() => navigation.navigate("HomeScreen")}
           />
+          <Sizebox height={15} />
+          <TouchableOpacity
+            style={styles.titleFogotPassword}
+            onPress={() => {}}
+          >
+            <Text style={styles.titleSignUp}>Forgot the password?</Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.footer}>
           <Text style={styles.titleDontHaveAccount}>Dont have an account?</Text>
@@ -54,7 +55,7 @@ const LoginHomeScreen = ({ navigation }) => {
   );
 };
 
-export default LoginHomeScreen;
+export default LoginEmailScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -68,37 +69,15 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   content: {
-    alignItems: "center",
+    alignItems: "flex-start",
     paddingHorizontal: 15,
     flexGrow: 1,
   },
   title: {
-    marginVertical: windowHeight / 6.5,
+    marginVertical: windowHeight / 11.5,
     fontWeight: "600",
     letterSpacing: 1,
     fontSize: windowWidth / 9.5,
-  },
-  contentButton: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  imageIcon: {
-    width: windowWidth / 15,
-    height: windowWidth / 15,
-  },
-  buttonLoginGoogle: {
-    paddingVertical: 14,
-    width: "100%",
-    borderRadius: 40,
-    backgroundColor: ColorAssets.transparentColor,
-    alignItems: "center",
-    borderWidth: 1,
-  },
-  titleGoogle: {
-    fontWeight: "bold",
-    color: ColorAssets.blackolor,
-    fontSize: windowWidth / 24,
   },
   footer: {
     flexDirection: "row",
@@ -113,5 +92,9 @@ const styles = StyleSheet.create({
   titleSignUp: {
     color: ColorAssets.greenColor,
     fontWeight: "bold",
+  },
+  titleFogotPassword: {
+    width: "100%",
+    alignItems: "center",
   },
 });

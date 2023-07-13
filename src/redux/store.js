@@ -1,4 +1,9 @@
-import { createStore } from 'redux'
-import dimensionsReducer from './reducers/dimensionsReducer';
-export const Store = createStore(dimensionsReducer);
+import { legacy_createStore as createStore, combineReducers } from 'redux';
+import  {TYPE_REDUCER}  from './reducers/typeReducer';
 
+const rootReducer = combineReducers({
+    TYPEReducer: TYPE_REDUCER,
+  });
+  
+
+export default Store = createStore(rootReducer); 
