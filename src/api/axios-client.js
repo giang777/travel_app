@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // import axios from "axios";
-const API_URL="http://103.16.160.232:3000/"
+const API_URL="http://103.16.160.232:3000"
 const axiosClient = axios.create({
     // api website
     baseURL: API_URL,
