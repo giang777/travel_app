@@ -6,6 +6,7 @@ import { styleSplashScreen } from "./styles";
 
 
 
+
 const SplashScreen = ({ navigation }) => {
   setTimeout(() => {
     navigation.dispatch(StackActions.replace("WelcomeV1"));

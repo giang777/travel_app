@@ -1,9 +1,7 @@
 import { ScrollView, StatusBar, StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native'
 import React, { useState } from 'react'
 import AppBar from '../../../components/custom-appbar';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { CustomTextInput } from '../../../components/custom-textInput';
-import { CustomTextInput2 } from '../../../components/custom-textInput'
 import Sizebox from "../../../components/custom-sizebox";
 import CustomButton from '../../../components/custom-button';
 import { ColorAssets } from '../../../utils/app-assets';
@@ -11,7 +9,6 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const SignUpScreen = ({ navigation }) => {
   const paddingTop = StatusBar.currentHeight || 0;
-  const [date, setDate] = useState(new Date())
 
   return (
     <View style={[styles.container, { paddingTop }]}>
@@ -22,9 +19,9 @@ const SignUpScreen = ({ navigation }) => {
         <View style={styles.content}>
           <Text style={styles.title}>Create your Account</Text>
 
-          <CustomTextInput textPlaceHolder={"Username"} />
+          <CustomTextInput placeholder={"Username"} />
           <Sizebox height={20} />
-          <CustomTextInput textPlaceHolder={"Password"} />
+          <CustomTextInput placeholder={"Password"} />
           <Sizebox height={30} />
 
           <CustomButton
