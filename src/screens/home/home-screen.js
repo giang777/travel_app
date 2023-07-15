@@ -3,6 +3,7 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 const HomeScreen = () => {
+  //giang
   return (
    <SafeAreaView>
      <View>
