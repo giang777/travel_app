@@ -11,7 +11,7 @@ import AppBar from "../../components/custom-appbar";
 import Sizebox from "../../components/custom-sizebox";
 import { ColorAssets } from "../../utils/app-assets";
 import CustomButton from "../../components/custom-button";
-import CustomTextInput from "../../components/custom-textInput";
+import {CustomTextInput} from "../../components/custom-textInput";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const LoginEmailScreen = ({ navigation }) => {
