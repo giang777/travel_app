@@ -1,4 +1,5 @@
-import { StyleSheet, Dimensions } from 'react-native';
+  
+import { StyleSheet, Dimensions,Platform, } from 'react-native';
 import { ColorAssets } from '../../utils/app-assets';
 
 
@@ -32,6 +33,8 @@ export const styleWelcomeV1= StyleSheet.create({
   },
   content: {
     justifyContent: "space-around",
+    width:'100%',
+    alignItems:'flex-start',
     paddingBottom: 20,
     paddingHorizontal: "5%",
   },
@@ -62,7 +65,7 @@ export const styleWelcomeV1_1 = StyleSheet.create({
   },
   banner: {
     width: windowWidth,
-    height: windowHeight / 1.8,
+    height: windowHeight / 1.8
   },
   content: {
     marginVertical: 10,
@@ -104,7 +107,7 @@ export const styleWelcomeV1_1 = StyleSheet.create({
     marginHorizontal: 5,
     height: 10,
     width: 10,
-    borderRadius: 5,
+    borderRadius: 10,
     backgroundColor: ColorAssets.dotColor,
   },
   selectedDot: {

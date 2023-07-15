@@ -21,7 +21,7 @@ import { styleWelcomeV1_1 } from "./styles";
 
 const WelcomeV1_1 = ({ navigation }) => {
 
-  const first = useSelector((state) => state.TYPEReducer.first);
+  const first = useSelector((state) => state.typeReducer.first);
   const dispatch = useDispatch();
   const handleIncreaseCount = () => {
     console.log(first);
@@ -44,24 +44,24 @@ const WelcomeV1_1 = ({ navigation }) => {
           </Text>
           <Sizebox height={10} />
           <View style={styleWelcomeV1_1.dotContainer}>
-          <Text
+          <View
               style={[
                 styleWelcomeV1_1.dot,
                 first === 0 && styleWelcomeV1_1.selectedDot,
               ]}
-            ></Text>
-            <Text
+            ></View>
+            <View
               style={[
                 styleWelcomeV1_1.dot,
                 first === 1 && styleWelcomeV1_1.selectedDot,
               ]}
-            ></Text>
-            <Text
+            ></View>
+            <View
               style={[
                 styleWelcomeV1_1.dot,
                 first === 2 && styleWelcomeV1_1.selectedDot,
               ]}
-            ></Text>
+            ></View>
           </View>
           <CustomButton title="Next" onPress={handleIncreaseCount} />
 
