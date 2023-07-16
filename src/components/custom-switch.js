@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         height: 60,
-        backgroundColor: 'white',
         backgroundColor: ColorAssets.greyColor200,
     },
     btnGender: {

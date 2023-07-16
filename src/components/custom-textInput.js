@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 16,
     fontSize: 16,
-    width: "100%",
   },
   container2: {
     width: "49%",
