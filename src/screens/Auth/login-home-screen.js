@@ -14,7 +14,7 @@ import React from "react";
 import AppBar from "../../components/custom-appbar";
 import { ColorAssets, IconAssets } from "../../utils/app-assets";
 import Sizebox from "../../components/custom-sizebox";
-import CustomButton from "../../components/custom-button";
+import {CustomButton} from "../../components/custom-button";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const windowWidth = Dimensions.get("window").width;

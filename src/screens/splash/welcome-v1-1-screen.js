@@ -13,7 +13,7 @@ import {
   titleAssets,
 } from "../../utils/app-assets";
 import Sizebox from "../../components/custom-sizebox";
-import CustomButton from "../../components/custom-button";
+import {CustomButton} from "../../components/custom-button";
 import { StackActions } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { increaseCount } from "../../redux/actions/typeAction";
