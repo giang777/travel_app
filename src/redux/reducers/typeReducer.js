@@ -4,7 +4,16 @@ export const initialState = {
 const userData = {
   userinfo: {},
 }
-
+const registerUser = {
+  userpassword: {
+    userName: '',
+    passWord: '',
+    re_password: ''
+  },
+  userInfo: {
+    fullName: '',
+  }
+}
 export const TYPE_REDUCER = (state = initialState, action) => {
   switch (action.type) {
     case "INCREASE_COUNT":
@@ -19,12 +28,29 @@ export const TYPE_REDUCER = (state = initialState, action) => {
 
 export const AUTH_REDUCER = (state = userData, action) => {
   switch (action.type) {
-    case 'SET_USER':
+    case 'LOGIN_USER':
       return {
         ...state,
         userinfo: action.payload,
       };
-  
+
+    default:
+      return state;
+  }
+};
+export const REGISTER_REDUCER = (state = registerUser, action) => {
+  switch (action.type) {
+    case 'REGISTER_USER/USERPASSWORD':
+      return {
+        ...state,
+        userpassword: action.payload
+      };
+    case 'REGISTER_USER/USERINFO':
+      return {
+        ...state,
+        userInfo: action.payload
+      };
+
     default:
       return state;
   }

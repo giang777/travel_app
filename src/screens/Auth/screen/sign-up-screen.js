@@ -5,13 +5,25 @@ import { CustomTextInput } from '../../../components/custom-textInput';
 import Sizebox from "../../../components/custom-sizebox";
 import { CustomButton, CustomHideButton } from '../../../components/custom-button';
 import { ColorAssets } from '../../../utils/app-assets';
+import { useDispatch } from 'react-redux';
+import { registerUser} from "../../../redux/actions/typeAction";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const SignUpScreen = ({ navigation }) => {
   const paddingTop = StatusBar.currentHeight || 0;
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [rePassword, setRePassword] = useState('')
 
+  const dispatch = useDispatch()
+  const changeConfirmAccount = () => {
+    dispatch(registerUser({
+      userName: username,
+      passWord: password,
+      re_password: rePassword
+    }))
+    navigation.navigate("ConfirmInformationScreen")
+  }
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <View style={[styles.container, { paddingTop }]}>
@@ -23,15 +35,17 @@ const SignUpScreen = ({ navigation }) => {
             <View style={styles.content}>
               <Text style={styles.title}>Create your Account</Text>
 
-              <CustomTextInput iconName={"user"} onChangeText={(text) => { setUsername(text) }} placeholder={"Username"} />
+              <CustomTextInput valueText={username ? true : false} iconName={"user"} onChangeText={(text) => { setUsername(text) }} placeholder={"Username (at least 5 characters)"} />
               <Sizebox height={20} />
-              <CustomTextInput iconName={"lock"} onChangeText={(text) => { setPassword(text) }} placeholder={"Password"} />
+              <CustomTextInput valueText={password ? true : false} secureTextEntry={true} showHide={true} iconName={"lock"} onChangeText={(text) => { setPassword(text) }} placeholder={"Password (at least 6 characters)"} />
+              <Sizebox height={20} />
+              <CustomTextInput valueText={rePassword ? true : false} secureTextEntry={true} showHide={true} iconName={"lock"} onChangeText={(text) => { setRePassword(text) }} placeholder={"Confirm password"} />
               <Sizebox height={30} />
 
-              {(username && password) ? <CustomButton
+              {(username.length > 4 && password.length > 5 && rePassword == password) ? <CustomButton
                 style={styles.button}
                 title="Sign up"
-                onPress={() => navigation.navigate("ConfirmInformationScreen")}
+                onPress={changeConfirmAccount}
               /> : <CustomHideButton title={"Sign up"} />}
             </View>
             <View style={styles.footer}>

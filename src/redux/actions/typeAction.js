@@ -5,6 +5,19 @@ export const increaseCount = () => {
 };
 
 export const setUser = (user) => ({
-  type: 'SET_USER',
+  type: 'LOGIN_USER',
   payload: user,
 });
+export const registerUser = (user) => ({
+  type: 'REGISTER_USER/USERPASSWORD',
+  payload: user,
+});
+export const registerUserInfo = (user) => ({
+  type: 'REGISTER_USER/USERINFO',
+  payload: user,
+});
+
+export const setToken = (token) => ({
+  type: 'SET_TOKEN',
+  payload: token
+})

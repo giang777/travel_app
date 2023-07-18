@@ -15,7 +15,8 @@ import { ColorAssets } from "../../utils/app-assets";
 import { CustomButton, CustomHideButton } from "../../components/custom-button";
 import { useDispatch, useSelector } from "react-redux";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { setUser } from "../../redux/actions/typeAction";
+import CheckBox from 'expo-checkbox';
+import { setUser, setToken } from "../../redux/actions/typeAction";
 import axiosClient from "../../api/axios-client";
 import { CustomTextInput } from "../../components/custom-textInput";
 import { isEnabled } from "react-native/Libraries/Performance/Systrace";
@@ -25,23 +26,29 @@ const LoginEmailScreen = ({ navigation }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [checkbutton, setCheckbutton] = useState(false)
+  const [toggleCheckBox, setToggleCheckBox] = useState(false)
+
   const dispatch = useDispatch();
   const handleFormSubmit = async () => {
-    console.log("username: " + username);
-    console.log("password: " + password);
     try {
-      // const response = await axiosClient.post("/api/auth/login", {
-      //   username,
-      //   password,
-      // });
-      // if (response.status === 200) console.log("Thành công");
-      // nếu return 200 => 
-      dispatch(setUser({
-        username: username,
-        password: password
-      }))
-      // console.log('---');
-      // if (response.status === 400) console.log("đéo tìm thấy");
+      const response = await axiosClient.post("/api/auth/login", {
+        username,
+        password,
+      });
+      if (response.status === 200) {
+        // nếu return 200 => 
+        dispatch(setUser({
+          username: username,
+          password: password
+        }))
+        dispatch(setToken(response.token))
+        navigation.navigate("HomeScreen")
+        console.log('---');
+        console.log("Thành công");
+      }
+
+      if (response.status === 400) console.log("đéo tìm thấy");
+      console.log(response);
       console.log("--------------------------------");
     } catch (error) {
       console.log(error);
@@ -49,6 +56,7 @@ const LoginEmailScreen = ({ navigation }) => {
   };
   // lấy dữ liệu user
   // const check = useSelector((state) => state.authReducer.userinfo);
+  
 
   useEffect(() => {
     setCheckbutton((username && password) ? false : true)
@@ -68,16 +76,30 @@ const LoginEmailScreen = ({ navigation }) => {
 
               <CustomTextInput
                 iconName={"user"}
+                valueText={username ? true : false}
                 placeholder={"Username"}
+                showHide={false}
                 onChangeText={(e) => { setUsername(e) }}
               />
               <Sizebox height={20} />
               <CustomTextInput
                 iconName={"lock"}
+                valueText={password ? true : false}
                 placeholder={"Password"}
                 secureTextEntry={true}
+                showHide={true}
                 onChangeText={(e) => { setPassword(e) }}
               />
+              <Sizebox height={20} />
+              <View style={styles.section}>
+                <CheckBox
+                  style={styles.checkbox}
+                  value={toggleCheckBox}
+                  onValueChange={setToggleCheckBox}
+                  color={toggleCheckBox ? '#1AB65C' : undefined}
+                />
+                <Text style={styles.paragraph}>Remmember me</Text>
+              </View>
               <Sizebox height={30} />
 
               {username && password ? <CustomButton
@@ -156,5 +178,19 @@ const styles = StyleSheet.create({
   titleFogotPassword: {
     width: "100%",
     alignItems: "center",
+  },
+  section: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%'
+  }, paragraph: {
+    fontSize: 15,
+  },
+  checkbox: {
+    margin: 8,
+    borderRadius: 6,
+    borderColor: '#1AB65C',
+    borderWidth: 3
   },
 });

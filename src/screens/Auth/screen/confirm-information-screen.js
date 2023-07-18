@@ -20,13 +20,16 @@ import { CustomTextInput } from "../../../components/custom-textInput";
 import { CustomTextInput2 } from "../../../components/custom-textInput";
 import PhoneInput from 'react-native-phone-number-input';
 import Sizebox from "../../../components/custom-sizebox";
+import { useDispatch, useSelector } from "react-redux";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import CustomSwitch from "../../../components/custom-switch";
+import axiosClient from "../../../api/axios-client";
 import { CustomButton, CustomHideButton } from "../../../components/custom-button";
 import { ColorAssets } from "../../../utils/app-assets";
 import CustomAvatar from "../../../components/custom-avatar";
 import dayjs from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat'
+import { registerUser, registerUserInfo } from "../../../redux/actions/typeAction";
 dayjs.extend(advancedFormat);
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -78,6 +81,36 @@ const ConfirmInformationScreen = ({ navigation }) => {
   const getGender = (value) => {
     setGender(value)
   }
+  //Đăng ký
+  const dispatch = useDispatch()
+  console.log('Confirm');
+  const getUserPassword = useSelector((state) => state.registerReducer);
+  console.log(getUserPassword);
+  const confirmRegister = async () => {
+    try {
+      const response = await axiosClient.post("/api/auth/register", {
+        userName: getUserPassword.userpassword.userName,
+        passWord: getUserPassword.userpassword.passWord,
+        re_password: getUserPassword.userpassword.re_password,
+        fullName: lastName + firstName
+      });
+      if (response.status == undefined) {
+        dispatch(registerUserInfo({
+          fullName: lastName +' '+ firstName
+        }))
+        navigation.navigate("HomeScreen")
+        console.log('---');
+        console.log("Thành công");
+      } else {
+        console.log("đéo dang ky duoc");
+      }
+      console.log(response);
+      console.log("--------------------------------");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <SafeAreaView style={[styles.container, { paddingTop }]}>
       <AppBar onPress={() => navigation.goBack()} title={"Fill Your Profile"} />
@@ -96,7 +129,7 @@ const ConfirmInformationScreen = ({ navigation }) => {
             <Sizebox height={20} />
             <View style={styles.boxDate}>
               <TouchableOpacity style={styles.input} onPress={showDatePicker}>
-                <Text style={{ color: "gray" }}>{dateBirth?dateBirth+'':'Your date of birth'}</Text>
+                <Text style={{ color: "gray" }}>{dateBirth ? dateBirth + '' : 'Your date of birth'}</Text>
                 <Image style={styles.iconimage} source={require('../../../assets/icons/iconcalendar.png')} />
               </TouchableOpacity>
             </View>
@@ -128,9 +161,9 @@ const ConfirmInformationScreen = ({ navigation }) => {
 
           <Sizebox height={40} />
           {(lastName && firstName && dateBirth && phoneNumber) ? <View style={styles.footer}>
-            <CustomButton title={"Continue"} onPress={() => { }} />
-          </View> : <View style={styles.footer}><CustomHideButton title={"Continue"}/></View>}
-          
+            <CustomButton title={"Continue"} onPress={confirmRegister} />
+          </View> : <View style={styles.footer}><CustomHideButton title={"Continue"} /></View>}
+
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -176,14 +209,14 @@ const styles = StyleSheet.create({
   input: {
     borderColor: "gray",
     borderRadius: 5,
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
     paddingVertical: 16,
     fontSize: 16,
     width: "100%",
     justifyContent: 'center',
   },
   input2: {
-    borderRadius: 5,
+    borderRadius: 20,
     width: "100%",
     justifyContent: 'center',
   },
@@ -209,12 +242,13 @@ const styles = StyleSheet.create({
     width: "100%",
     borderColor: "gray",
     backgroundColor: ColorAssets.greyColor200,
-    borderRadius: 15,
+    borderRadius: 18,
+    fontSize: 16,
+    paddingVertical: 2
+  },
+  textInput: {
+    backgroundColor: ColorAssets.greyColor200,
+    borderRadius: 18,
     fontSize: 16,
   },
-  textInput:{
-    backgroundColor: ColorAssets.greyColor200,
-    borderRadius: 15,
-    fontSize: 16,
-  }
 });
