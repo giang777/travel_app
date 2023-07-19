@@ -23,7 +23,6 @@ import Sizebox from "../../../components/custom-sizebox";
 import { useDispatch, useSelector } from "react-redux";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import CustomSwitch from "../../../components/custom-switch";
-import axiosClient from "../../../api/axios-client";
 import { CustomButton, CustomHideButton } from "../../../components/custom-button";
 import { ColorAssets } from "../../../utils/app-assets";
 import CustomAvatar from "../../../components/custom-avatar";
@@ -35,8 +34,6 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const ConfirmInformationScreen = ({ navigation }) => {
   const paddingTop = StatusBar.currentHeight || 0;
-  const [lastName, setLastName] = useState('')
-  const [firstName, setFirstName] = useState('')
   const [gender, setGender] = useState(false)
   const [dateBirth, setDateBirth] = useState('')
 
@@ -81,34 +78,9 @@ const ConfirmInformationScreen = ({ navigation }) => {
   const getGender = (value) => {
     setGender(value)
   }
-  //Đăng ký
-  const dispatch = useDispatch()
-  console.log('Confirm');
-  const getUserPassword = useSelector((state) => state.registerReducer);
-  console.log(getUserPassword);
-  const confirmRegister = async () => {
-    try {
-      const response = await axiosClient.post("/api/auth/register", {
-        userName: getUserPassword.userpassword.userName,
-        passWord: getUserPassword.userpassword.passWord,
-        re_password: getUserPassword.userpassword.re_password,
-        fullName: lastName + firstName
-      });
-      if (response.status == undefined) {
-        dispatch(registerUserInfo({
-          fullName: lastName +' '+ firstName
-        }))
-        navigation.navigate("HomeScreen")
-        console.log('---');
-        console.log("Thành công");
-      } else {
-        console.log("đéo dang ky duoc");
-      }
-      console.log(response);
-      console.log("--------------------------------");
-    } catch (error) {
-      console.log(error);
-    }
+  //Fill thông tin
+  const confirmRegister = () => {
+    
   }
 
   return (
@@ -120,10 +92,6 @@ const ConfirmInformationScreen = ({ navigation }) => {
           contentContainerStyle={styles.scrollViewContent}>
           <View style={styles.content}>
             <CustomAvatar />
-            <Sizebox height={20} />
-            <CustomTextInput onChangeText={(text) => { setFirstName(text) }} placeholder={"First name"} />
-            <Sizebox height={20} />
-            <CustomTextInput onChangeText={(text) => { setLastName(text) }} placeholder={"Last name"} />
             <Sizebox height={20} />
             <CustomSwitch onSwitch={getGender} />
             <Sizebox height={20} />
@@ -153,14 +121,14 @@ const ConfirmInformationScreen = ({ navigation }) => {
                   }}
                   defaultCode="VN"
                   layout='first'
-                  // withShadow
+                // withShadow
                 />
               </View>
             </View>
           </View>
 
           <Sizebox height={40} />
-          {(lastName && firstName && dateBirth && phoneNumber) ? <View style={styles.footer}>
+          {(dateBirth && phoneNumber) ? <View style={styles.footer}>
             <CustomButton title={"Continue"} onPress={confirmRegister} />
           </View> : <View style={styles.footer}><CustomHideButton title={"Continue"} /></View>}
 
@@ -180,6 +148,9 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
   },
+  scrollViewContent: {
+    flex: 1
+  },
   content: {
     alignItems: "center",
     paddingTop: 10,
@@ -197,7 +168,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     alignItems: "center",
     justifyContent: "flex-end",
-    flex: 1,
+    height: '36%'
   },
   titleAlreadyHaveAccount: {
     color: ColorAssets.greyColor,

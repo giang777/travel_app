@@ -16,6 +16,7 @@ import { CustomButton, CustomHideButton } from "../../components/custom-button";
 import { useDispatch, useSelector } from "react-redux";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CheckBox from 'expo-checkbox';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { setUser, setToken } from "../../redux/actions/typeAction";
 import axiosClient from "../../api/axios-client";
 import { CustomTextInput } from "../../components/custom-textInput";
@@ -27,7 +28,6 @@ const LoginEmailScreen = ({ navigation }) => {
   const [password, setPassword] = useState('')
   const [checkbutton, setCheckbutton] = useState(false)
   const [toggleCheckBox, setToggleCheckBox] = useState(false)
-
   const dispatch = useDispatch();
   const handleFormSubmit = async () => {
     try {
@@ -42,6 +42,12 @@ const LoginEmailScreen = ({ navigation }) => {
           password: password
         }))
         dispatch(setToken(response.token))
+        if (toggleCheckBox) {
+          let user = { username, password }
+          AsyncStorage.setItem('USER_DATA_LOGIN', JSON.stringify(user))
+        }else{
+          AsyncStorage.removeItem('USER_DATA_LOGIN')
+        }
         navigation.navigate("HomeScreen")
         console.log('---');
         console.log("Thành công");
@@ -56,7 +62,7 @@ const LoginEmailScreen = ({ navigation }) => {
   };
   // lấy dữ liệu user
   // const check = useSelector((state) => state.authReducer.userinfo);
-  
+
 
   useEffect(() => {
     setCheckbutton((username && password) ? false : true)

@@ -7,11 +7,9 @@ const userData = {
 const registerUser = {
   userpassword: {
     userName: '',
+    fullName: '',
     passWord: '',
     re_password: ''
-  },
-  userInfo: {
-    fullName: '',
   }
 }
 export const TYPE_REDUCER = (state = initialState, action) => {
@@ -44,11 +42,6 @@ export const REGISTER_REDUCER = (state = registerUser, action) => {
       return {
         ...state,
         userpassword: action.payload
-      };
-    case 'REGISTER_USER/USERINFO':
-      return {
-        ...state,
-        userInfo: action.payload
       };
 
     default:

@@ -12,10 +12,6 @@ export const registerUser = (user) => ({
   type: 'REGISTER_USER/USERPASSWORD',
   payload: user,
 });
-export const registerUserInfo = (user) => ({
-  type: 'REGISTER_USER/USERINFO',
-  payload: user,
-});
 
 export const setToken = (token) => ({
   type: 'SET_TOKEN',
