@@ -117,7 +117,7 @@ const LoginEmailScreen = ({ navigation }) => {
               <Sizebox height={15} />
               <TouchableOpacity
                 style={styles.titleFogotPassword}
-                onPress={() => { }}
+                onPress={() => {navigation.navigate("ForgotPassword") }}
               >
                 <Text style={styles.titleSignUp}>Forgot the password?</Text>
               </TouchableOpacity>

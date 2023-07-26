@@ -87,7 +87,6 @@ const SignUpScreen = ({ navigation }) => {
               <Sizebox height={30} />
 
               {(username.length > 4 && password.length > 5 && fullName.length > 0 && rePassword == password) ? <CustomButton
-                style={styles.button}
                 title="Sign up"
                 onPress={registerConfirmAccount}
               /> : <CustomHideButton title={"Sign up"} />}
