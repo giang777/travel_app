@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Image, TextInput, ScrollView, TouchableOpacity, KeyboardAvoidingView, Modal } from 'react-native'
 import React, { useState } from 'react'
+import * as Device from 'expo-device'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ColorAssets } from "../../../utils/app-assets";
 import AppBar from "../../../components/custom-appbar";
@@ -14,7 +15,7 @@ const CreateNewPassword = ({ navigation }) => {
         <SafeAreaView style={[styles.safeAreaView, showModal ? { backgroundColor: 'rgba(0, 0, 0, 0.5)' } : { backgroundColor: ColorAssets.whiteColor, }]}>
             <View style={styles.container}>
                 <AppBar onPress={() => navigation.goBack()} title={'Forgot Password'} />
-                <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+                <KeyboardAvoidingView style={{ flex: 1 }} behavior={Device.osName === 'iOS' ? "padding" : "height"}>
                     <ScrollView
                         style={styles.scrollView}
                         contentContainerStyle={styles.scrollViewContent}>

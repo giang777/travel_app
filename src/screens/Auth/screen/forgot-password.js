@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { ColorAssets } from "../../../utils/app-assets";
 import AppBar from "../../../components/custom-appbar";
 import { CustomButton, CustomHideButton } from '../../../components/custom-button';
-
+import * as Device from 'expo-device'
 const ForgotPassword = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
@@ -12,7 +12,7 @@ const ForgotPassword = ({ navigation }) => {
     <SafeAreaView style={styles.safeAreaView}>
       <View style={styles.container}>
         <AppBar onPress={() => navigation.goBack()} title={'Forgot Password'} />
-        <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+        <KeyboardAvoidingView style={{ flex: 1 }} behavior={Device.osName === 'iOS' ? "padding" : "height"}>
         <ScrollView
           style={styles.scrollView}
           contentContainerStyle={styles.scrollViewContent}>

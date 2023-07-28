@@ -8,7 +8,6 @@ import {
   Dimensions,
   Pressable,
   TextInput,
-  Platform,
   Image,
   SafeAreaView,
   KeyboardAvoidingView,
@@ -18,6 +17,7 @@ import React, { useEffect, useState } from "react";
 import AppBar from "../../../components/custom-appbar";
 import { CustomTextInput } from "../../../components/custom-textInput";
 import { CustomTextInput2 } from "../../../components/custom-textInput";
+import * as Device from 'expo-device'
 import PhoneInput from 'react-native-phone-number-input';
 import Sizebox from "../../../components/custom-sizebox";
 import { useDispatch, useSelector } from "react-redux";
@@ -86,7 +86,7 @@ const ConfirmInformationScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={[styles.container, { paddingTop }]}>
       <AppBar onPress={() => navigation.goBack()} title={"Fill Your Profile"} />
-      <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior={Device.osName === 'iOS' ? "padding" : "height"}>
         <ScrollView
           style={styles.scrollView}
           contentContainerStyle={styles.scrollViewContent}>

@@ -1,5 +1,6 @@
 import { ScrollView, StatusBar, StyleSheet, Text, View, TouchableOpacity, Dimensions, KeyboardAvoidingView, SafeAreaView } from 'react-native'
 import React, { useState } from 'react'
+import * as Device from 'expo-device'
 import AppBar from '../../../components/custom-appbar';
 import { CustomTextInput } from '../../../components/custom-textInput';
 import Sizebox from "../../../components/custom-sizebox";
@@ -7,13 +8,16 @@ import { CustomButton, CustomHideButton } from '../../../components/custom-butto
 import axiosClient from "../../../api/axios-client";
 import { ColorAssets } from '../../../utils/app-assets';
 import { useDispatch } from 'react-redux';
-import { registerUser, setUser, setToken } from "../../../redux/actions/typeAction";
+import { StackActions } from "@react-navigation/native";
+import { setToken } from "../../../redux/actions/typeAction";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const SignUpScreen = ({ navigation }) => {
   const paddingTop = StatusBar.currentHeight || 0;
   const [username, setUsername] = useState('')
   const [fullName, setFullName] = useState('')
+  const [email, setEmail] = useState('')
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
   const [password, setPassword] = useState('')
   const [rePassword, setRePassword] = useState('')
   const [notifyError, setNotifyError] = useState('')
@@ -24,24 +28,16 @@ const SignUpScreen = ({ navigation }) => {
       const response = await axiosClient.post("/api/auth/register", {
         userName: username,
         fullName: fullName,
+        email: email,
         passWord: password,
         re_password: rePassword,
       });
       if (response.status == undefined) {
-        dispatch(registerUser({
-          userName: username,
-          fullName: fullName,
-          passWord: password,
-          re_password: rePassword
-        }))
         //login sau khi dki
         loginUser();
       } else {
         setNotifyError(response.message)
-        console.log("đéo dang ky duoc");
       }
-      console.log(response);
-      console.log("--------------------------------");
     } catch (error) {
       console.log(error);
     }
@@ -52,12 +48,8 @@ const SignUpScreen = ({ navigation }) => {
       password,
     });
     if (responselogin.status === 200) {
-      dispatch(setUser({
-        username: username,
-        password: password
-      }))
       dispatch(setToken(responselogin.token))
-      navigation.navigate("HomeScreen")
+      navigation.dispatch(StackActions.replace("HomeScreen"))
     } else {
       navigation.navigate("LoginEmailScreen")
     }
@@ -66,7 +58,7 @@ const SignUpScreen = ({ navigation }) => {
     <SafeAreaView style={styles.safeAreaView}>
       <View style={[styles.container, { paddingTop }]}>
         <AppBar onPress={() => navigation.goBack()} />
-        <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+        <KeyboardAvoidingView style={{ flex: 1 }} behavior={Device.osName === 'iOS' ? "padding" : "height"}>
           <ScrollView
             style={styles.scrollView}
             contentContainerStyle={styles.scrollViewContent} >
@@ -75,6 +67,8 @@ const SignUpScreen = ({ navigation }) => {
               <CustomTextInput valueText={username ? true : false} iconName={"user"} onChangeText={(text) => { setUsername(text) }} placeholder={"Username (at least 5 characters)"} />
               <Sizebox height={20} />
               <CustomTextInput valueText={fullName ? true : false} iconName={"pencil"} onChangeText={(text) => { setFullName(text) }} placeholder={"Full name *(Nguyen Thi Hoa Hong)"} />
+              <Sizebox height={20} />
+              <CustomTextInput valueText={fullName ? true : false} iconName={"envelope"} onChangeText={(text) => { setEmail(text) }} placeholder={"Email"} />
               <Sizebox height={20} />
               <CustomTextInput valueText={password ? true : false} secureTextEntry={true} showHide={true} iconName={"lock"} onChangeText={(text) => { setPassword(text) }} placeholder={"Password (at least 6 characters)"} />
               <Sizebox height={20} />
@@ -86,7 +80,7 @@ const SignUpScreen = ({ navigation }) => {
               </View>
               <Sizebox height={30} />
 
-              {(username.length > 4 && password.length > 5 && fullName.length > 0 && rePassword == password) ? <CustomButton
+              {(username.length > 4 && password.length > 5 && fullName.length > 0 && rePassword == password && emailRegex.test(email)) ? <CustomButton
                 title="Sign up"
                 onPress={registerConfirmAccount}
               /> : <CustomHideButton title={"Sign up"} />}
@@ -128,8 +122,8 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   title: {
-    marginVertical: windowHeight / 13,
-    fontWeight: "600",
+    marginVertical: windowHeight / 40,
+    fontWeight: "500",
     letterSpacing: 1,
     fontSize: windowWidth / 9.5,
   },

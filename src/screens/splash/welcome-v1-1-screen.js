@@ -26,7 +26,6 @@ const WelcomeV1_1 = ({ navigation }) => {
   const handleIncreaseCount = () => {
     console.log(first);
     if (first >= 2) {
-      console.log("hết" + first);
       navigation.dispatch(StackActions.replace("LoginHomeScreen"));
     } else {
       dispatch(increaseCount());

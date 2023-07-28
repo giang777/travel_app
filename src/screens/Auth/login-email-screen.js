@@ -8,6 +8,7 @@ import {
   StatusBar,
   KeyboardAvoidingView,
 } from "react-native";
+import * as Device from 'expo-device'
 import React, { useEffect, useState } from "react";
 import AppBar from "../../components/custom-appbar";
 import Sizebox from "../../components/custom-sizebox";
@@ -17,16 +18,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CheckBox from 'expo-checkbox';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { setUser, setToken } from "../../redux/actions/typeAction";
+import { setToken } from "../../redux/actions/typeAction";
 import axiosClient from "../../api/axios-client";
 import { CustomTextInput } from "../../components/custom-textInput";
-import { isEnabled } from "react-native/Libraries/Performance/Systrace";
+import { StackActions } from "@react-navigation/native";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const LoginEmailScreen = ({ navigation }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [checkbutton, setCheckbutton] = useState(false)
   const [toggleCheckBox, setToggleCheckBox] = useState(false)
   const dispatch = useDispatch();
   const handleFormSubmit = async () => {
@@ -37,10 +37,6 @@ const LoginEmailScreen = ({ navigation }) => {
       });
       if (response.status === 200) {
         // nếu return 200 => 
-        dispatch(setUser({
-          username: username,
-          password: password
-        }))
         dispatch(setToken(response.token))
         if (toggleCheckBox) {
           let user = { username, password }
@@ -48,7 +44,7 @@ const LoginEmailScreen = ({ navigation }) => {
         }else{
           AsyncStorage.removeItem('USER_DATA_LOGIN')
         }
-        navigation.navigate("HomeScreen")
+        navigation.dispatch(StackActions.replace("HomeScreen"))
         console.log('---');
         console.log("Thành công");
       }
@@ -63,16 +59,11 @@ const LoginEmailScreen = ({ navigation }) => {
   // lấy dữ liệu user
   // const check = useSelector((state) => state.authReducer.userinfo);
 
-
-  useEffect(() => {
-    setCheckbutton((username && password) ? false : true)
-  }, [username, password])
-
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <View style={styles.container}>
         <AppBar onPress={() => navigation.goBack()} />
-        <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+        <KeyboardAvoidingView style={{ flex: 1 }} behavior={Device.osName === 'iOS' ? "padding" : "height"}>
           <ScrollView
             style={styles.scrollView}
             contentContainerStyle={styles.scrollViewContent}

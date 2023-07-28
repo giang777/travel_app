@@ -7,9 +7,9 @@ import {
   ScrollView,
   Image,
   Dimensions,
-  Platform,
   TouchableOpacity,
 } from "react-native";
+import * as Device from 'expo-device'
 import React from "react";
 import AppBar from "../../components/custom-appbar";
 import { ColorAssets, IconAssets } from "../../utils/app-assets";
@@ -25,7 +25,7 @@ const LoginHomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <View style={styles.container}>
-        {Platform.OS === "ios" && (
+        {Device.osName === 'iOS' && (
           <AppBar onPress={() => BackHandler.exitApp()} />
         )}
         <ScrollView
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   },
   title: {
     marginVertical:
-      Platform.OS === "ios" ? windowHeight / 6.2 : windowHeight / 5,
+    Device.osName === 'iOS' ? windowHeight / 6.2 : windowHeight / 5,
     fontWeight: "600",
     letterSpacing: 1,
     fontSize: windowWidth / 9.5,

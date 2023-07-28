@@ -1,5 +1,5 @@
   
-import { StyleSheet, Dimensions,Platform, } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { ColorAssets } from '../../utils/app-assets';
 
 
