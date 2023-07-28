@@ -1,4 +1,4 @@
-import { ScrollView, StatusBar, StyleSheet, Text, View, TouchableOpacity, Dimensions, KeyboardAvoidingView, SafeAreaView } from 'react-native'
+import { ScrollView, StatusBar, StyleSheet, Text, View, TouchableOpacity, Dimensions, KeyboardAvoidingView, SafeAreaView,ActivityIndicator } from 'react-native'
 import React, { useState } from 'react'
 import * as Device from 'expo-device'
 import AppBar from '../../../components/custom-appbar';
@@ -21,10 +21,12 @@ const SignUpScreen = ({ navigation }) => {
   const [password, setPassword] = useState('')
   const [rePassword, setRePassword] = useState('')
   const [notifyError, setNotifyError] = useState('')
+  const [statusLoading, setStatusLoading] = useState(false)
 
   const dispatch = useDispatch()
   const registerConfirmAccount = async () => {
     try {
+      setStatusLoading(true)
       const response = await axiosClient.post("/api/auth/register", {
         userName: username,
         fullName: fullName,
@@ -38,6 +40,7 @@ const SignUpScreen = ({ navigation }) => {
       } else {
         setNotifyError(response.message)
       }
+      setStatusLoading(false)
     } catch (error) {
       console.log(error);
     }
@@ -68,7 +71,7 @@ const SignUpScreen = ({ navigation }) => {
               <Sizebox height={20} />
               <CustomTextInput valueText={fullName ? true : false} iconName={"pencil"} onChangeText={(text) => { setFullName(text) }} placeholder={"Full name *(Nguyen Thi Hoa Hong)"} />
               <Sizebox height={20} />
-              <CustomTextInput valueText={fullName ? true : false} iconName={"envelope"} onChangeText={(text) => { setEmail(text) }} placeholder={"Email"} />
+              <CustomTextInput valueText={email ? true : false} iconName={"envelope"} onChangeText={(text) => { setEmail(text) }} placeholder={"Email"} />
               <Sizebox height={20} />
               <CustomTextInput valueText={password ? true : false} secureTextEntry={true} showHide={true} iconName={"lock"} onChangeText={(text) => { setPassword(text) }} placeholder={"Password (at least 6 characters)"} />
               <Sizebox height={20} />
@@ -94,6 +97,9 @@ const SignUpScreen = ({ navigation }) => {
             </View>
           </ScrollView>
         </KeyboardAvoidingView>
+        {statusLoading ? <View style={styles.boxLoading}>
+          <ActivityIndicator size={"large"} color="#2196F3" />
+        </View> : <></>}
       </View>
     </SafeAreaView>
   );
@@ -141,4 +147,18 @@ const styles = StyleSheet.create({
     color: ColorAssets.greenColor,
     fontWeight: "bold",
   },
+  textError: {
+    fontSize: 16,
+    color: 'red',
+    marginHorizontal: 10,
+    marginBottom: 8
+  },
+  boxLoading: {
+    position: 'absolute',
+    height: '100%',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)'
+  }
 })

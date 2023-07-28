@@ -7,6 +7,7 @@ import {
   View,
   StatusBar,
   KeyboardAvoidingView,
+  ActivityIndicator
 } from "react-native";
 import * as Device from 'expo-device'
 import React, { useEffect, useState } from "react";
@@ -27,10 +28,13 @@ const windowHeight = Dimensions.get("window").height;
 const LoginEmailScreen = ({ navigation }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [textError, setTextError] = useState('')
   const [toggleCheckBox, setToggleCheckBox] = useState(false)
+  const [statusLoading, setStatusLoading] = useState(false)
   const dispatch = useDispatch();
   const handleFormSubmit = async () => {
     try {
+      setStatusLoading(true)
       const response = await axiosClient.post("/api/auth/login", {
         username,
         password,
@@ -41,7 +45,7 @@ const LoginEmailScreen = ({ navigation }) => {
         if (toggleCheckBox) {
           let user = { username, password }
           AsyncStorage.setItem('USER_DATA_LOGIN', JSON.stringify(user))
-        }else{
+        } else {
           AsyncStorage.removeItem('USER_DATA_LOGIN')
         }
         navigation.dispatch(StackActions.replace("HomeScreen"))
@@ -49,7 +53,11 @@ const LoginEmailScreen = ({ navigation }) => {
         console.log("Thành công");
       }
 
-      if (response.status === 400) console.log("đéo tìm thấy");
+      if (response.status === 400) {
+        setTextError(response.message)
+        console.log("đéo tìm thấy");
+      }
+      setStatusLoading(false)
       console.log(response);
       console.log("--------------------------------");
     } catch (error) {
@@ -60,7 +68,7 @@ const LoginEmailScreen = ({ navigation }) => {
   // const check = useSelector((state) => state.authReducer.userinfo);
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <SafeAreaView style={[styles.safeAreaView, statusLoading ? { backgroundColor: 'rgba(0, 0, 0, 0.5)' } : { backgroundColor: 'white' }]}>
       <View style={styles.container}>
         <AppBar onPress={() => navigation.goBack()} />
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={Device.osName === 'iOS' ? "padding" : "height"}>
@@ -70,7 +78,7 @@ const LoginEmailScreen = ({ navigation }) => {
           >
             <View style={styles.content}>
               <Text style={styles.title}>Login to your Account</Text>
-
+              <Text style={styles.textError}>{textError}</Text>
               <CustomTextInput
                 iconName={"user"}
                 valueText={username ? true : false}
@@ -108,7 +116,7 @@ const LoginEmailScreen = ({ navigation }) => {
               <Sizebox height={15} />
               <TouchableOpacity
                 style={styles.titleFogotPassword}
-                onPress={() => {navigation.navigate("ForgotPassword") }}
+                onPress={() => { navigation.navigate("ForgotPassword") }}
               >
                 <Text style={styles.titleSignUp}>Forgot the password?</Text>
               </TouchableOpacity>
@@ -125,6 +133,9 @@ const LoginEmailScreen = ({ navigation }) => {
             </View>
           </ScrollView>
         </KeyboardAvoidingView>
+        {statusLoading ? <View style={styles.boxLoading}>
+          <ActivityIndicator size={"large"} color="#2196F3" />
+        </View> : <></>}
       </View>
     </SafeAreaView>
   );
@@ -135,7 +146,6 @@ export default LoginEmailScreen;
 const styles = StyleSheet.create({
   safeAreaView: {
     flex: 1,
-    backgroundColor: "white",
   },
   container: {
     backgroundColor: ColorAssets.whiteColor,
@@ -153,7 +163,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   title: {
-    marginVertical: windowHeight / 11.5,
+    marginVertical: windowHeight / 15,
     fontWeight: "600",
     letterSpacing: 1,
     fontSize: windowWidth / 9.5,
@@ -190,4 +200,18 @@ const styles = StyleSheet.create({
     borderColor: '#1AB65C',
     borderWidth: 3
   },
+  textError: {
+    fontSize: 16,
+    color: 'red',
+    marginHorizontal: 10,
+    marginBottom: 8
+  },
+  boxLoading: {
+    position: 'absolute',
+    height: '100%',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)'
+  }
 });
