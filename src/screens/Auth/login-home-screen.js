@@ -25,9 +25,6 @@ const LoginHomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <View style={styles.container}>
-        {Device.osName === 'iOS' && (
-          <AppBar onPress={() => BackHandler.exitApp()} />
-        )}
         <ScrollView
           style={styles.scrollView}
           contentContainerStyle={styles.scrollViewContent}
@@ -101,7 +98,7 @@ const styles = StyleSheet.create({
   },
   title: {
     marginVertical:
-    Device.osName === 'iOS' ? windowHeight / 6.2 : windowHeight / 5,
+      Device.osName === 'iOS' ? windowHeight / 6.2 : windowHeight / 5,
     fontWeight: "600",
     letterSpacing: 1,
     fontSize: windowWidth / 9.5,
