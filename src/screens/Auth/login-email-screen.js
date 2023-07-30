@@ -41,7 +41,7 @@ const LoginEmailScreen = ({ navigation }) => {
   const handleFormSubmit = async () => {
     try {
       setStatusLoading(true)
-      const response = await axiosClient.post("/api/auth/login", {
+      const response = await axiosClient.get("/api/auth/login", {
         username,
         password,
       });
