@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Image, TextInput, ScrollView, TouchableOpacity,
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ColorAssets } from "../../../utils/app-assets";
+import { CustomTextInput } from '../../../components/custom-textInput';
 import AppBar from "../../../components/custom-appbar";
 import { CustomButton, CustomHideButton } from '../../../components/custom-button';
 import * as Device from 'expo-device'
@@ -13,33 +14,25 @@ const ForgotPassword = ({ navigation }) => {
       <View style={styles.container}>
         <AppBar onPress={() => navigation.goBack()} title={'Forgot Password'} />
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={Device.osName === 'iOS' ? "padding" : "height"}>
-        <ScrollView
-          style={styles.scrollView}
-          contentContainerStyle={styles.scrollViewContent}>
-          <View style={{ flexGrow: 1 }}>
-            <View style={{ width: '100%', alignItems: 'center' }}>
-              <Image source={require('../../../assets/icons/forgot-password.png')} />
-            </View>
-            <Text style={styles.textForgotPass}>Select which contact details should we use to reset your password</Text>
-            <View style={{ paddingHorizontal: 15 }}>
-              <View style={{ width: '100%', borderWidth: 3, borderRadius: 10, borderColor: ColorAssets.greenColor, paddingVertical: 5, flexDirection: 'row' }}>
-                <Image source={require('../../../assets/icons/sendemail.png')} style={{ width: 100, height: 100, marginLeft: 10 }} />
-                <View style={{ marginLeft: 10, justifyContent: 'center', width: '60%' }}>
-                  <Text style={{ color: ColorAssets.greyColor }}>via Email:</Text>
-                  <TextInput style={{ fontSize: 16, fontWeight: 'bold', borderBottomColor: ColorAssets.greyColor, borderBottomWidth: 1, width: '100%' }}
-                    placeholder='travel@gmail.com'
-                    onChangeText={setEmail}></TextInput>
-                </View>
+          <ScrollView
+            style={styles.scrollView}
+            contentContainerStyle={styles.scrollViewContent}>
+            <View style={{ flexGrow: 1 }}>
+              <View style={{ width: '100%', alignItems: 'center' }}>
+                <Image source={require('../../../assets/icons/forgot-password.png')} />
+              </View>
+              <Text style={styles.textForgotPass}>Please enter your email address</Text>
+              <View style={{ paddingHorizontal: 15 }}>
+                <CustomTextInput condition={(emailRegex.test(email)) ? true : false} fillText={email ? true : false} iconName={"envelope"} onChangeText={(text) => { setEmail(text) }} placeholder={"Email"} />
+              </View>
+              <View style={styles.footer}>
+                {(emailRegex.test(email)) ? <CustomButton
+                  title="Continue"
+                  onPress={() => { navigation.navigate("ForgotPasswordInputCode") }}
+                /> : <CustomHideButton title={"Continue"} />}
               </View>
             </View>
-            <View style={styles.footer}>
-              {(emailRegex.test(email)) ? <CustomButton
-                title="Continue"
-                onPress={() => {navigation.navigate("ForgotPasswordInputCode")}}
-              /> : <CustomHideButton title={"Continue"} />}
-            </View>
-          </View>
-        </ScrollView>
+          </ScrollView>
         </KeyboardAvoidingView>
       </View>
     </SafeAreaView>
@@ -68,9 +61,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'red'
   },
   textForgotPass: {
-    fontSize: 16,
+    fontSize: 17,
     paddingHorizontal: 15,
-    marginVertical: 30
+    marginVertical: 25,
+    color: ColorAssets.greyColor
   },
   titleSignIn: {
     color: ColorAssets.greenColor,
@@ -80,7 +74,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingHorizontal: 16,
     paddingVertical: 10,
-    alignItems: "flex-end",
-    flex: 1
+    alignItems: "center",
+    flex: 1,
   },
 })

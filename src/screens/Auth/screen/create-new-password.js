@@ -26,9 +26,9 @@ const CreateNewPassword = ({ navigation }) => {
                             <View style={{ paddingHorizontal: 15 }}>
                                 <Text style={{ fontSize: 16, marginLeft: 2 }}>Create Your New Password</Text>
                                 <Sizebox height={30} />
-                                <CustomTextInput valueText={password ? true : false} secureTextEntry={true} showHide={true} iconName={"lock"} onChangeText={(text) => { setPassword(text) }} placeholder={"Password (at least 6 characters)"} />
+                                <CustomTextInput fillText={password ? true : false} secureTextEntry={true} showHide={true} iconName={"lock"} onChangeText={(text) => { setPassword(text) }} placeholder={"Password (at least 6 characters)"} />
                                 <Sizebox height={20} />
-                                <CustomTextInput valueText={rePassword ? true : false} secureTextEntry={true} showHide={true} iconName={"lock"} onChangeText={(text) => { setRePassword(text) }} placeholder={"Confirm password"} />
+                                <CustomTextInput fillText={rePassword ? true : false} secureTextEntry={true} showHide={true} iconName={"lock"} onChangeText={(text) => { setRePassword(text) }} placeholder={"Confirm password"} />
                             </View>
                             <View style={styles.footer}>
                                 {(password.length > 5 && rePassword == password) ? <CustomButton
@@ -60,7 +60,7 @@ const ModalView = ({ show, navigation }) => {
                         <Text style={{ fontSize: 24, fontWeight: 'bold', color: ColorAssets.greenColor }}>Congratulations!</Text>
                         <Text style={{ fontSize: 16, marginTop: 10 }}>Your account is ready to use</Text>
                         <TouchableOpacity style={styles.btngohome} onPress={() => { navigation.navigate("LoginEmailScreen") }}>
-                            <Text style={styles.textgohome}>Go to Homepage</Text>
+                            <Text style={styles.textgohome}>Go to Login</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

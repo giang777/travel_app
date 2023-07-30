@@ -26,12 +26,18 @@ import { StackActions } from "@react-navigation/native";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const LoginEmailScreen = ({ navigation }) => {
+  // lấy dữ liệu user
+  const getUserRes = useSelector((state) => state.register.user);
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [textError, setTextError] = useState('')
   const [toggleCheckBox, setToggleCheckBox] = useState(false)
   const [statusLoading, setStatusLoading] = useState(false)
   const dispatch = useDispatch();
+  useEffect(() => {
+    setUsername(getUserRes.userName)
+    setPassword(getUserRes.passWord)
+  }, [getUserRes.userName, getUserRes.passWord])
   const handleFormSubmit = async () => {
     try {
       setStatusLoading(true)
@@ -64,8 +70,6 @@ const LoginEmailScreen = ({ navigation }) => {
       console.log(error);
     }
   };
-  // lấy dữ liệu user
-  // const check = useSelector((state) => state.authReducer.userinfo);
 
   return (
     <SafeAreaView style={[styles.safeAreaView, statusLoading ? { backgroundColor: 'rgba(0, 0, 0, 0.5)' } : { backgroundColor: 'white' }]}>
@@ -81,18 +85,20 @@ const LoginEmailScreen = ({ navigation }) => {
               <Text style={styles.textError}>{textError}</Text>
               <CustomTextInput
                 iconName={"user"}
-                valueText={username ? true : false}
+                fillText={username ? true : false}
                 placeholder={"Username"}
                 showHide={false}
+                valueText={username}
                 onChangeText={(e) => { setUsername(e) }}
               />
               <Sizebox height={20} />
               <CustomTextInput
                 iconName={"lock"}
-                valueText={password ? true : false}
+                fillText={password ? true : false}
                 placeholder={"Password"}
                 secureTextEntry={true}
                 showHide={true}
+                valueText={password}
                 onChangeText={(e) => { setPassword(e) }}
               />
               <Sizebox height={20} />
@@ -127,7 +133,7 @@ const LoginEmailScreen = ({ navigation }) => {
               </Text>
               <Sizebox width={5} />
               <TouchableOpacity
-                onPress={() => navigation.navigate("SignUpScreen")}>
+                onPress={() => navigation.dispatch(StackActions.replace("SignUpScreen"))}>
                 <Text style={styles.titleSignUp}>Sign up</Text>
               </TouchableOpacity>
             </View>

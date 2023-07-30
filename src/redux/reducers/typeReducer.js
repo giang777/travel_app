@@ -2,6 +2,13 @@ export const initialState = {
   first: 0,
 };
 
+export const register = {
+  user: {
+    userName: '',
+    passWord: ''
+  }
+}
+
 export const TYPE_REDUCER = (state = initialState, action) => {
   switch (action.type) {
     case "INCREASE_COUNT":
@@ -13,3 +20,15 @@ export const TYPE_REDUCER = (state = initialState, action) => {
       return state;
   }
 };
+
+export const REGISTER = (state = register, action) => {
+  switch(action.type){
+    case "REGISTER_USER":
+      return{
+        ...state,
+        user: action.payload
+      }
+    default:
+      return state
+  }
+}

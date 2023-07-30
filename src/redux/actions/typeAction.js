@@ -8,3 +8,8 @@ export const setToken = (token) => ({
   type: 'SET_TOKEN',
   payload: token
 })
+
+export const registerUser = (user)=>({
+  type: 'REGISTER_USER',
+  payload: user
+})

@@ -1,6 +1,7 @@
-import { ScrollView, StatusBar, StyleSheet, Text, View, TouchableOpacity, Dimensions, KeyboardAvoidingView, SafeAreaView,ActivityIndicator } from 'react-native'
+import { ScrollView, StatusBar, StyleSheet, Text, View, TouchableOpacity, Dimensions, KeyboardAvoidingView, ActivityIndicator, Modal } from 'react-native'
 import React, { useState } from 'react'
 import * as Device from 'expo-device'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import AppBar from '../../../components/custom-appbar';
 import { CustomTextInput } from '../../../components/custom-textInput';
 import Sizebox from "../../../components/custom-sizebox";
@@ -9,19 +10,21 @@ import axiosClient from "../../../api/axios-client";
 import { ColorAssets } from '../../../utils/app-assets';
 import { useDispatch } from 'react-redux';
 import { StackActions } from "@react-navigation/native";
-import { setToken } from "../../../redux/actions/typeAction";
+import { registerUser } from "../../../redux/actions/typeAction";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const SignUpScreen = ({ navigation }) => {
-  const paddingTop = StatusBar.currentHeight || 0;
   const [username, setUsername] = useState('')
   const [fullName, setFullName] = useState('')
+  const fullNameRegex = /^[a-zA-Z]+(?:\s+[a-zA-Z]+)+$/
   const [email, setEmail] = useState('')
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
   const [password, setPassword] = useState('')
   const [rePassword, setRePassword] = useState('')
   const [notifyError, setNotifyError] = useState('')
   const [statusLoading, setStatusLoading] = useState(false)
+  const [statusFillText, setStatusFillText] = useState(false)
+
 
   const dispatch = useDispatch()
   const registerConfirmAccount = async () => {
@@ -35,8 +38,9 @@ const SignUpScreen = ({ navigation }) => {
         re_password: rePassword,
       });
       if (response.status == undefined) {
-        //login sau khi dki
-        loginUser();
+        //chuyen sang login sau khi dki
+        dispatch(registerUser({ userName: username, passWord: password }))
+        navigation.navigate("LoginEmailScreen")
       } else {
         setNotifyError(response.message)
       }
@@ -45,37 +49,34 @@ const SignUpScreen = ({ navigation }) => {
       console.log(error);
     }
   }
-  const loginUser = async () => {
-    const responselogin = await axiosClient.post("/api/auth/login", {
-      username,
-      password,
-    });
-    if (responselogin.status === 200) {
-      dispatch(setToken(responselogin.token))
-      navigation.dispatch(StackActions.replace("HomeScreen"))
-    } else {
-      navigation.navigate("LoginEmailScreen")
+  const showDialogBackScreen = () => {
+    if (username != '' || password != '' || email != '' || fullName != '' || rePassword != '') {
+      return setStatusFillText(true)
     }
+    return navigation.goBack()
+  }
+  const hideDialogBackScreen = () => {
+    setStatusFillText(false)
   }
   return (
-    <SafeAreaView style={styles.safeAreaView}>
-      <View style={[styles.container, { paddingTop }]}>
-        <AppBar onPress={() => navigation.goBack()} />
+    <SafeAreaView style={[styles.safeAreaView, statusFillText ? { backgroundColor: 'rgba(0, 0, 0, 0.5)' } : { backgroundColor: 'white' }]}>
+      <View style={[styles.container]}>
+        <AppBar onPress={showDialogBackScreen} />
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={Device.osName === 'iOS' ? "padding" : "height"}>
           <ScrollView
             style={styles.scrollView}
             contentContainerStyle={styles.scrollViewContent} >
             <View style={styles.content}>
               <Text style={styles.title}>Create your Account</Text>
-              <CustomTextInput valueText={username ? true : false} iconName={"user"} onChangeText={(text) => { setUsername(text) }} placeholder={"Username (at least 5 characters)"} />
+              <CustomTextInput condition={username.length > 4 ? true : false} fillText={username ? true : false} iconName={"user"} onChangeText={(text) => { setUsername(text) }} placeholder={"Username (at least 5 characters)"} />
               <Sizebox height={20} />
-              <CustomTextInput valueText={fullName ? true : false} iconName={"pencil"} onChangeText={(text) => { setFullName(text) }} placeholder={"Full name *(Nguyen Thi Hoa Hong)"} />
+              <CustomTextInput condition={(fullNameRegex.test(fullName)) ? true : false} fillText={fullName ? true : false} iconName={"pencil"} onChangeText={(text) => { setFullName(text) }} placeholder={"Full name *(Nguyen Thi Hoa Hong)"} />
               <Sizebox height={20} />
-              <CustomTextInput valueText={email ? true : false} iconName={"envelope"} onChangeText={(text) => { setEmail(text) }} placeholder={"Email"} />
+              <CustomTextInput condition={(emailRegex.test(email)) ? true : false} fillText={email ? true : false} iconName={"envelope"} onChangeText={(text) => { setEmail(text) }} placeholder={"Email"} />
               <Sizebox height={20} />
-              <CustomTextInput valueText={password ? true : false} secureTextEntry={true} showHide={true} iconName={"lock"} onChangeText={(text) => { setPassword(text) }} placeholder={"Password (at least 6 characters)"} />
+              <CustomTextInput condition={password.length > 5 ? true : false} fillText={password ? true : false} secureTextEntry={true} showHide={true} iconName={"lock"} onChangeText={(text) => { setPassword(text) }} placeholder={"Password (at least 6 characters)"} />
               <Sizebox height={20} />
-              <CustomTextInput valueText={rePassword ? true : false} secureTextEntry={true} showHide={true} iconName={"lock"} onChangeText={(text) => { setRePassword(text) }} placeholder={"Confirm password"} />
+              <CustomTextInput condition={rePassword == password ? true : false} fillText={rePassword ? true : false} secureTextEntry={true} showHide={true} iconName={"lock"} onChangeText={(text) => { setRePassword(text) }} placeholder={"Confirm password"} />
               <Sizebox height={10} />
               <View style={{ width: '100%', alignItems: 'center', height: 20 }}>
                 {notifyError != '' ? <Text style={{ fontSize: 16, color: 'red' }}>*{notifyError}</Text> : <View></View>}
@@ -83,7 +84,7 @@ const SignUpScreen = ({ navigation }) => {
               </View>
               <Sizebox height={30} />
 
-              {(username.length > 4 && password.length > 5 && fullName.length > 0 && rePassword == password && emailRegex.test(email)) ? <CustomButton
+              {(username.length > 4 && password.length > 5 && fullNameRegex.test(fullName) && rePassword == password && emailRegex.test(email)) ? <CustomButton
                 title="Sign up"
                 onPress={registerConfirmAccount}
               /> : <CustomHideButton title={"Sign up"} />}
@@ -95,6 +96,7 @@ const SignUpScreen = ({ navigation }) => {
                 <Text style={styles.titleSignIn}>Sign in</Text>
               </TouchableOpacity>
             </View>
+            <ModalView show={statusFillText} navigation={navigation} hideDialogBackScreen={hideDialogBackScreen} />
           </ScrollView>
         </KeyboardAvoidingView>
         {statusLoading ? <View style={styles.boxLoading}>
@@ -105,12 +107,38 @@ const SignUpScreen = ({ navigation }) => {
   );
 }
 
+const ModalView = ({ show, navigation, hideDialogBackScreen }) => {
+  return (
+    <View style={styles.centeredView}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={show}
+      >
+        <View style={[styles.centeredView, show ? { flex: 1 } : undefined]}>
+          <View style={styles.modalView}>
+            <Text style={{ fontSize: 24, fontWeight: 'bold', color: ColorAssets.greenColor }}>Do you want to back?</Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
+              <TouchableOpacity style={[styles.btncancel, styles.shadowButton]} onPress={() => { hideDialogBackScreen() }}>
+                <Text style={styles.textcancel}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[styles.btngohome, styles.shadowButton]} onPress={() => { hideDialogBackScreen(); navigation.dispatch(StackActions.replace("LoginEmailScreen")) }}>
+                <Text style={styles.textgohome}>OK</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal >
+    </View >
+  )
+}
+
 export default SignUpScreen
 
 const styles = StyleSheet.create({
   safeAreaView: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: 'red'
   },
   container: {
     backgroundColor: ColorAssets.whiteColor,
@@ -160,5 +188,64 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)'
+  },
+  //modal
+  centeredView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalView: {
+    width: '80%',
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    paddingVertical: 35,
+    paddingHorizontal: 30,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  btncancel: {
+    backgroundColor: ColorAssets.whiteColor,
+    width: '48%',
+    borderRadius: 100,
+    marginTop: 20
+  },
+  btngohome: {
+    backgroundColor: ColorAssets.greenColor,
+    width: '48%',
+    borderRadius: 100,
+    marginTop: 20
+  },
+  textgohome: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+    padding: 15
+  },
+  textcancel: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: ColorAssets.greenColor,
+    textAlign: 'center',
+    padding: 15
+  },
+  shadowButton: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
   }
 })

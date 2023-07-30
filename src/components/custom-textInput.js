@@ -3,22 +3,31 @@ import { StyleSheet, TextInput, View, Text, TouchableOpacity } from "react-nativ
 import { ColorAssets } from "../utils/app-assets";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-const CustomTextInput = ({ secureTextEntry, placeholder, onChangeText, iconName, valueText, showHide }) => {
+const CustomTextInput = ({ secureTextEntry, placeholder, onChangeText, iconName, fillText, showHide, valueText, condition }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [statusPass, setStatusPass] = useState(true)
+  const [checkValidate, setCheckValidate] = useState(false)
+  const checkEmty = () => {
+    if (!fillText || (!condition && condition != undefined)) {
+      setCheckValidate(true)
+    } else {
+      setCheckValidate(false)
+    }
+  }
   return (
-    <View style={[styles.container, isFocused ? styles.boxInputFocus : styles.boxInput]}>
+    <View style={[styles.container, isFocused ? styles.boxInputFocus : (checkValidate ? styles.boxInputBlur : styles.boxInput)]}>
       {iconName ? <View style={{ width: 25, alignItems: 'center' }}>
-        <Icon name={iconName} size={21} color={isFocused ? ColorAssets.greenColor : (valueText ? '#000' : '#999')} />
+        <Icon name={iconName} size={21} color={isFocused ? ColorAssets.greenColor : (fillText ? '#000' : '#999')} />
       </View> : <View></View>}
       <TextInput
         style={styles.input}
+        value={valueText}
         secureTextEntry={secureTextEntry ? statusPass : false}
         placeholder={placeholder}
         onChangeText={onChangeText}
         keyboardType="ascii-capable"
         onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
+        onBlur={() => { checkEmty(); setIsFocused(false) }}
       />
       {showHide ? <TouchableOpacity onPress={() => { setStatusPass(!statusPass) }} style={{ alignItems: 'center', width: 25 }}>
         {statusPass ? <Icon name="eye-slash" size={21} color={isFocused ? ColorAssets.greenColor : (valueText ? '#000' : '#999')} /> : <Icon name="eye" size={21} color={isFocused ? ColorAssets.greenColor : (valueText ? '#000' : '#999')} />}
@@ -64,7 +73,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#EDFAF2',
     borderWidth: 2,
     borderColor: ColorAssets.greenColor,
-  }
+  },
+  boxInputBlur: {
+    backgroundColor: '#FFCCBC',
+    borderWidth: 2,
+    borderColor: '#FF5722',
+  },
+
 });
 
 export { CustomTextInput, CustomTextInput2 };

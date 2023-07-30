@@ -15,8 +15,6 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import AppBar from "../../../components/custom-appbar";
-import { CustomTextInput } from "../../../components/custom-textInput";
-import { CustomTextInput2 } from "../../../components/custom-textInput";
 import * as Device from 'expo-device'
 import PhoneInput from 'react-native-phone-number-input';
 import Sizebox from "../../../components/custom-sizebox";
