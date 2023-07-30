@@ -11,6 +11,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 const SplashScreen = ({ navigation }) => {
+  const changeScreen = (nameScreen) => {
+    setTimeout(() => {
+      navigation.dispatch(StackActions.replace(nameScreen));
+    }, 3000);
+  }
   const dispatch = useDispatch();
   AsyncStorage.getItem('USER_DATA_LOGIN').then(async asyncStorageRes => {
     try {
@@ -35,9 +40,9 @@ const SplashScreen = ({ navigation }) => {
         console.log(response);
         console.log("--------------------------------");
       } else {
-        setTimeout(() => {
-          navigation.dispatch(StackActions.replace("WelcomeV1"));
-        }, 3000);
+        AsyncStorage.getItem('NEW_USER').then(asyncStorageRes => {
+          asyncStorageRes == null ? changeScreen("WelcomeV1") : changeScreen("LoginHomeScreen")
+        })
       }
     } catch (error) {
       console.log(error);

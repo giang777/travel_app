@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image, TextInput, ScrollView, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { ColorAssets } from "../../../utils/app-assets";
+import { ColorAssets, containScreenAssets } from "../../../utils/app-assets";
 import { CustomTextInput } from '../../../components/custom-textInput';
 import AppBar from "../../../components/custom-appbar";
 import { CustomButton, CustomHideButton } from '../../../components/custom-button';
@@ -10,13 +10,13 @@ const ForgotPassword = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
   return (
-    <SafeAreaView style={styles.safeAreaView}>
-      <View style={styles.container}>
+    <SafeAreaView style={containScreenAssets.safeAreaView}>
+      <View style={containScreenAssets.container}>
         <AppBar onPress={() => navigation.goBack()} title={'Forgot Password'} />
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={Device.osName === 'iOS' ? "padding" : "height"}>
           <ScrollView
-            style={styles.scrollView}
-            contentContainerStyle={styles.scrollViewContent}>
+            style={containScreenAssets.scrollView}
+            contentContainerStyle={containScreenAssets.scrollViewContent}>
             <View style={{ flexGrow: 1 }}>
               <View style={{ width: '100%', alignItems: 'center' }}>
                 <Image source={require('../../../assets/icons/forgot-password.png')} />
@@ -42,20 +42,6 @@ const ForgotPassword = ({ navigation }) => {
 export default ForgotPassword
 
 const styles = StyleSheet.create({
-  safeAreaView: {
-    flex: 1,
-    backgroundColor: ColorAssets.whiteColor,
-  },
-  container: {
-    backgroundColor: ColorAssets.whiteColor,
-    flex: 1,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollViewContent: {
-    flexGrow: 1,
-  },
   boxTitle: {
     flexDirection: 'row',
     backgroundColor: 'red'

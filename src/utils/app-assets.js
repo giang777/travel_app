@@ -1,4 +1,4 @@
-import {useFonts} from 'expo-font'
+import { useFonts } from 'expo-font'
 import { useEffect } from 'react';
 
 // export const useCustomFonts = () => {
@@ -27,8 +27,8 @@ export const ColorAssets = {
   greyColor: "#6C6C6C",
   greyColor200: "#E8E8E8",
   blackolor: "#000000",
-  dotColor:'#E0E0E0',
-  transparentColor:'transparent',
+  dotColor: '#E0E0E0',
+  transparentColor: 'transparent',
 };
 export const ImageAssets = {
   backgroundImage: require("../assets/images/background-image.png"),
@@ -42,14 +42,30 @@ export const IconAssets = {
   iconGoogle: require("../assets/icons/google.png"),
 };
 
-export const subTitleAssets ={
-  subTitle0:'Book your travels with confidence and convenience. Our app ensures your safety, comfort, and hassle-free journeys, making travel a breeze.',
-  subTitle1:'Discover the perfect accommodations for your dream vacation. Our app features the finest hotels, handpicked to provide the ultimate holiday experience.',
-  subTitle2:'Unleash your wanderlust and explore the world with our app. Start your journey of discovery and create unforgettable memories with us.'
+export const subTitleAssets = {
+  subTitle0: 'Book your travels with confidence and convenience. Our app ensures your safety, comfort, and hassle-free journeys, making travel a breeze.',
+  subTitle1: 'Discover the perfect accommodations for your dream vacation. Our app features the finest hotels, handpicked to provide the ultimate holiday experience.',
+  subTitle2: 'Unleash your wanderlust and explore the world with our app. Start your journey of discovery and create unforgettable memories with us.'
 }
-export const titleAssets ={
-  title0:'Travel safely,\ncomfortably & easily',
-  title1:'Find the best hotels,\nfor vacation ',
-  title2:'Let\'s discover the world with us'
+export const titleAssets = {
+  title0: 'Travel safely,\ncomfortably & easily',
+  title1: 'Find the best hotels,\nfor vacation ',
+  title2: 'Let\'s discover the world with us'
+}
+export const containScreenAssets = {
+  safeAreaView: {
+    flex: 1,
+    backgroundColor: ColorAssets.whiteColor,
+  },
+  container: {
+    backgroundColor: ColorAssets.whiteColor,
+    flex: 1,
+  },
+  scrollView: {
+    flex: 1,
+  },
+  scrollViewContent: {
+    flexGrow: 1,
+  },
 }
 

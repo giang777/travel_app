@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Image, TextInput, ScrollView, TouchableOpacity,
 import React, { useState } from 'react'
 import * as Device from 'expo-device'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { ColorAssets } from "../../../utils/app-assets";
+import { ColorAssets, containScreenAssets } from "../../../utils/app-assets";
 import AppBar from "../../../components/custom-appbar";
 import { CustomButton, CustomHideButton } from '../../../components/custom-button';
 import { CustomTextInput } from '../../../components/custom-textInput'
@@ -12,13 +12,13 @@ const CreateNewPassword = ({ navigation }) => {
     const [password, setPassword] = useState('')
     const [rePassword, setRePassword] = useState('')
     return (
-        <SafeAreaView style={[styles.safeAreaView, showModal ? { backgroundColor: 'rgba(0, 0, 0, 0.5)' } : { backgroundColor: ColorAssets.whiteColor, }]}>
-            <View style={styles.container}>
+        <SafeAreaView style={[containScreenAssets.safeAreaView, showModal ? { backgroundColor: 'rgba(0, 0, 0, 0.5)' } : { backgroundColor: ColorAssets.whiteColor, }]}>
+            <View style={containScreenAssets.container}>
                 <AppBar onPress={() => navigation.goBack()} title={'Forgot Password'} />
                 <KeyboardAvoidingView style={{ flex: 1 }} behavior={Device.osName === 'iOS' ? "padding" : "height"}>
                     <ScrollView
-                        style={styles.scrollView}
-                        contentContainerStyle={styles.scrollViewContent}>
+                        style={containScreenAssets.scrollView}
+                        contentContainerStyle={containScreenAssets.scrollViewContent}>
                         <View style={{ flexGrow: 1 }}>
                             <View style={{ width: '100%', alignItems: 'center', paddingVertical: 50 }}>
                                 <Image source={require('../../../assets/icons/shield.png')} />
@@ -26,9 +26,9 @@ const CreateNewPassword = ({ navigation }) => {
                             <View style={{ paddingHorizontal: 15 }}>
                                 <Text style={{ fontSize: 16, marginLeft: 2 }}>Create Your New Password</Text>
                                 <Sizebox height={30} />
-                                <CustomTextInput fillText={password ? true : false} secureTextEntry={true} showHide={true} iconName={"lock"} onChangeText={(text) => { setPassword(text) }} placeholder={"Password (at least 6 characters)"} />
+                                <CustomTextInput condition={password.length > 5 ? true : false} fillText={password ? true : false} secureTextEntry={true} showHide={true} iconName={"lock"} onChangeText={(text) => { setPassword(text) }} placeholder={"Password (at least 6 characters)"} />
                                 <Sizebox height={20} />
-                                <CustomTextInput fillText={rePassword ? true : false} secureTextEntry={true} showHide={true} iconName={"lock"} onChangeText={(text) => { setRePassword(text) }} placeholder={"Confirm password"} />
+                                <CustomTextInput condition={rePassword == password ? true : false} fillText={rePassword ? true : false} secureTextEntry={true} showHide={true} iconName={"lock"} onChangeText={(text) => { setRePassword(text) }} placeholder={"Confirm password"} />
                             </View>
                             <View style={styles.footer}>
                                 {(password.length > 5 && rePassword == password) ? <CustomButton
@@ -72,19 +72,6 @@ const ModalView = ({ show, navigation }) => {
 export default CreateNewPassword
 
 const styles = StyleSheet.create({
-    safeAreaView: {
-        flex: 1,
-    },
-    container: {
-        backgroundColor: ColorAssets.whiteColor,
-        flex: 1,
-    },
-    scrollView: {
-        flex: 1,
-    },
-    scrollViewContent: {
-        flexGrow: 1,
-    },
     boxTitle: {
         flexDirection: 'row',
         backgroundColor: 'red'

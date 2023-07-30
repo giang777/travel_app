@@ -13,7 +13,7 @@ import * as Device from 'expo-device'
 import React, { useEffect, useState } from "react";
 import AppBar from "../../components/custom-appbar";
 import Sizebox from "../../components/custom-sizebox";
-import { ColorAssets } from "../../utils/app-assets";
+import { ColorAssets, containScreenAssets } from "../../utils/app-assets";
 import { CustomButton, CustomHideButton } from "../../components/custom-button";
 import { useDispatch, useSelector } from "react-redux";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -72,13 +72,13 @@ const LoginEmailScreen = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={[styles.safeAreaView, statusLoading ? { backgroundColor: 'rgba(0, 0, 0, 0.5)' } : { backgroundColor: 'white' }]}>
-      <View style={styles.container}>
+    <SafeAreaView style={[containScreenAssets.safeAreaView, statusLoading ? { backgroundColor: 'rgba(0, 0, 0, 0.5)' } : { backgroundColor: 'white' }]}>
+      <View style={containScreenAssets.container}>
         <AppBar onPress={() => navigation.goBack()} />
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={Device.osName === 'iOS' ? "padding" : "height"}>
           <ScrollView
-            style={styles.scrollView}
-            contentContainerStyle={styles.scrollViewContent}
+            style={containScreenAssets.scrollView}
+            contentContainerStyle={containScreenAssets.scrollViewContent}
           >
             <View style={styles.content}>
               <Text style={styles.title}>Login to your Account</Text>
@@ -150,19 +150,6 @@ const LoginEmailScreen = ({ navigation }) => {
 export default LoginEmailScreen;
 
 const styles = StyleSheet.create({
-  safeAreaView: {
-    flex: 1,
-  },
-  container: {
-    backgroundColor: ColorAssets.whiteColor,
-    flex: 1,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollViewContent: {
-    flexGrow: 1,
-  },
   content: {
     alignItems: "flex-start",
     paddingHorizontal: 15,

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image, TextInput, ScrollView, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { ColorAssets } from "../../../utils/app-assets";
+import { ColorAssets, containScreenAssets } from "../../../utils/app-assets";
 import AppBar from "../../../components/custom-appbar";
 import { CustomButton, CustomHideButton } from '../../../components/custom-button';
 const ForgotPasswordInputCode = ({ navigation }) => {
@@ -22,12 +22,12 @@ const ForgotPasswordInputCode = ({ navigation }) => {
         }
     };
     return (
-        <SafeAreaView style={styles.safeAreaView}>
-            <View style={styles.container}>
+        <SafeAreaView style={containScreenAssets.safeAreaView}>
+            <View style={containScreenAssets.container}>
                 <AppBar onPress={() => navigation.goBack()} />
                 <ScrollView
-                    style={styles.scrollView}
-                    contentContainerStyle={styles.scrollViewContent}>
+                    style={containScreenAssets.scrollView}
+                    contentContainerStyle={containScreenAssets.scrollViewContent}>
                     <View style={styles.content}>
                         <Text style={{ fontSize: 16 }}>Code has been send to ....</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 30 }}>
@@ -66,20 +66,6 @@ const ForgotPasswordInputCode = ({ navigation }) => {
 export default ForgotPasswordInputCode;
 
 const styles = StyleSheet.create({
-    safeAreaView: {
-        flex: 1,
-        backgroundColor: "white",
-    },
-    container: {
-        backgroundColor: ColorAssets.whiteColor,
-        flex: 1,
-    },
-    scrollView: {
-        flex: 1,
-    },
-    scrollViewContent: {
-        flexGrow: 1,
-    },
     content: {
         alignItems: "center",
         paddingHorizontal: 15,

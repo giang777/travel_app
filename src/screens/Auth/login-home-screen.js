@@ -12,7 +12,7 @@ import {
 import * as Device from 'expo-device'
 import React from "react";
 import AppBar from "../../components/custom-appbar";
-import { ColorAssets, IconAssets } from "../../utils/app-assets";
+import { ColorAssets, IconAssets, containScreenAssets } from "../../utils/app-assets";
 import Sizebox from "../../components/custom-sizebox";
 import { CustomButton } from "../../components/custom-button";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -23,11 +23,11 @@ const windowHeight = Dimensions.get("window").height;
 const LoginHomeScreen = ({ navigation }) => {
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
-      <View style={styles.container}>
+    <SafeAreaView style={containScreenAssets.safeAreaView}>
+      <View style={containScreenAssets.container}>
         <ScrollView
-          style={styles.scrollView}
-          contentContainerStyle={styles.scrollViewContent}
+          style={containScreenAssets.scrollView}
+          contentContainerStyle={containScreenAssets.scrollViewContent}
         >
           <View style={styles.content}>
             <Text style={styles.title}>Let's you in</Text>
@@ -77,20 +77,6 @@ const LoginHomeScreen = ({ navigation }) => {
 export default LoginHomeScreen;
 
 const styles = StyleSheet.create({
-  safeAreaView: {
-    backgroundColor: 'white',
-    flex: 1,
-  },
-  container: {
-    backgroundColor: ColorAssets.whiteColor,
-    flex: 1,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollViewContent: {
-    flexGrow: 1,
-  },
   content: {
     alignItems: "center",
     paddingHorizontal: 15,

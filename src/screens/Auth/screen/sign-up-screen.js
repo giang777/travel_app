@@ -7,7 +7,7 @@ import { CustomTextInput } from '../../../components/custom-textInput';
 import Sizebox from "../../../components/custom-sizebox";
 import { CustomButton, CustomHideButton } from '../../../components/custom-button';
 import axiosClient from "../../../api/axios-client";
-import { ColorAssets } from '../../../utils/app-assets';
+import { ColorAssets, containScreenAssets } from '../../../utils/app-assets';
 import { useDispatch } from 'react-redux';
 import { StackActions } from "@react-navigation/native";
 import { registerUser } from "../../../redux/actions/typeAction";
@@ -59,13 +59,13 @@ const SignUpScreen = ({ navigation }) => {
     setStatusFillText(false)
   }
   return (
-    <SafeAreaView style={[styles.safeAreaView, statusFillText ? { backgroundColor: 'rgba(0, 0, 0, 0.5)' } : { backgroundColor: 'white' }]}>
-      <View style={[styles.container]}>
+    <SafeAreaView style={[containScreenAssets.safeAreaView, statusFillText ? { backgroundColor: 'rgba(0, 0, 0, 0.5)' } : { backgroundColor: 'white' }]}>
+      <View style={[containScreenAssets.container]}>
         <AppBar onPress={showDialogBackScreen} />
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={Device.osName === 'iOS' ? "padding" : "height"}>
           <ScrollView
-            style={styles.scrollView}
-            contentContainerStyle={styles.scrollViewContent} >
+            style={containScreenAssets.scrollView}
+            contentContainerStyle={containScreenAssets.scrollViewContent} >
             <View style={styles.content}>
               <Text style={styles.title}>Create your Account</Text>
               <CustomTextInput condition={username.length > 4 ? true : false} fillText={username ? true : false} iconName={"user"} onChangeText={(text) => { setUsername(text) }} placeholder={"Username (at least 5 characters)"} />
@@ -136,20 +136,6 @@ const ModalView = ({ show, navigation, hideDialogBackScreen }) => {
 export default SignUpScreen
 
 const styles = StyleSheet.create({
-  safeAreaView: {
-    flex: 1,
-    backgroundColor: 'red'
-  },
-  container: {
-    backgroundColor: ColorAssets.whiteColor,
-    flex: 1,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollViewContent: {
-    flexGrow: 1,
-  },
   content: {
     alignItems: "flex-start",
     paddingHorizontal: 15,
