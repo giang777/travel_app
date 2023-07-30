@@ -8,24 +8,34 @@ import {
   Dimensions,
   Pressable,
   TextInput,
-  Platform,
-  Button,
+  Image,
   SafeAreaView,
+  KeyboardAvoidingView,
+  Alert
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "../../../components/custom-appbar";
-import { CustomTextInput } from "../../../components/custom-textInput";
-import { CustomTextInput2 } from "../../../components/custom-textInput";
+import * as Device from 'expo-device'
+import PhoneInput from 'react-native-phone-number-input';
 import Sizebox from "../../../components/custom-sizebox";
+import { useDispatch, useSelector } from "react-redux";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import CustomSwitch from "../../../components/custom-switch";
-import CustomButton from "../../../components/custom-button";
+import { CustomButton, CustomHideButton } from "../../../components/custom-button";
 import { ColorAssets } from "../../../utils/app-assets";
 import CustomAvatar from "../../../components/custom-avatar";
+import dayjs from 'dayjs';
+import advancedFormat from 'dayjs/plugin/advancedFormat'
+import { registerUser, registerUserInfo } from "../../../redux/actions/typeAction";
+dayjs.extend(advancedFormat);
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const ConfirmInformationScreen = ({ navigation }) => {
   const paddingTop = StatusBar.currentHeight || 0;
+  const [gender, setGender] = useState(false)
+  const [dateBirth, setDateBirth] = useState('')
+
+  //choose date
   const [open, setOpen] = useState(false);
   const showDatePicker = () => {
     setOpen(true);
@@ -34,43 +44,94 @@ const ConfirmInformationScreen = ({ navigation }) => {
     setOpen(false);
   };
   const handleConfirm = (date) => {
-    console.log(date);
-    hideDatePicker();
+    setOpen(false);
+    let dateofbirth = dayjs(date).format('DD/MM/YYYY')
+    console.log(dateofbirth);
+    setDateBirth(dateofbirth)
+
   };
+  //choose phone number
+  const [phoneNumber, setPhoneNumber] = React.useState('');
+  const phoneInput = React.useRef(null);
+  //hàm confirm số điện thoại
+  const OnPress = () => {
+    if (phoneNumber.length !== 0) {
+      Alert.alert(
+        "Confirm Number",
+        phoneNumber,
+        [
+          {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed" + phoneNumber),
+          },
+          {
+            text: "OK",
+            onPress: () => console.log("OK Pressed"),
+          },
+        ],
+      );
+    }
+  }
+
+  const getGender = (value) => {
+    setGender(value)
+  }
+  //Fill thông tin
+  const confirmRegister = () => {
+    
+  }
+
   return (
     <SafeAreaView style={[styles.container, { paddingTop }]}>
       <AppBar onPress={() => navigation.goBack()} title={"Fill Your Profile"} />
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollViewContent}
-      >
-        <View style={styles.content}>
-          <CustomAvatar />
-          <View style={styles.boxName}>
-            <CustomTextInput2 textPlaceHolder={"First name"} />
-            <View style={{ width: "2%" }}></View>
-            <CustomTextInput2 textPlaceHolder={"Last name"} />
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior={Device.osName === 'iOS' ? "padding" : "height"}>
+        <ScrollView
+          style={styles.scrollView}
+          contentContainerStyle={styles.scrollViewContent}>
+          <View style={styles.content}>
+            <CustomAvatar />
+            <Sizebox height={20} />
+            <CustomSwitch onSwitch={getGender} />
+            <Sizebox height={20} />
+            <View style={styles.boxDate}>
+              <TouchableOpacity style={styles.input} onPress={showDatePicker}>
+                <Text style={{ color: "gray" }}>{dateBirth ? dateBirth + '' : 'Your date of birth'}</Text>
+                <Image style={styles.iconimage} source={require('../../../assets/icons/iconcalendar.png')} />
+              </TouchableOpacity>
+            </View>
+            <Sizebox height={20} />
+            <DateTimePickerModal
+              isVisible={open}
+              mode="date"
+              date={new Date()}
+              onConfirm={handleConfirm}
+              onCancel={hideDatePicker}
+            />
+            <View style={styles.boxDate2}>
+              <View style={styles.input2}>
+                <PhoneInput
+                  ref={phoneInput}
+                  defaultValue={phoneNumber}
+                  containerStyle={styles.phoneContainer}
+                  textContainerStyle={styles.textInput}
+                  onChangeFormattedText={text => {
+                    setPhoneNumber(text);
+                  }}
+                  defaultCode="VN"
+                  layout='first'
+                // withShadow
+                />
+              </View>
+            </View>
           </View>
-          <CustomSwitch />
-          <View style={styles.boxDate}>
-            <TouchableOpacity style={styles.input} onPress={showDatePicker}>
-              <Text style={{ color: "gray" }}>dd/mm/yyyy</Text>
-            </TouchableOpacity>
-          </View>
-          <DateTimePickerModal
-            isVisible={open}
-            mode="date"
-            date={new Date()}
-            onConfirm={handleConfirm}
-            onCancel={hideDatePicker}
-          />
 
-          <CustomTextInput textPlaceHolder={"Phone number"} />
-        </View>
-        <View style={styles.footer}>
-          <CustomButton title={"Continue"} />
-        </View>
-      </ScrollView>
+          <Sizebox height={40} />
+          {(dateBirth && phoneNumber) ? <View style={styles.footer}>
+            <CustomButton title={"Continue"} onPress={confirmRegister} />
+          </View> : <View style={styles.footer}><CustomHideButton title={"Continue"} /></View>}
+
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
@@ -85,12 +146,13 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
   },
-
+  scrollViewContent: {
+    flex: 1
+  },
   content: {
     alignItems: "center",
     paddingTop: 10,
     paddingHorizontal: 15,
-    flexGrow: 1,
     justifyContent: "space-around",
   },
   title: {
@@ -100,11 +162,11 @@ const styles = StyleSheet.create({
     fontSize: windowWidth / 9.5,
   },
   footer: {
-    flexDirection: "row",
     paddingHorizontal: 16,
     paddingVertical: 10,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-end",
+    height: '36%'
   },
   titleAlreadyHaveAccount: {
     color: ColorAssets.greyColor,
@@ -113,17 +175,19 @@ const styles = StyleSheet.create({
     color: ColorAssets.greenColor,
     fontWeight: "bold",
   },
-  boxName: {
-    width: "100%",
-    flexDirection: "row",
-  },
   input: {
     borderColor: "gray",
     borderRadius: 5,
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
     paddingVertical: 16,
     fontSize: 16,
     width: "100%",
+    justifyContent: 'center',
+  },
+  input2: {
+    borderRadius: 20,
+    width: "100%",
+    justifyContent: 'center',
   },
   boxDate: {
     width: "100%",
@@ -131,5 +195,29 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     flexDirection: "row",
     paddingVertical: 5,
+    position: 'relative',
+    paddingHorizontal: 10
+  },
+  boxDate2: {
+    width: "100%",
+  },
+  iconimage: {
+    position: 'absolute',
+    right: 10,
+    height: 24,
+    width: 24
+  },
+  phoneContainer: {
+    width: "100%",
+    borderColor: "gray",
+    backgroundColor: ColorAssets.greyColor200,
+    borderRadius: 18,
+    fontSize: 16,
+    paddingVertical: 2
+  },
+  textInput: {
+    backgroundColor: ColorAssets.greyColor200,
+    borderRadius: 18,
+    fontSize: 16,
   },
 });

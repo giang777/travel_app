@@ -1,9 +1,13 @@
 export const initialState = {
   first: 0,
-  username: '',
-  password: '',
-
 };
+
+export const register = {
+  user: {
+    userName: '',
+    passWord: ''
+  }
+}
 
 export const TYPE_REDUCER = (state = initialState, action) => {
   switch (action.type) {
@@ -17,19 +21,14 @@ export const TYPE_REDUCER = (state = initialState, action) => {
   }
 };
 
-export const AUTH_REDUCER = (state = initialState, action) => {
-  switch (action.type) {
-    case 'SET_USERNAME':
-      return {
+export const REGISTER = (state = register, action) => {
+  switch(action.type){
+    case "REGISTER_USER":
+      return{
         ...state,
-        username: action.payload,
-      };
-    case 'SET_PASSWORD':
-      return {
-        ...state,
-        password: action.payload,
-      };
+        user: action.payload
+      }
     default:
-      return state;
+      return state
   }
-};
+}

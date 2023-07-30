@@ -7,7 +7,10 @@ import WelcomeV1 from '../screens/splash/welcome-v1-screen';
 import WelcomeV1_1 from '../screens/splash/welcome-v1-1-screen';
 import LoginEmailScreen from '../screens/Auth/login-email-screen';
 import SignUpScreen from '../screens/Auth/screen/sign-up-screen';
+import ForgotPassword from '../screens/Auth/screen/forgot-password'
+import ForgotPasswordInputCode from '../screens/Auth/screen/forgot-password-inputcode'
 import ConfirmInformationScreen from '../screens/Auth/screen/confirm-information-screen';
+import CreateNewPassword from '../screens/Auth/screen/create-new-password'
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +25,9 @@ export default TabsNavigation = () => {
       <Stack.Screen name="LoginHomeScreen" component={LoginHomeScreen}  options={{animation:'slide_from_right'}}/>
       <Stack.Screen name="LoginEmailScreen" component={LoginEmailScreen} options={{animation:'slide_from_right'}} />
       <Stack.Screen name="SignUpScreen" component={SignUpScreen} options={{animation:'slide_from_right'}} />
+      <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{animation:'slide_from_right'}} />
+      <Stack.Screen name="ForgotPasswordInputCode" component={ForgotPasswordInputCode} options={{animation:'slide_from_right'}} />
+      <Stack.Screen name="CreateNewPassword" component={CreateNewPassword} options={{animation:'slide_from_right'}} />
       <Stack.Screen name="ConfirmInformationScreen" component={ConfirmInformationScreen} options={{animation:'slide_from_right'}} />
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
     </Stack.Navigator>

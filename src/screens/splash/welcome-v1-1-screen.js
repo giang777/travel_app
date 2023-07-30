@@ -13,7 +13,7 @@ import {
   titleAssets,
 } from "../../utils/app-assets";
 import Sizebox from "../../components/custom-sizebox";
-import CustomButton from "../../components/custom-button";
+import {CustomButton} from "../../components/custom-button";
 import { StackActions } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { increaseCount } from "../../redux/actions/typeAction";
@@ -26,7 +26,6 @@ const WelcomeV1_1 = ({ navigation }) => {
   const handleIncreaseCount = () => {
     console.log(first);
     if (first >= 2) {
-      console.log("hết" + first);
       navigation.dispatch(StackActions.replace("LoginHomeScreen"));
     } else {
       dispatch(increaseCount());

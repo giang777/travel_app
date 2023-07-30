@@ -4,11 +4,12 @@ export const increaseCount = () => {
   };
 };
 
-export const setUsername = (username) => ({
-  type: 'SET_USERNAME',
-  payload: username,
-});
-export const setPassword = (password) => ({
-  type: 'SET_PASSWORD',
-  payload: password,
-});
+export const setToken = (token) => ({
+  type: 'SET_TOKEN',
+  payload: token
+})
+
+export const registerUser = (user)=>({
+  type: 'REGISTER_USER',
+  payload: user
+})
