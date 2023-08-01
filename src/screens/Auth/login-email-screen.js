@@ -11,17 +11,17 @@ import {
 } from "react-native";
 import * as Device from 'expo-device'
 import React, { useEffect, useState } from "react";
-import AppBar from "../../components/custom-appbar";
-import Sizebox from "../../components/custom-sizebox";
+import AppBar from "../../components/custom/custom-appbar";
+import Sizebox from "../../components/custom/custom-sizebox";
 import { ColorAssets, containScreenAssets } from "../../utils/app-assets";
-import { CustomButton, CustomHideButton } from "../../components/custom-button";
+import { CustomButton, CustomHideButton } from "../../components/custom/custom-button";
 import { useDispatch, useSelector } from "react-redux";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CheckBox from 'expo-checkbox';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { setToken } from "../../redux/actions/typeAction";
 import axiosClient from "../../api/axios-client";
-import { CustomTextInput } from "../../components/custom-textInput";
+import { CustomTextInput } from "../../components/custom/custom-textInput";
 import { StackActions } from "@react-navigation/native";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -54,7 +54,7 @@ const LoginEmailScreen = ({ navigation }) => {
         } else {
           AsyncStorage.removeItem('USER_DATA_LOGIN')
         }
-        navigation.dispatch(StackActions.replace("HomeScreen"))
+        navigation.dispatch(StackActions.replace("MainScreen"))
         console.log('---');
         console.log("Thành công");
       }

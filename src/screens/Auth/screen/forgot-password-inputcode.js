@@ -2,8 +2,8 @@ import { StyleSheet, Text, View, Image, TextInput, ScrollView, TouchableOpacity,
 import React, { useEffect, useRef, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ColorAssets, containScreenAssets } from "../../../utils/app-assets";
-import AppBar from "../../../components/custom-appbar";
-import { CustomButton, CustomHideButton } from '../../../components/custom-button';
+import AppBar from "../../../components/custom/custom-appbar";
+import { CustomButton, CustomHideButton } from '../../../components/custom/custom-button';
 const ForgotPasswordInputCode = ({ navigation }) => {
     const inputRefs = [useRef(''), useRef(''), useRef(''), useRef('')];
     const [checkButtonShow, setChecjButtonShow] = useState(false)

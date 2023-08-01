@@ -14,16 +14,16 @@ import {
   Alert
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import AppBar from "../../../components/custom-appbar";
+import AppBar from "../../../components/custom/custom-appbar";
 import * as Device from 'expo-device'
 import PhoneInput from 'react-native-phone-number-input';
-import Sizebox from "../../../components/custom-sizebox";
+import Sizebox from "../../../components/custom/custom-sizebox";
 import { useDispatch, useSelector } from "react-redux";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import CustomSwitch from "../../../components/custom-switch";
-import { CustomButton, CustomHideButton } from "../../../components/custom-button";
+import CustomSwitch from "../../../components/custom/custom-switch";
+import { CustomButton, CustomHideButton } from "../../../components/custom/custom-button";
 import { ColorAssets } from "../../../utils/app-assets";
-import CustomAvatar from "../../../components/custom-avatar";
+import CustomAvatar from "../../../components/custom/custom-avatar";
 import dayjs from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat'
 import { registerUser, registerUserInfo } from "../../../redux/actions/typeAction";

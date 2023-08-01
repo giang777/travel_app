@@ -3,9 +3,9 @@ import React, { useState } from 'react'
 import * as Device from 'expo-device'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ColorAssets, containScreenAssets } from "../../../utils/app-assets";
-import AppBar from "../../../components/custom-appbar";
-import { CustomButton, CustomHideButton } from '../../../components/custom-button';
-import { CustomTextInput } from '../../../components/custom-textInput'
+import AppBar from "../../../components/custom/custom-appbar";
+import { CustomButton, CustomHideButton } from '../../../components/custom/custom-button';
+import { CustomTextInput } from '../../../components/custom/custom-textInput'
 
 const CreateNewPassword = ({ navigation }) => {
     const [showModal, setShowModal] = useState(false);

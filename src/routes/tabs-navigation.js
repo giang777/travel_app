@@ -1,6 +1,5 @@
 import React from 'react';
 import SplashScreen from '../screens/splash/splash-screen';
-import HomeScreen from '../screens/home/home-screen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import LoginHomeScreen from '../screens/Auth/login-home-screen';
 import WelcomeV1 from '../screens/splash/welcome-v1-screen';
@@ -11,6 +10,7 @@ import ForgotPassword from '../screens/Auth/screen/forgot-password'
 import ForgotPasswordInputCode from '../screens/Auth/screen/forgot-password-inputcode'
 import ConfirmInformationScreen from '../screens/Auth/screen/confirm-information-screen';
 import CreateNewPassword from '../screens/Auth/screen/create-new-password'
+import BottomNavigation from './bottom-navigation';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,7 +29,7 @@ export default TabsNavigation = () => {
       <Stack.Screen name="ForgotPasswordInputCode" component={ForgotPasswordInputCode} options={{animation:'slide_from_right'}} />
       <Stack.Screen name="CreateNewPassword" component={CreateNewPassword} options={{animation:'slide_from_right'}} />
       <Stack.Screen name="ConfirmInformationScreen" component={ConfirmInformationScreen} options={{animation:'slide_from_right'}} />
-      <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      <Stack.Screen name="MainScreen" component={BottomNavigation} options={{animation:'slide_from_right'}}/>
     </Stack.Navigator>
   );
 };
