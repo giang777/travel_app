@@ -11,6 +11,7 @@ import ForgotPasswordInputCode from '../screens/Auth/screen/forgot-password-inpu
 import ConfirmInformationScreen from '../screens/Auth/screen/confirm-information-screen';
 import CreateNewPassword from '../screens/Auth/screen/create-new-password'
 import BottomNavigation from './bottom-navigation';
+import Booked from '../screens/home/Booked';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,7 @@ export default TabsNavigation = () => {
       <Stack.Screen name="CreateNewPassword" component={CreateNewPassword} options={{animation:'slide_from_right'}} />
       <Stack.Screen name="ConfirmInformationScreen" component={ConfirmInformationScreen} options={{animation:'slide_from_right'}} />
       <Stack.Screen name="MainScreen" component={BottomNavigation} options={{animation:'slide_from_right'}}/>
+      <Stack.Screen name="RecentlyBookedScreen" component={Booked} options={{animation:'slide_from_right'}}/>
     </Stack.Navigator>
   );
 };
