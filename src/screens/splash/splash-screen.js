@@ -5,48 +5,40 @@ import { StackActions } from "@react-navigation/native";
 import { styleSplashScreen } from "./styles";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axiosClient from "../../api/axios-client";
-import { setUser, setToken } from "../../redux/actions/typeAction";
-import { useDispatch, useSelector } from "react-redux";
-
+import { useDispatch } from "react-redux";
+import { setToken } from '../../redux/actions/typeAction'
 
 
 const SplashScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
   const changeScreen = (nameScreen) => {
     setTimeout(() => {
       navigation.dispatch(StackActions.replace(nameScreen));
     }, 3000);
   }
-  const dispatch = useDispatch();
-  AsyncStorage.getItem('USER_DATA_LOGIN').then(async asyncStorageRes => {
-    try {
-      if (asyncStorageRes != null) {
-        const response = await axiosClient.post("/api/auth/login", {
-          username: (JSON.parse(asyncStorageRes)).username,
-          password: (JSON.parse(asyncStorageRes)).password,
-        });
-        if (response.status === 200) {
-          // nếu return 200 => 
-          dispatch(setUser({
-            username: (JSON.parse(asyncStorageRes)).username,
-            password: (JSON.parse(asyncStorageRes)).password
-          }))
-          dispatch(setToken(response.token))
-          navigation.navigate("HomeScreen")
-          console.log('---');
-          console.log("Thành công");
-        }
-
-        if (response.status === 400) { navigation.navigate("LoginHomeScreen") };
-        console.log(response);
-        console.log("--------------------------------");
-      } else {
-        AsyncStorage.getItem('NEW_USER').then(asyncStorageRes => {
-          asyncStorageRes == null ? changeScreen("WelcomeV1") : changeScreen("LoginHomeScreen")
-        })
+  const refreshToken = async (token) => {
+    const response = await axiosClient.post("/api/auth/refreshtoken", {
+      refreshToken: token
+    });
+    response.accessToken != null ? dispatch(setToken(response.accessToken)) : undefined
+    console.log('token: ' + response.accessToken);
+  }
+  AsyncStorage.getItem('NEW_USER').then(asyncStorageRes => {
+    asyncStorageRes == null ? changeScreen("WelcomeV1") : (AsyncStorage.getItem('USER_DATA_LOGIN').then(
+      asyncStorageResUser => {
+        asyncStorageResUser == null ? changeScreen("LoginHomeScreen") : (
+          AsyncStorage.getItem('REFRESH_TOKEN').then(asyncStorage => {
+            if (asyncStorage != null) {
+              refreshToken(asyncStorage)
+              setInterval(() => {
+                refreshToken(asyncStorage)
+              }, 870000)
+            }
+            changeScreen("MainScreen")
+          })
+        )
       }
-    } catch (error) {
-      console.log(error);
-    }
+    ))
   })
   return (
     <View style={styleSplashScreen.container}>

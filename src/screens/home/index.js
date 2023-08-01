@@ -6,14 +6,13 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 const HomeScreen = () => {
   //giang
   console.log('HOME');
-  const test = useSelector((state) => state.tokenReducer.token)
-  console.log(test);
-  const getUserPassword = useSelector((state) => state.registerReducer);
-  console.log(getUserPassword);
+  const token = useSelector((state) => state.tokenReducer.token)
+  console.log(token);
+
   return (
     <SafeAreaView>
       <View>
-        <Text>HomeScreen</Text>
+        <Text>HELOOOOOOOOOOOOOOOOOOO</Text>
       </View>
     </SafeAreaView>
   )
