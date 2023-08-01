@@ -11,10 +11,10 @@ import {
 } from "react-native";
 import * as Device from 'expo-device'
 import React from "react";
-import AppBar from "../../components/custom-appbar";
+import AppBar from "../../components/custom/custom-appbar";
 import { ColorAssets, IconAssets, containScreenAssets } from "../../utils/app-assets";
-import Sizebox from "../../components/custom-sizebox";
-import { CustomButton } from "../../components/custom-button";
+import Sizebox from "../../components/custom/custom-sizebox";
+import { CustomButton } from "../../components/custom/custom-button";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const windowWidth = Dimensions.get("window").width;

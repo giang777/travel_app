@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { ColorAssets } from '../utils/app-assets'
+import { ColorAssets } from "../../utils/app-assets";
 
 const CustomButton = ({ title, onPress }) => {
   return (

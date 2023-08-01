@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Sizebox from "./custom-sizebox";
 import React from "react";
-import { ColorAssets } from "../utils/app-assets";
+import { ColorAssets } from "../../utils/app-assets";
 const AppBar = ({ title, onPress }) => {
   return (
     <View style={styles.container}>

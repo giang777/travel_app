@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { ColorAssets } from "../utils/app-assets";
+import { ColorAssets } from "../../utils/app-assets";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function CustomSwitch({ onSwitch }) {

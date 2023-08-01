@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import React from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { ColorAssets } from "../utils/app-assets";
+import { ColorAssets } from "../../utils/app-assets";
 
 const CustomAvatar = () => {
   return (

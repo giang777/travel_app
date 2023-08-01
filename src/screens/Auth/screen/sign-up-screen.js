@@ -2,10 +2,10 @@ import { ScrollView, StatusBar, StyleSheet, Text, View, TouchableOpacity, Dimens
 import React, { useState } from 'react'
 import * as Device from 'expo-device'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import AppBar from '../../../components/custom-appbar';
-import { CustomTextInput } from '../../../components/custom-textInput';
-import Sizebox from "../../../components/custom-sizebox";
-import { CustomButton, CustomHideButton } from '../../../components/custom-button';
+import AppBar from '../../../components/custom/custom-appbar';
+import { CustomTextInput } from '../../../components/custom/custom-textInput';
+import Sizebox from "../../../components/custom/custom-sizebox";
+import { CustomButton, CustomHideButton } from '../../../components/custom/custom-button';
 import axiosClient from "../../../api/axios-client";
 import { ColorAssets, containScreenAssets } from '../../../utils/app-assets';
 import { useDispatch } from 'react-redux';

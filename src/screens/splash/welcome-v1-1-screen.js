@@ -12,8 +12,8 @@ import {
   subTitleAssets,
   titleAssets,
 } from "../../utils/app-assets";
-import Sizebox from "../../components/custom-sizebox";
-import {CustomButton} from "../../components/custom-button";
+import Sizebox from "../../components/custom/custom-sizebox";
+import {CustomButton} from "../../components/custom/custom-button";
 import { StackActions } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { increaseCount } from "../../redux/actions/typeAction";

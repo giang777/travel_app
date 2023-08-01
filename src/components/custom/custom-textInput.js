@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, TextInput, View, Text, TouchableOpacity } from "react-native";
-import { ColorAssets } from "../utils/app-assets";
+import { ColorAssets } from "../../utils/app-assets";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 const CustomTextInput = ({ secureTextEntry, placeholder, onChangeText, iconName, fillText, showHide, valueText, condition }) => {
