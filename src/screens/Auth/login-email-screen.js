@@ -38,30 +38,24 @@ const LoginEmailScreen = ({ navigation }) => {
     setUsername(getUserRes.userName)
     setPassword(getUserRes.passWord)
   }, [getUserRes.userName, getUserRes.passWord])
+  // hàm refresh accessToken
   const handleFormSubmit = async () => {
     try {
       setStatusLoading(true)
-      const response = await axiosClient.get("/api/auth/login", {
+      const response = await axiosClient.post("/api/auth/login", {
         username,
         password,
       });
       if (response.status === 200) {
         // nếu return 200 => 
-        dispatch(setToken(response.token))
-        if (toggleCheckBox) {
-          let user = { username, password }
-          AsyncStorage.setItem('USER_DATA_LOGIN', JSON.stringify(user))
-        } else {
-          AsyncStorage.removeItem('USER_DATA_LOGIN')
-        }
+        dispatch(setToken(response.accessToken))
+        AsyncStorage.setItem('USER_DATA_LOGIN', JSON.stringify({ username, password }))
+        AsyncStorage.setItem('REFRESH_TOKEN', response.refreshToken)
         navigation.dispatch(StackActions.replace("MainScreen"))
-        console.log('---');
-        console.log("Thành công");
       }
 
       if (response.status === 400) {
         setTextError(response.message)
-        console.log("đéo tìm thấy");
       }
       setStatusLoading(false)
       console.log(response);
@@ -70,6 +64,7 @@ const LoginEmailScreen = ({ navigation }) => {
       console.log(error);
     }
   };
+
 
   return (
     <SafeAreaView style={[containScreenAssets.safeAreaView, statusLoading ? { backgroundColor: 'rgba(0, 0, 0, 0.5)' } : { backgroundColor: 'white' }]}>

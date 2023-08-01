@@ -10,7 +10,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { RenderItemListHorizontal,RenderItemListVertical } from '../../components/renderList';
 
 const HomeScreen = (props) => {
-  //giang
+  //giang giang
 
   const [indexOptions, setindexOptions] = useState(1);
 
@@ -90,7 +90,6 @@ const HomeScreen = (props) => {
 
       </SafeAreaView>
     </ScrollView>
-
   )
 }
 

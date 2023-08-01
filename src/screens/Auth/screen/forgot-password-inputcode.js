@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { ColorAssets, containScreenAssets } from "../../../utils/app-assets";
 import AppBar from "../../../components/custom/custom-appbar";
 import { CustomButton, CustomHideButton } from '../../../components/custom/custom-button';
+import * as Device from 'expo-device'
 const ForgotPasswordInputCode = ({ navigation }) => {
     const inputRefs = [useRef(''), useRef(''), useRef(''), useRef('')];
     const [checkButtonShow, setChecjButtonShow] = useState(false)
@@ -25,39 +26,41 @@ const ForgotPasswordInputCode = ({ navigation }) => {
         <SafeAreaView style={containScreenAssets.safeAreaView}>
             <View style={containScreenAssets.container}>
                 <AppBar onPress={() => navigation.goBack()} />
-                <ScrollView
-                    style={containScreenAssets.scrollView}
-                    contentContainerStyle={containScreenAssets.scrollViewContent}>
-                    <View style={styles.content}>
-                        <Text style={{ fontSize: 16 }}>Code has been send to ....</Text>
-                        <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 30 }}>
-                            {inputRefs.map((item, index) => (
-                                <React.Fragment key={index}>
-                                    <TextInput textAlign='center'
-                                        ref={item}
-                                        maxLength={1}
-                                        autoFocus={index == 0 ? true : false}
-                                        keyboardType='numeric'
-                                        style={[styles.textNumber, focusedIndex == index ? styles.focus : styles.unFocus]}
-                                        onFocus={() => { setFocusedIndex(index) }}
-                                        onChangeText={(text) => { handleCodeChange(text, index) }} />
-                                    {index !== inputRefs.length - 1 && <View style={{ width: '5%' }}></View>}
-                                </React.Fragment>
-                            ))}
+                <KeyboardAvoidingView style={{ flex: 1 }} behavior={Device.osName === 'iOS' ? "padding" : "height"}>
+                    <ScrollView
+                        style={containScreenAssets.scrollView}
+                        contentContainerStyle={containScreenAssets.scrollViewContent}>
+                        <View style={styles.content}>
+                            <Text style={{ fontSize: 16 }}>Code has been send to ....</Text>
+                            <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 30 }}>
+                                {inputRefs.map((item, index) => (
+                                    <React.Fragment key={index}>
+                                        <TextInput textAlign='center'
+                                            ref={item}
+                                            maxLength={1}
+                                            autoFocus={index == 0 ? true : false}
+                                            keyboardType='numeric'
+                                            style={[styles.textNumber, focusedIndex == index ? styles.focus : styles.unFocus]}
+                                            onFocus={() => { setFocusedIndex(index) }}
+                                            onChangeText={(text) => { handleCodeChange(text, index) }} />
+                                        {index !== inputRefs.length - 1 && <View style={{ width: '5%' }}></View>}
+                                    </React.Fragment>
+                                ))}
+                            </View>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={{ fontSize: 15 }}>Resend code in </Text>
+                                <Text style={{ fontSize: 15, color: ColorAssets.greenColor }}>55</Text>
+                                <Text style={{ fontSize: 15 }}> s</Text>
+                            </View>
                         </View>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Text style={{ fontSize: 15 }}>Resend code in </Text>
-                            <Text style={{ fontSize: 15, color: ColorAssets.greenColor }}>55</Text>
-                            <Text style={{ fontSize: 15 }}> s</Text>
+                        <View style={styles.footer}>
+                            {checkButtonShow ? <CustomButton
+                                title="Verify"
+                                onPress={() => { navigation.navigate("CreateNewPassword"); }}
+                            /> : <CustomHideButton title={"Verify"} />}
                         </View>
-                    </View>
-                    <View style={styles.footer}>
-                        {checkButtonShow ? <CustomButton
-                            title="Verify"
-                            onPress={() => { navigation.navigate("CreateNewPassword"); }}
-                        /> : <CustomHideButton title={"Verify"} />}
-                    </View>
-                </ScrollView>
+                    </ScrollView>
+                </KeyboardAvoidingView>
             </View>
         </SafeAreaView>
     );
@@ -70,14 +73,14 @@ const styles = StyleSheet.create({
         alignItems: "center",
         paddingHorizontal: 15,
         flexGrow: 1,
-        paddingVertical: '55%',
+        justifyContent: 'center'
     },
     footer: {
         flexDirection: "row",
         paddingHorizontal: 16,
         paddingVertical: 10,
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "flex-end",
     },
     unFocus: {
         backgroundColor: '#FAFAFA',

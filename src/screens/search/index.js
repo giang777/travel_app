@@ -5,7 +5,7 @@ const SearchScreen = () => {
   return (
     <SafeAreaView>
       <View>
-        <Text>Search</Text>
+        <Text>dfhjaklshfdlakjshdf</Text>
       </View>
 
     </SafeAreaView>
