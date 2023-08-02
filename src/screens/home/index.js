@@ -10,7 +10,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { RenderItemListHorizontal,RenderItemListVertical } from '../../components/renderList';
 
 const HomeScreen = (props) => {
-  //giang giang
+  //giang giang 
 
   const [indexOptions, setindexOptions] = useState(1);
 
@@ -52,7 +52,7 @@ const HomeScreen = (props) => {
                   onPress={() => { setindexOptions(item.id) }}
                   key={index}
                 >
-                  <Text style={indexOptions === item.id ? { color: "white" } : { color: "black" }}>{item.titel}</Text>
+                  <Text style={[{fontWeight: 'bold', fontSize: 16},indexOptions === item.id ? { color: "white" } : { color: ColorAssets.greenColor }]}>{item.title}</Text>
                 </TouchableOpacity>
               )
             })
