@@ -19,7 +19,7 @@ const Stack = createNativeStackNavigator();
 export default TabsNavigation = () => {
   return (
     <Stack.Navigator
-      initialRouteName="HotelDetailsScreen"
+      initialRouteName="SplashScreen"
       screenOptions={{headerShown: false}}>
       <Stack.Screen name="SplashScreen" component={SplashScreen}  />
       <Stack.Screen name="WelcomeV1" component={WelcomeV1} />
