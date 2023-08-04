@@ -30,10 +30,10 @@ const SplashScreen = ({ navigation }) => {
           AsyncStorage.getItem('REFRESH_TOKEN').then(asyncStorage => {
             if (asyncStorage != null) {
             
-              // refreshToken(asyncStorage)
-              // setInterval(() => {
-              //   refreshToken(asyncStorage)
-              // }, 870000)
+              refreshToken(asyncStorage)
+              setInterval(() => {
+                refreshToken(asyncStorage)
+              }, 870000)
             }
             clearInterval(refreshToken)
             changeScreen("MainScreen")
