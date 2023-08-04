@@ -11,13 +11,15 @@ import ForgotPasswordInputCode from '../screens/Auth/screen/forgot-password-inpu
 import ConfirmInformationScreen from '../screens/Auth/screen/confirm-information-screen';
 import CreateNewPassword from '../screens/Auth/screen/create-new-password'
 import BottomNavigation from './bottom-navigation';
+import HotelDetailsSCreen from '../screens/hotel_details';
+import BookingScreen from '../screens/booking';
 
 const Stack = createNativeStackNavigator();
 
 export default TabsNavigation = () => {
   return (
     <Stack.Navigator
-      initialRouteName="SplashScreen"
+      initialRouteName="HotelDetailsScreen"
       screenOptions={{headerShown: false}}>
       <Stack.Screen name="SplashScreen" component={SplashScreen}  />
       <Stack.Screen name="WelcomeV1" component={WelcomeV1} />
@@ -30,6 +32,8 @@ export default TabsNavigation = () => {
       <Stack.Screen name="CreateNewPassword" component={CreateNewPassword} options={{animation:'slide_from_right'}} />
       <Stack.Screen name="ConfirmInformationScreen" component={ConfirmInformationScreen} options={{animation:'slide_from_right'}} />
       <Stack.Screen name="MainScreen" component={BottomNavigation} options={{animation:'slide_from_right'}}/>
+      <Stack.Screen name="HotelDetailsScreen" component={HotelDetailsSCreen} options={{animation:'slide_from_right'}}/>
+      <Stack.Screen name="BookingScreen" component={BookingScreen} options={{animation:'slide_from_right'}}/>
     </Stack.Navigator>
   );
 };
