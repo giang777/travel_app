@@ -61,6 +61,7 @@ const LoginEmailScreen = ({ navigation }) => {
       console.log(response);
       console.log("--------------------------------");
     } catch (error) {
+      setStatusLoading(false)
       console.log(error);
     }
   };

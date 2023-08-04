@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions, Text, View } from 'react-native'
+import { ColorAssets } from '../../utils/app-assets';
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -6,8 +7,9 @@ const windowHeight = Dimensions.get("window").height;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#F5F5F5",
-        padding: 20
+        backgroundColor: "#FAFAFA",
+        paddingHorizontal: 20,
+        paddingVertical: 10
     },
     header: {
         width: "100%",
@@ -26,8 +28,8 @@ const styles = StyleSheet.create({
     },
 
     nameApp: {
-        fontSize: 18,
-        fontWeight: "500",
+        fontSize: 20,
+        fontWeight: "bold",
         marginLeft: 10
     },
 
@@ -46,10 +48,10 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "flex-start",
         width: "100%",
-        height: windowHeight - 780,
+        height: 50,
         backgroundColor: "#DCDCDC",
-        marginVertical: 10,
         borderRadius: 20,
+        marginTop: 20,
         paddingHorizontal: 20,
     },
 
@@ -71,12 +73,12 @@ const styles = StyleSheet.create({
 
     itemOptions_noActive: {
         backgroundColor: "white",
-        borderColor: "#32CD32",
+        borderColor: ColorAssets.greenColor,
     },
 
     itemOptions_isActive: {
-        backgroundColor: "#32CD32",
-        borderColor: "#32CD32",
+        backgroundColor: ColorAssets.greenColor,
+        borderColor: ColorAssets.greenColor,
     },
 
     headerBooked:{

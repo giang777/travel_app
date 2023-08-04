@@ -21,7 +21,7 @@ const SplashScreen = ({ navigation }) => {
       refreshToken: token
     });
     response.accessToken != null ? dispatch(setToken(response.accessToken)) : undefined
-    console.log('token: ' + response.accessToken);
+    console.log('splash token: ' + response.accessToken);
   }
   AsyncStorage.getItem('NEW_USER').then(asyncStorageRes => {
     asyncStorageRes == null ? changeScreen("WelcomeV1") : (AsyncStorage.getItem('USER_DATA_LOGIN').then(
@@ -29,11 +29,13 @@ const SplashScreen = ({ navigation }) => {
         asyncStorageResUser == null ? changeScreen("LoginHomeScreen") : (
           AsyncStorage.getItem('REFRESH_TOKEN').then(asyncStorage => {
             if (asyncStorage != null) {
-              refreshToken(asyncStorage)
-              setInterval(() => {
-                refreshToken(asyncStorage)
-              }, 870000)
+            
+              // refreshToken(asyncStorage)
+              // setInterval(() => {
+              //   refreshToken(asyncStorage)
+              // }, 870000)
             }
+            clearInterval(refreshToken)
             changeScreen("MainScreen")
           })
         )
