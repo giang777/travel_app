@@ -37,7 +37,7 @@ const SignUpScreen = ({ navigation }) => {
         passWord: password,
         re_password: rePassword,
       });
-      if (response.status == undefined) {
+      if (response.status == 200) {
         //chuyen sang login sau khi dki
         dispatch(registerUser({ userName: username, passWord: password }))
         navigation.navigate("LoginEmailScreen")
@@ -46,6 +46,8 @@ const SignUpScreen = ({ navigation }) => {
       }
       setStatusLoading(false)
     } catch (error) {
+      setNotifyError(error.response.data.message)
+      setStatusLoading(false)
       console.log(error);
     }
   }
