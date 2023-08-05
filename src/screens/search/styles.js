@@ -3,15 +3,16 @@ import { StyleSheet, Text, View } from 'react-native'
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-        padding: 20
+
+
+        backgroundColor: "#FAFAFA",
+        paddingHorizontal: 20,
+        paddingVertical: 10
     },
    
     searchBar: {   
 
-        marginTop:50,
+
         width:"100%",
         height:48,
         flexDirection: 'row',
@@ -52,6 +53,27 @@ const styles = StyleSheet.create({
       width:"100%",
         height:50,
         marginVertical:10
+    },
+    header: {
+        marginTop :45,
+        marginBottom:20,
+        width: "100%",
+        flexDirection: "row",
+        justifyContent: "space-between",
+    },
+
+    viewHeaderItem: {
+        flexDirection: "row",
+        justifyContent: "space-around"
+    },
+    logoApp: {
+        width: 30,
+        height: 30,
+    },
+    nameApp: {
+        fontSize: 22,
+        fontWeight: "bold",
+        marginLeft: 10
     },
 })
 

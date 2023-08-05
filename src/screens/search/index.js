@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import {Text, View, TextInput, TouchableOpacity, Image, StyleSheet,ScrollView,FlatList } from 'react-native';
 import styles from './styles';
-import styless from '../home/styles'
+import styleshome from '../home/styles'
 import { arrOptions, arrFakeData } from '../home/fakeData';
 import { RenderItemListHorizontal,RenderItemListVertical } from '../../components/renderList';
 import { SafeAreaView } from 'react-native-safe-area-context'
+import {ColorAssets, IconAssets} from "../../utils/app-assets";
 
 
 const SearchBar = () => {
@@ -43,24 +44,31 @@ const SearScreen = () => {
     return (
 
         <View style={styles.container}>
+            {/*title*/}
+            <View style={styles.header}>
+                <View style={styles.viewHeaderItem}>
+                    <Image source={IconAssets.logoApp} style={styles.logoApp} />
+                    <Text style={styles.nameApp}>Search</Text>
+                </View>
+            </View>
             <SearchBar />
             {/*option*/}
             <View style={styles.ViewOP}>
-                <ScrollView horizontal={true} style={styles.viewOptions} showsHorizontalScrollIndicator={false}>
-                {
-                    arrOptions.map((item, index) => {
-                        return (
-                            <TouchableOpacity
-                                style={[styless.itemOptions, indexOptions === item.id ? styless.itemOptions_isActive : styless.itemOptions_noActive]}
-                                onPress={() => { setindexOptions(item.id) }}
-                                key={index}
-                            >
-                                <Text style={indexOptions === item.id ? { color: "white" } : { color: "black" }}>{item.titel}</Text>
-                            </TouchableOpacity>
-                        )
-                    })
-                }
-            </ScrollView>
+                <ScrollView horizontal={true} style={styleshome.viewOptions} showsHorizontalScrollIndicator={false}>
+                    {
+                        arrOptions.map((item, index) => {
+                            return (
+                                <TouchableOpacity
+                                    style={[styleshome.itemOptions, indexOptions === item.id ? styleshome.itemOptions_isActive : styleshome.itemOptions_noActive]}
+                                    onPress={() => { setindexOptions(item.id) }}
+                                    key={index}
+                                >
+                                    <Text style={[{fontWeight: 'bold', fontSize: 16},indexOptions === item.id ? { color: "white" } : { color: ColorAssets.greenColor }]}>{item.title}</Text>
+                                </TouchableOpacity>
+                            )
+                        })
+                    }
+                </ScrollView>
             </View>
 
             
