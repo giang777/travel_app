@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#FAFAFA",
-        paddingHorizontal: 10,
+        paddingHorizontal: 20,
         paddingVertical: 10
     },
     header: {
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     },
 
     nameApp: {
-        fontSize: 22,
+        fontSize: 20,
         fontWeight: "bold",
         marginLeft: 10
     },
