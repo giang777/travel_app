@@ -1,3 +1,4 @@
+
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react'
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete"
