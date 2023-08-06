@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./src/assets/icons/logo.png",
     "userInterfaceStyle": "light",
-    
+
     "assetBundlePatterns": [
       "**/*"
     ],
