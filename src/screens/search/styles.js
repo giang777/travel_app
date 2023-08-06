@@ -138,6 +138,21 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginLeft: 8,
     },
+    ViewBtn:{
+        flexDirection:"row"
+    },
+    btnDialog:{
+        margin:10,
+        flex:1,
+        width:100,
+        height:48,
+        backgroundColor:"#1AB65C",
+        borderRadius:40,
+        borderWidth:1,
+        borderColor:"#1AB65C",
+        justifyContent:'center',
+        alignItems:"center"
+    }
 
 })
 

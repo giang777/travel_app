@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, View, TextInput, TouchableOpacity, Image, StyleSheet,ScrollView,FlatList,CheckBox } from 'react-native';
+import {Text, View, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView, FlatList, Slider} from 'react-native';
 import styles from './styles';
 import styleshome from '../home/styles'
 import { arrOptions, arrFakeData } from '../home/fakeData';
@@ -10,31 +10,49 @@ import Modal from 'react-native-modal';
 import {arrCity, arrResults, arrStar, optionsCheckBox} from "./fakedataSearch";
 import { Ionicons } from '@expo/vector-icons';
 
+import CheckBox from "react-native-check-box";
+import {Checkbox} from "expo-checkbox";
 
-const SearchBar = () => {
+
+
+    const SearchBar = () => {
     const [isModalVisible, setModalVisible] = useState(false);
 
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
     const [indexOptions, setindexOptions] = useState(1);
-    // const [boxchecked, setchecked] = useState(optionsCheckBox);
-    // const toggleCheckbox = (itemId) => {
-    //     setchecked((prevData) =>
-    //         prevData.map((item) =>
-    //             item.id === itemId ? { ...item, isChecked: !item.isChecked } : item
-    //         )
-    //     );
-    // };
-    // const renderCheckboxItem = ({ item }) => (
-    //     <View style={styles.checkboxContainer}>
-    //         <CheckBox
-    //             value={item.isChecked}
-    //             onValueChange={() => toggleCheckbox(item.id)}
-    //         />
-    //         <Text style={styles.labelcb}>{item.label}</Text>
-    //     </View>
-    // );
+    const [data, setData] = useState([
+        { id: 1, label: 'Option 1', isChecked: false },
+        { id: 2, label: 'Option 2', isChecked: false },
+        { id: 3, label: 'Option 3', isChecked: false },
+        // Add more options as needed
+    ]);
+    const toggleCheckbox = (itemId) => {
+        setData((prevData) =>
+            prevData.map((item) =>
+                item.id === itemId ? { ...item, isChecked: !item.isChecked } : item
+            )
+        );
+    };
+    const renderCheckboxItem = ({ item }) => (
+        <View style={styles.checkboxContainer}>
+            <Checkbox color={"#1AB65C"}
+                value={item.isChecked}
+                onValueChange={() => toggleCheckbox(item.id)}
+            />
+
+            <Text style={styles.label}>{item.label}</Text>
+        </View>
+    );
+
+        const [priceRange, setPriceRange] = useState([0, 100]); // Khoảng giá mặc định
+
+        const onPriceRangeChange = (values) => {
+            setPriceRange(values);
+        };
+
+
 
     // const [priceRange, setPriceRange] = useState([0, 100]);
     //
@@ -68,7 +86,6 @@ const SearchBar = () => {
                         <Text style={styles.label}>Country</Text>
                         {/*Options*/}
                         <View style={styles.ViewFilter}>
-
                             <ScrollView  horizontal={true} style={styles.viewOptions} showsVerticalScrollIndicator={false}>
                                 {
                                     arrCity.map((item, index) => {
@@ -78,7 +95,7 @@ const SearchBar = () => {
                                                 onPress={() => { setindexOptions(item.id) }}
                                                 key={index}
                                             >
-                                                <Text style={[{fontWeight: 'bold', fontSize: 16},indexOptions === item.id ? { color: "white" } : { color: ColorAssets.greenColor }]}>{item.title}</Text>
+                                                <Text style={[{fontWeight: 'bold', fontSize: 16},indexOptions === item.id ? { color: "white" } : { color: ColorAssets.greenColor }]}>{item.city}</Text>
                                             </TouchableOpacity>
                                         )
                                     })
@@ -115,7 +132,7 @@ const SearchBar = () => {
                                             onPress={() => { setindexOptions(item.id) }}
                                             key={index}
                                         >
-                                            <Text style={[{fontWeight: 'bold', fontSize: 16},indexOptions === item.id ? { color: "white" } : { color: ColorAssets.greenColor }]}>{item.title}</Text>
+                                            <Text style={[{fontWeight: 'bold', fontSize: 16},indexOptions === item.id ? { color: "white" } : { color: ColorAssets.greenColor }]}>{item.star}</Text>
                                         </TouchableOpacity>
                                     )
                                 })
@@ -123,15 +140,54 @@ const SearchBar = () => {
                             </ScrollView>
                         </View>
 
-                        {/*checkbox*/}
-                        {/*<Text style={styles.label}>Checkbox</Text>*/}
-
-                        {/*<FlatList*/}
-                        {/*    data={boxchecked}*/}
-                        {/*    renderItem={renderCheckboxItem}*/}
-                        {/*    keyExtractor={(item) => item.id.toString()}*/}
-                        {/*    horizontal={true}*/}
+                        {/*slider*/}
+                        <Text style={styles.label}>Price Range:</Text>
+                        <Text>{`$${priceRange[0]} - $${priceRange[1]}`}</Text>
+                        {/*<Slider*/}
+                        {/*    style={styles.slider}*/}
+                        {/*    minimumValue={0}*/}
+                        {/*    maximumValue={100}*/}
+                        {/*    step={1}*/}
+                        {/*    thumbTintColor="#007AFF"*/}
+                        {/*    minimumTrackTintColor="#007AFF"*/}
+                        {/*    maximumTrackTintColor="#000000"*/}
+                        {/*    value={priceRange}*/}
+                        {/*    onValueChange={onPriceRangeChange}*/}
                         {/*/>*/}
+
+                        {/*checkbox*/}
+                        <Text style={styles.label}>Checkbox</Text>
+                        <View style={styles.ViewFilter}>
+                            <FlatList
+                                data={data}
+                                renderItem={renderCheckboxItem}
+                                keyExtractor={(item) => item.id.toString()}
+                                horizontal // Đặt thuộc tính horizontal để hiển thị danh sách kéo ngang
+                            />
+                        </View>
+                        {/*checkbox*/}
+                        <Text style={styles.label}>Checkbox</Text>
+                        {/*button*/}
+                        <View style={styles.ViewFilter}>
+                            <FlatList
+                                data={data}
+                                renderItem={renderCheckboxItem}
+                                keyExtractor={(item) => item.id.toString()}
+                                horizontal // Đặt thuộc tính horizontal để hiển thị danh sách kéo ngang
+                            />
+                        </View>
+                        <View style={styles.ViewBtn}>
+                            <TouchableOpacity style={styles.btnDialog}>
+                                <Text style={{fontSize:20,fontWeight:"bold",color:'white'}}>Reset</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.btnDialog}>
+                                <Text style={{fontSize:20,fontWeight:"bold",color:'white'}}>Apply</Text>
+                            </TouchableOpacity>
+                        </View>
+
+
+
+
 
                     </View>
                 </Modal>
@@ -151,7 +207,7 @@ const SearchBar = () => {
 // };
 
 
-const SearScreen = () => {
+const SearchScreen = () => {
     const [indexOptions, setindexOptions] = useState(1);
     return (
 
@@ -213,6 +269,6 @@ const SearScreen = () => {
 
 
 
-export default SearScreen;
+export default SearchScreen;
 
 

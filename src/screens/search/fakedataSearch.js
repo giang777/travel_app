@@ -1,9 +1,9 @@
 const arrCity = [
 
-    { id: 2, title: "Đà Nẵng" },
-    { id: 3, title: 'Hà Nội' },
-    { id: 4, title: 'TP Hồ Chí Minh' },
-    { id: 5, title: 'Nha Trang' },
+    { id: 2, city: "Đà Nẵng" },
+    { id: 3, city: 'Hà Nội' },
+    { id: 4, city: 'TP Hồ Chí Minh' },
+    { id: 5, city: 'Nha Trang' },
 ];
 
 const arrResults = [
@@ -14,21 +14,14 @@ const arrResults = [
 
 ]
 const arrStar = [
-    { id: 1, title: "☆ 1" },
-    { id: 2, title: "☆ 2" },
-    { id: 3, title: '☆ 3' },
-    { id: 4, title: '☆ 4' },
-    { id: 4, title: '☆ 5' },
+    { id: 1, star: "☆ 1" },
+    { id: 2, star: "☆ 2" },
+    { id: 3, star: '☆ 3' },
+    { id: 4, star: '☆ 4' },
+    { id: 5, star: '☆ 5' },
 
 ]
-const optionsCheckBox= [
-    { id: 1, label: 'cb1', isSelected: false },
-    { id: 2, label: 'cb2', isSelected: false },
-    { id: 3, label: 'cb3', isSelected: false },
-    { id: 4, label: 'cb4', isSelected: false },
-    { id: 5, label: 'cb5', isSelected: false },
-    // Add more options as needed
-];
 
 
-export {arrCity,arrResults,arrStar,optionsCheckBox}
+
+export {arrCity,arrResults,arrStar}
