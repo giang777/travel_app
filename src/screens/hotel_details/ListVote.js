@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Image, StyleSheet, Dimensions, View, ScrollView, Text } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -65,4 +66,3 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ListVote;
