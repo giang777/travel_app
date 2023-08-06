@@ -30,7 +30,7 @@ export default function CustomSwitch({ onSwitch }) {
 const styles = StyleSheet.create({
     boxSwitch: {
         width: '100%',
-        borderRadius: 5,
+
         paddingHorizontal: 5,
         borderRadius: 15,
         flexDirection: 'row',
