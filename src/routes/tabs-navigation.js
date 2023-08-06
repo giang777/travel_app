@@ -11,8 +11,12 @@ import ForgotPasswordInputCode from '../screens/Auth/screen/forgot-password-inpu
 import ConfirmInformationScreen from '../screens/Auth/screen/confirm-information-screen';
 import CreateNewPassword from '../screens/Auth/screen/create-new-password'
 import BottomNavigation from './bottom-navigation';
+import HotelDetailsSCreen from '../screens/hotel_details';
+import BookingScreen from '../screens/booking';
 import Booked from '../screens/home/Booked';
-import PayScreen from '../screens/booking/payScreen'
+import HotelPhotoScreen from '../screens/hotel_details/Screen/HotelPhoTos';
+import HotelLocationScreen from '../screens/hotel_details/Screen/HotelLocation';
+import HotelReviewScreen from '../screens/hotel_details/Screen/HotelReview';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,8 +36,12 @@ export default TabsNavigation = () => {
       <Stack.Screen name="CreateNewPassword" component={CreateNewPassword} options={{animation:'slide_from_right'}} />
       <Stack.Screen name="ConfirmInformationScreen" component={ConfirmInformationScreen} options={{animation:'slide_from_right'}} />
       <Stack.Screen name="MainScreen" component={BottomNavigation} options={{animation:'slide_from_right'}}/>
+      <Stack.Screen name="HotelDetailsScreen" component={HotelDetailsSCreen} options={{animation:'slide_from_right'}}/>
+      <Stack.Screen name="BookingScreen" component={BookingScreen} options={{animation:'slide_from_right'}}/>
       <Stack.Screen name="RecentlyBookedScreen" component={Booked} options={{animation:'slide_from_right'}}/>
-      <Stack.Screen name="PayScreen" component={PayScreen} options={{animation:'slide_from_right'}}/>
+      <Stack.Screen name="HotelPhotoScreen" component={HotelPhotoScreen} options={{animation:'slide_from_right'}}/>
+      <Stack.Screen name="HotelLocationScreen" component={HotelLocationScreen} options={{animation:'slide_from_right'}}/>
+      <Stack.Screen name="HotelReviewScreen" component={HotelReviewScreen} options={{animation:'slide_from_right'}}/>
     </Stack.Navigator>
   );
 };

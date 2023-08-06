@@ -46,8 +46,6 @@ const SignUpScreen = ({ navigation }) => {
       }
       setStatusLoading(false)
     } catch (error) {
-      setNotifyError(error.response.data.message)
-      setStatusLoading(false)
       console.log(error);
     }
   }
