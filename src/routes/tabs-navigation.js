@@ -12,6 +12,7 @@ import ConfirmInformationScreen from '../screens/Auth/screen/confirm-information
 import CreateNewPassword from '../screens/Auth/screen/create-new-password'
 import BottomNavigation from './bottom-navigation';
 import Booked from '../screens/home/Booked';
+import PayScreen from '../screens/booking/payScreen'
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +33,7 @@ export default TabsNavigation = () => {
       <Stack.Screen name="ConfirmInformationScreen" component={ConfirmInformationScreen} options={{animation:'slide_from_right'}} />
       <Stack.Screen name="MainScreen" component={BottomNavigation} options={{animation:'slide_from_right'}}/>
       <Stack.Screen name="RecentlyBookedScreen" component={Booked} options={{animation:'slide_from_right'}}/>
+      <Stack.Screen name="PayScreen" component={PayScreen} options={{animation:'slide_from_right'}}/>
     </Stack.Navigator>
   );
 };
