@@ -5,7 +5,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#FAFAFA",
-        justifyContent: 'space-between'
+        paddingHorizontal: 20,
+        paddingVertical: 10
     },
     header: {
         width: "100%",
@@ -53,19 +54,6 @@ const styles = StyleSheet.create({
         backgroundColor: ColorAssets.greenColor,
         borderColor: ColorAssets.greenColor,
     },
-    // Modal
-    boxModal: { backgroundColor: 'white', paddingTop: 12, paddingHorizontal: 12, borderTopRightRadius: 20, borderTopLeftRadius: 20, minHeight: 330, paddingBottom: 20 },
-    topModal:{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingHorizontal: 20 },
-    iconBar:{ width: 50, height: 5, backgroundColor: '#E0E0E0', borderRadius: 3 },
-    titleModal:{ fontSize: 24, fontWeight: 'bold', color: '#F75555', marginVertical: 20 },
-    hrModal:{ backgroundColor: '#F5F5F5', height: 1, marginBottom: 20, marginHorizontal: 10, width: '100%' },
-    text1Modal:{ fontSize: 20, fontWeight: 'bold', textAlign: 'center', marginBottom: 10 },
-    text2Modal:{ fontSize: 14.5, textAlign: 'center', color: 'grey', marginBottom: 25 },
-    bottomModal:{ flexDirection: 'row', justifyContent: 'space-between' },
-    btnCancelModal:{ width: '48%', paddingVertical: 15, borderRadius: 50, backgroundColor: '#E3F6EB' },
-    textCancelModal:{ textAlign: 'center', fontSize: 16, fontWeight: 'bold', color: ColorAssets.greenColor },
-    btnContinueModal:{ backgroundColor: ColorAssets.greenColor, width: '48%', paddingVertical: 15, justifyContent: 'center', borderRadius: 50 },
-    textContinueModal:{ textAlign: 'center', fontSize: 16, fontWeight: 'bold', color: 'white' }
 })
 
 export default styles;
