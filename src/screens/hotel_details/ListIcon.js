@@ -15,7 +15,7 @@ const ListIcon = (props) => {
         <View  style={styles.flex}>
             {list.map((item, index) => {
                 return (<View key={index} style={styles.item}>
-                    <Image style={styles.imageBanner} source={{ uri: item.image ? item.image : 'https://toppng.com/uploads/preview/file-upload-image-icon-115632290507ftgixivqp.png' }} />
+                    <Image  style={styles.imageBanner} source={{ uri: item.image ? item.image : 'https://toppng.com/uploads/preview/file-upload-image-icon-115632290507ftgixivqp.png' }} />
                     <Text>{item.name}</Text>
                 </View>)
             })}
