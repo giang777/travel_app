@@ -6,7 +6,7 @@ import Store from "./src/redux/store";
 import { Provider } from "react-redux";
 
 export default function App() {
-  console.log("test");
+  console.log("aaaaaa");
   return (
     <Provider store={Store}>
       <NavigationContainer>
