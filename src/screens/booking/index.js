@@ -7,7 +7,7 @@ import { arrOptions, arrFakeDataOngoing, arrFakeDataCompleted, arrFakeDataCancel
 import { ColorAssets, IconAssets, ImageAssets } from '../../utils/app-assets';
 import { ItemOngoing, ItemCompleted, ItemCanceled } from '../../components/renderItemBooking/index'
 import Modal from "react-native-modal";
-const BookingScreen = () => {
+const BookingScreen = ({navigation}) => {
   const [indexOptions, setindexOptions] = useState(1);
   const [modal, setshowModal] = useState(false)
   const hideModal = () => { setshowModal(false) }
@@ -50,16 +50,16 @@ const BookingScreen = () => {
       </View>
       {/*Body*/}
       {indexOptions == 1 ? <OngoingScreen showModal={showModal} /> : (indexOptions == 2 ? <CompletedScreen /> : <CanceledScreen />)}
-      <WrapperComponent hideModal={hideModal} hide={modal} />
+      <WrapperComponent hideModal={hideModal} hide={modal} navigation={navigation} />
     </SafeAreaView>
 
   )
 }
 // Bottom Dialog
-const WrapperComponent = ({ hide, hideModal }) => {
+const WrapperComponent = ({ hide, hideModal, navigation }) => {
   const confirmCancel = () => {
     hideModal()
-    console.log('chuyen man hinh');
+    navigation.navigate('PayScreen')
   }
   return (
     <View>
