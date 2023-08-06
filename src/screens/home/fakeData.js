@@ -1,8 +1,8 @@
 const arrOptions = [
-    { id: 1, titel: "Reconmmended" },
-    { id: 2, titel: "Popular" },
-    { id: 3, titel: 'Trending' },
-    { id: 4, titel: 'Top' },
+    { id: 1, title: "Reconmmended" },
+    { id: 2, title: "Popular" },
+    { id: 3, title: 'Trending' },
+    { id: 4, title: 'Top' },
 ];
 
 const arrFakeData = [
