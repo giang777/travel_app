@@ -47,7 +47,7 @@ const PayScreen = ({ navigation }) => {
                     </View>
                     <View style={styles.footer}>
                         <CustomButton title={"Confirm Cancellation"} onPress={() => {
-                            // xử lý thanh toán ở đây
+                            // xử lý thanh toán ở đây nhé
                             setShowModal(true)
                         }} />
                     </View>
