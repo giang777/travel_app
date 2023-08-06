@@ -6,7 +6,7 @@ var { width } = Dimensions.get("window");
 const Bottom = (props) => {
     const { price } = props;
     return (
-        <View style={[styles.flex,styles.align]}>
+        <View style={[styles.flex,styles.align,styles.border]}>
             <View style={[styles.flex,styles.align]}>
                 <Text style={styles.price}>${price}</Text>
                 <Text style={styles.normal}>/night</Text>
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     normal: {
         color: '#5b655f', 
         fontSize: 20, 
-        fontWeight: "normal"
+        fontWeight: "normal",
     },
     item: {
         width: width * 0.2,
@@ -38,9 +38,16 @@ const styles = StyleSheet.create({
     },
     flex: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        bottom: -10,
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+        alignItems:'center',
+        padding:15,
+        paddingTop:20,
+    },
+    border:{
+        borderWidth:2,
+        borderTopEndRadius:20,
+        borderTopLeftRadius:20,
+        borderColor:'#e1e1e1'
     },
     booking: {
         fontSize: 20,
@@ -57,7 +64,6 @@ const styles = StyleSheet.create({
     align:{
         justifyContent:'space-between',
         alignContent:'space-around'
-        
     }
 });
 

@@ -9,9 +9,9 @@ const Banner = () => {
 
   useEffect(() => {
     setBannerData([
-      "https://images.vexels.com/media/users/3/126443/preview2/ff9af1e1edfa2c4a46c43b0c2040ce52-macbook-pro-touch-bar-banner.jpg",
-      "https://pbs.twimg.com/media/D7P_yLdX4AAvJWO.jpg",
-      "https://www.yardproduct.com/blog/wp-content/uploads/2016/01/gardening-banner.jpg",
+      "http://www.kidstart.co.uk/blog/wp-content/uploads/2014/05/TRAVELODGE_BENEFITING_FROM_BRAND_INVESTMENT-2.jpg",
+      "https://cdn.pixabay.com/photo/2016/09/18/03/28/travel-1677347_960_720.jpg",
+      "https://i.ibb.co/FKr0SCV/Hotel-Packages-139.jpg",
     ]);
 
     return () => {
@@ -24,10 +24,8 @@ const Banner = () => {
       <View style={styles.container}>
         <View style={styles.swiper}>
           <Swiper
-            style={{ height: width * 0.5 }}
+            style={{ height: width * 0.7 }}
             showButtons={false}
-            // autoplay={true}
-            // autoplayTimeout={2}
             showsPagination={false}
           >
             {bannerData.map((item) => {
@@ -58,7 +56,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   imageBanner: {
-    height: width * 0.5,
+    height: width * 0.7,
     width: width,
     borderRadius: 1,
     backgroundColor: '#2b2424',
