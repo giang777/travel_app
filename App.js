@@ -6,10 +6,12 @@ import Store from "./src/redux/store";
 import { Provider } from "react-redux";
 
 export default function App() {
+  console.log("test");
   return (
     <Provider store={Store}>
       <NavigationContainer>
       <TabsNavigation />
+      
     </NavigationContainer>
     </Provider>
   );
