@@ -17,6 +17,7 @@ import Booked from '../screens/home/Booked';
 import HotelPhotoScreen from '../screens/hotel_details/Screen/HotelPhoTos';
 import HotelLocationScreen from '../screens/hotel_details/Screen/HotelLocation';
 import HotelReviewScreen from '../screens/hotel_details/Screen/HotelReview';
+import PayScreen from '../screens/booking/payScreen'
 
 const Stack = createNativeStackNavigator();
 
@@ -42,6 +43,8 @@ export default TabsNavigation = () => {
       <Stack.Screen name="HotelPhotoScreen" component={HotelPhotoScreen} options={{animation:'slide_from_right'}}/>
       <Stack.Screen name="HotelLocationScreen" component={HotelLocationScreen} options={{animation:'slide_from_right'}}/>
       <Stack.Screen name="HotelReviewScreen" component={HotelReviewScreen} options={{animation:'slide_from_right'}}/>
+      <Stack.Screen name="PayScreen" component={PayScreen} options={{animation:'slide_from_right'}}/>
+
     </Stack.Navigator>
   );
 };

@@ -8,6 +8,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { arrOptions, arrFakeData } from './fakeData';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { RenderItemListHorizontal,RenderItemListVertical } from '../../components/renderList';
+import AppBar from '../../components/custom/custom-appbar';
+import { StatusBar } from 'expo-status-bar';
 
 const HomeScreen = (props) => {
   //giang giang 
@@ -16,6 +18,7 @@ const HomeScreen = (props) => {
 
   return (
     <ScrollView>
+      <StatusBar backgroundColor='white' ></StatusBar>
       <SafeAreaView style={styles.container}>
         {/*Header */}
         <View style={styles.header}>
