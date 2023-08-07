@@ -48,20 +48,20 @@ const LoginEmailScreen = ({ navigation }) => {
       });
       if (response.status === 200) {
         // nếu return 200 => 
-        dispatch(setToken(response.accessToken))
+        dispatch(setToken(response.data.accessToken))
         AsyncStorage.setItem('USER_DATA_LOGIN', JSON.stringify({ username, password }))
-        AsyncStorage.setItem('REFRESH_TOKEN', response.refreshToken)
+        AsyncStorage.setItem('REFRESH_TOKEN', response.data.refreshToken)
+
         navigation.dispatch(StackActions.replace("MainScreen"))
       }
 
-      if (response.status === 400) {
-        setTextError(response.message)
-      }
+
       setStatusLoading(false)
       console.log(response);
       console.log("--------------------------------");
     } catch (error) {
       setStatusLoading(false)
+      setTextError(error.response.data.message)
       console.log(error);
     }
   };
