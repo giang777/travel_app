@@ -5,7 +5,7 @@ import TOKEN_REDUCER from './reducers/tokenReducer'
 const rootReducer = combineReducers({
     typeReducer: TYPE_REDUCER,
     tokenReducer: TOKEN_REDUCER,
-    register: REGISTER
+    register: REGISTER,
   });
   
 

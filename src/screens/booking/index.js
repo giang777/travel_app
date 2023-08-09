@@ -36,7 +36,7 @@ const BookingScreen = ({ navigation }) => {
   useEffect(() => {}, [indexOptions]);
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ paddingHorizontal: 20, paddingTop: 10 }}>
+      <View style={{ paddingHorizontal: 10, paddingTop: 10 }}>
         {/*Header */}
         <View style={styles.header}>
           <View style={styles.viewHeaderItem}>
