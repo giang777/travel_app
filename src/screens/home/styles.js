@@ -92,6 +92,11 @@ const styles = StyleSheet.create({
     containerBooked:{
         flex:1,
     },
+
+    headerBookedAll:{
+        padding:10,
+        marginBottom:10,
+    }
 })
 
 export default styles;

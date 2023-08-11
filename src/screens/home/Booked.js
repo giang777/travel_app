@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, Text, View, TextInput } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import HeaderNavigation from '../../components/custom/custom-header'
@@ -32,7 +32,14 @@ const Booked = (props) => {
 
     return (
         <SafeAreaView style={styles.containerBooked}>
-            <HeaderNavigation titel={"Recently Booked"} arrIcon={IconRight} onBack={() => { props.navigation.goBack() }} />
+            <View style={styles.headerBookedAll}>
+                <HeaderNavigation titel={"Recently Booked"} arrIcon={IconRight} onBack={() => { props.navigation.goBack() }} />
+                <View style={styles.viewSearch}>
+                    <Icon name="search" color={'gray'} size={20} />
+                    <TextInput placeholder='Search' maxLength={225} numberOfLines={1} style={{ width: "100%",marginLeft:10}} />
+                </View>
+            </View>
+
             {listHotel.length == 0 ? <FlatList
                 style={{ padding: 10 }}
                 data={arrFakeData}
