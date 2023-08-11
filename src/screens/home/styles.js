@@ -8,13 +8,14 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#FAFAFA",
-        paddingHorizontal: 20,
         paddingVertical: 10
     },
     header: {
         width: "100%",
         flexDirection: "row",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        paddingBottom: 8,
+        paddingHorizontal: 10
     },
 
     viewHeaderItem: {
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
     },
 
     nameApp: {
-        fontSize: 20,
+        fontSize: 22,
         fontWeight: "bold",
         marginLeft: 10
     },
@@ -90,9 +91,7 @@ const styles = StyleSheet.create({
 
     containerBooked:{
         flex:1,
-        padding:10,
     },
-
 })
 
 export default styles;

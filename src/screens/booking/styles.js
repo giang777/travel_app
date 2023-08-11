@@ -5,8 +5,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#FAFAFA",
-        justifyContent: 'space-between',
-  
+        justifyContent: 'space-between'
     },
     header: {
         width: "100%",
@@ -54,7 +53,7 @@ const styles = StyleSheet.create({
         backgroundColor: ColorAssets.greenColor,
         borderColor: ColorAssets.greenColor,
     },
-    //modal
+    // Modal
     boxModal: { backgroundColor: 'white', paddingTop: 12, paddingHorizontal: 12, borderTopRightRadius: 20, borderTopLeftRadius: 20, minHeight: 330, paddingBottom: 20 },
     topModal:{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingHorizontal: 20 },
     iconBar:{ width: 50, height: 5, backgroundColor: '#E0E0E0', borderRadius: 3 },
@@ -66,7 +65,88 @@ const styles = StyleSheet.create({
     btnCancelModal:{ width: '48%', paddingVertical: 15, borderRadius: 50, backgroundColor: '#E3F6EB' },
     textCancelModal:{ textAlign: 'center', fontSize: 16, fontWeight: 'bold', color: ColorAssets.greenColor },
     btnContinueModal:{ backgroundColor: ColorAssets.greenColor, width: '48%', paddingVertical: 15, justifyContent: 'center', borderRadius: 50 },
-    textContinueModal:{ textAlign: 'center', fontSize: 16, fontWeight: 'bold', color: 'white' }
+    textContinueModal:{ textAlign: 'center', fontSize: 16, fontWeight: 'bold', color: 'white' },
+    //---------------------------------------------------------------
+    //payScreen
+    container: {
+        backgroundColor: ColorAssets.whiteColor,
+        flex: 1,
+    },
+    scrollView: {
+        flex: 1,
+    },
+    scrollViewContent: {
+        flex: 1
+    },
+    content: {
+        alignItems: "center",
+        paddingTop: 25,
+        paddingHorizontal: 15,
+    },
+    shadowBox: {
+        borderColor: 'grey',
+        backgroundColor: 'white',
+        marginTop: 20,
+        borderRadius: 20,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 2,
+    },
+    boxTextPay:{ flex: 1, marginTop: 20, flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-end' },
+    textPaid:{ fontSize: 16, marginRight: 10 },
+    textRefund:{ fontSize: 16, fontWeight: 'bold' },
+    footer: {
+        paddingHorizontal: 16,
+        paddingVertical: 10,
+        alignItems: "center",
+        justifyContent: "flex-end",
+    },
+
+    boxMethodItem:{ flexDirection: 'row', marginHorizontal: 20, padding: 20, borderRadius: 20, alignItems: 'center' },
+    imageMethod:{ height: 30, width: 30 },
+    textMethod:{ fontSize: 16, fontWeight: 'bold', marginLeft: 20 },
+    statusMethod:{ borderColor: ColorAssets.greenColor, borderRadius: 10, borderWidth: 2, padding: 2 },
+    //modal
+    centeredView: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    modalView: {
+        width: '80%',
+        margin: 20,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        paddingVertical: 35,
+        paddingHorizontal: 30,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    btngohome: {
+        backgroundColor: ColorAssets.greenColor,
+        width: '100%',
+        borderRadius: 100,
+        marginTop: 20
+    },
+    textgohome: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'white',
+        textAlign: 'center',
+        padding: 15
+    }
 })
 
 export default styles;
