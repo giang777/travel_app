@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
         justifyContent: "flex-start",
+        marginBottom:20
     },
 
     titel: {
