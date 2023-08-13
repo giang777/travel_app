@@ -4,20 +4,23 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { StackActions } from "@react-navigation/native";
 import { styleWelcomeV1 } from "./styles";
-import { ImageAssets, useCustomFonts } from "../../utils/app-assets";
-import { useFonts } from "expo-font";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ImageAssets } from "../../utils/app-assets";
+import SharedPreferences from "../../database/share_preferences_helper";
+import { changeScreenWithOutTime } from "../../utils/navigation-utils";
 const WelcomeV1 = ({ navigation }) => {
-  const welcomeFirt = () => {
-    AsyncStorage.setItem('NEW_USER', 'true')
-    navigation.dispatch(StackActions.replace("WelcomeV1_1"))
-  }
+  const welcomeFirst = async () => {
+     SharedPreferences.SET_NEW_USER("true");
+
+    changeScreenWithOutTime(navigation, "WelcomeV1_1");
+  };
   return (
     <TouchableWithoutFeedback
-      onPress={() => { welcomeFirt() }}
+      onPress={() => {
+        welcomeFirst();
+      }}
     >
       <View style={styleWelcomeV1.container}>
         <ImageBackground
@@ -37,4 +40,4 @@ const WelcomeV1 = ({ navigation }) => {
   );
 };
 
-export default WelcomeV1
+export default WelcomeV1;

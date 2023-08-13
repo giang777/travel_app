@@ -1,15 +1,25 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image, FlatList } from "react-native";
 import React from "react";
 import { Modal } from "react-native";
 import { TouchableOpacity } from "react-native";
-import { ColorAssets } from "../../utils/app-assets";
-import { CustomTextInput, CustomTextInput2 } from "./custom-textInput";
+import { ColorAssets } from "../../../utils/app-assets";
+import {
+  CustomTextInput,
+  CustomTextInput2,
+} from "../../../common/custom/custom-textInput";
 import { ScrollView } from "react-native";
 import PhoneInput from "react-native-phone-number-input";
 import { useState } from "react";
-import { handleAddHotel } from "../../api/hotel/hotel-service";
+import { handleAddHotel } from "../../../api/hotel/hotel-service";
+import SharedPreferences from "../../../database/share_preferences_helper";
+import { useEffect } from "react";
+import {
+  launchImageLibraryAsync,
+  useCameraPermissions,
+  PermissionStatus,
+} from "expo-image-picker";
 
-const CustomBottomSheet = ({ visible, onCancel, onFinish }) => {
+const BottomSheet = ({ visible, onCancel, onFinish }) => {
   //choose phone number
   const [phoneNumber, setPhoneNumber] = React.useState("");
   const [nameHotel, setNameHotel] = useState("");
@@ -19,10 +29,95 @@ const CustomBottomSheet = ({ visible, onCancel, onFinish }) => {
   const [closeTime, setCloseTime] = useState("");
   const [place, setPlace] = useState("");
   const phoneInput = React.useRef(null);
+  const [idUser, setIdUser] = useState("");
+
+  const [cameraPermissionInformation, requestPermission] =
+    useCameraPermissions();
+
+  async function verifyPermission() {
+    if (cameraPermissionInformation.status === PermissionStatus.UNDETERMINED) {
+      const permissionResponse = await requestPermission();
+
+      return permissionResponse.granted;
+    }
+    if (cameraPermissionInformation.status === PermissionStatus.DENIED) {
+      Alert.alert(
+        "Insufficient permission!",
+        "You need to grant camera access to use this app"
+      );
+      return false;
+    }
+    return true;
+  }
+
+  async function camerapressHandler(selectedKey) {
+    const hasPermission = await verifyPermission();
+    if (!hasPermission) {
+      return;
+    }
+    const image = await launchImageLibraryAsync({
+      mediaTypes: "Images",
+      allowsEditing: false,
+      aspect: [9, 16],
+      quality: 1,
+    });
+
+    if (!image.canceled) {
+      const updatedData = data.map((item) => {
+        if (item.key === selectedKey) {
+          console.log("equals key " + item.key);
+          return { ...item, uri: image.assets[0].uri };
+        }
+        return item;
+      });
+      setData(updatedData);
+    }
+  }
+
+  const [data, setData] = useState([
+    { uri: " ", key: "1" },
+    { uri: " ", key: "2" },
+    { uri: " ", key: "3" },
+    { uri: " ", key: "4" },
+    { uri: " ", key: "5" },
+    { uri: " ", key: "6" },
+  ]);
+  const render_item = (item) => {
+    console.log(item.uri);
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          camerapressHandler(item.key);
+        }}
+      >
+        <View style={styles.item} key={item.key}>
+          <Image source={{ uri: item.uri }} style={styles.imageStyle} />
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
+  const getUserInfor = () => {
+    SharedPreferences.GET_USER_INFOR()
+      .then((userInfoString) => {
+        if (userInfoString) {
+          const userInfo = JSON.parse(userInfoString);
+          setIdUser(userInfo.id);
+        } else {
+          console.log("User information not found.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error retrieving user information:", error);
+      });
+  };
+  useEffect(() => {
+    getUserInfor();
+  }, []);
   const addHotel = async () => {
     const response = await handleAddHotel(
       nameHotel,
-      "64bfddee4a9e7ca2760e8bb8",
+      idUser,
       address,
       description,
       openTime,
@@ -31,9 +126,9 @@ const CustomBottomSheet = ({ visible, onCancel, onFinish }) => {
       place
     );
 
-    if (response === 200) 
-      onCancel();
+    if (response === 200) onCancel();
   };
+
   return (
     <Modal
       isVisible={visible}
@@ -50,11 +145,22 @@ const CustomBottomSheet = ({ visible, onCancel, onFinish }) => {
           <View style={styles.topModal}>
             <View style={styles.titleContainer}>
               <Text style={styles.titleModal}>Add Hotel</Text>
-           
             </View>
             <View style={styles.hrModal}></View>
             <Text style={styles.text1Modal}>Media</Text>
-            <Text style={styles.text2Modal}>This is an image about hotel</Text>
+            <View
+              style={{
+                justifyContent: "center",
+                width: "100%",
+              }}
+            >
+              <FlatList
+                data={data}
+                renderItem={({ item }) => render_item(item)}
+                keyExtractor={(item) => item.key}
+                numColumns={3}
+              />
+            </View>
           </View>
           <View style={styles.bodyModal}>
             <CustomTextInput
@@ -118,7 +224,7 @@ const CustomBottomSheet = ({ visible, onCancel, onFinish }) => {
   );
 };
 
-export default CustomBottomSheet;
+export default BottomSheet;
 
 const styles = StyleSheet.create({
   boxModal: {
@@ -149,7 +255,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 10,
   },
- 
+
   hrModal: {
     backgroundColor: "#F5F5F5",
     height: 1,
@@ -157,9 +263,11 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   bodyModal: {
+    marginTop: 20,
     paddingHorizontal: 10,
     marginBottom: 20,
     display: "flex",
+    backgroundColor: ColorAssets.whiteColor,
     justifyContent: "space-around",
   },
   bottomModal: {
@@ -214,5 +322,24 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     color: "white",
+  },
+  item: {
+    width: 120,
+    height: 160,
+    margin: 3,
+    borderRadius: 8,
+    backgroundColor: "#D4D4D4",
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "black",
+  },
+  imageStyle: {
+    width: 120,
+    height: 160,
+    resizeMode: "contain",
+  },
+  item_text: {
+    fontSize: 40,
+    color: "#FFFFFF",
   },
 });
