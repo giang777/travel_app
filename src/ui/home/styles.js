@@ -12,7 +12,10 @@ const styles = StyleSheet.create({
   },
   header: {
     paddingHorizontal: 15,
+
+    paddingBottom: 10,
     flexDirection: "row",
+    alignItems: "center",
     justifyContent: "space-between",
   },
 
@@ -71,6 +74,7 @@ const styles = StyleSheet.create({
   },
 
   viewOptions: {
+    marginBottom: 10,
     paddingHorizontal: 15,
     flexDirection: "row",
   },

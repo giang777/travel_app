@@ -1,14 +1,14 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import HeaderNavigation from "../../common/custom/custom-header";
-import AnimatedGradient from "../../common/custom/custom-imgloading";
+import HeaderNavigation from "../../../common/custom/custom-header";
+import AnimatedGradient from "../../../common/custom/custom-imgloading";
 import Icon from "react-native-vector-icons/Octicons";
-import styles from "./styles";
-import { arrFakeData } from "./fakeData";
-import { RenderItemListVertical } from "../../common/renderList";
-import axiosHotel from "../../api/hotel/config";
-import { handleGetHotel } from "../../api/hotel/hotel-service";
+import styles from "../styles";
+import { arrFakeData } from "../fakeData";
+import { RenderItemListVertical } from "../../../common/renderList";
+import axiosHotel from "../../../api/hotel/config";
+import { handleGetHotel } from "../../../api/hotel/hotel-service";
 
 const Booked = (props) => {
   const [listHotel, setlistHotel] = useState([]);

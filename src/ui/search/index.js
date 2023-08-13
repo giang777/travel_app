@@ -3,7 +3,7 @@ import {Text, View, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView, 
 import styles from './styles';
 import styleshome from '../home/styles'
 import { arrOptions, arrFakeData } from '../home/fakeData';
-import { RenderItemListHorizontal,RenderItemListVertical } from '../../common/renderList';
+import { RenderItemListVertical } from '../../common/renderList';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {ColorAssets, IconAssets} from "../../utils/app-assets";
 import Modal from 'react-native-modal';
@@ -207,6 +207,7 @@ import {Checkbox} from "expo-checkbox";
 // };
 
 
+
 const SearchScreen = () => {
     const [indexOptions, setindexOptions] = useState(1);
     return (
@@ -239,7 +240,8 @@ const SearchScreen = () => {
                 </ScrollView>
             </View>
 
-            
+          
+  
             <View style={styles.optionView}>
             <Text style={{fontSize:27}}>Recomended({arrFakeData.length})</Text>
                 <TouchableOpacity style={{position:"absolute",right:40}}>
@@ -259,7 +261,6 @@ const SearchScreen = () => {
                     keyExtractor={item => item.id}
                 />
             </View>
-
 
 
         </View>

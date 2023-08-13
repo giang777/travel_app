@@ -53,13 +53,18 @@ const styles = StyleSheet.create({
   },
 
   nameItemHorizontal: {
-    fontSize: 22,
+    fontSize: 23,
     fontWeight: "700",
     color: "white",
   },
   priceItemHorizontal: {
-    fontSize: 21,
+    fontSize: 22,
     fontWeight: "700",
+    color: ColorAssets.whiteColor,
+  },
+  timeOut: {
+    fontSize: 16,
+    fontWeight:'300',
     color: ColorAssets.whiteColor,
   },
 
@@ -84,7 +89,15 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 15,
     marginVertical: 10,
-    elevation: 4,
+    elevation: 5, // Adjust the value as needed for the desired shadow effect
+    // IOS
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
 
   imgItemVertical: {

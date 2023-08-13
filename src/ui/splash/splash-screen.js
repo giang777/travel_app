@@ -1,26 +1,22 @@
 import React from "react";
 import { Image, View, StyleSheet, Dimensions } from "react-native";
 import { IconAssets } from "../../utils/app-assets";
-import { StackActions } from "@react-navigation/native";
 import { styleSplashScreen } from "./styles";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useDispatch } from "react-redux";
-import { setToken } from '../../redux/actions/typeAction'
 
+import SharedPreferences from "../../database/share_preferences_helper";
+import { changeScreen } from "../../utils/navigation-utils";
 
 const SplashScreen = ({ navigation }) => {
-  const changeScreen = (nameScreen) => {
-    setTimeout(() => {
-      navigation.dispatch(StackActions.replace(nameScreen));
-    }, 3000);
-  }
-  AsyncStorage.getItem('NEW_USER').then(asyncStorageRes => {
-    asyncStorageRes == null ? changeScreen("WelcomeV1") : (AsyncStorage.getItem('USER_DATA_LOGIN').then(
-      asyncStorageResUser => {
-        asyncStorageResUser == null ? changeScreen("LoginHomeScreen") : changeScreen("MainScreen")
-      }
-    ))
-  })
+  
+  SharedPreferences.GET_NEW_USER().then((asyncStorageRes) => {
+    asyncStorageRes == null
+      ? changeScreen(navigation,"WelcomeV1")
+      : SharedPreferences.GET_USER_DATA().then((asyncStorageResUser) => {
+          asyncStorageResUser == null
+            ? changeScreen(navigation,"LoginHomeScreen")
+            : changeScreen(navigation,"MainScreen");
+        });
+  });
   return (
     <View style={styleSplashScreen.container}>
       <Image style={styleSplashScreen.imageLogo} source={IconAssets.logoApp} />

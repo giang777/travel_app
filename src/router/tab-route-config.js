@@ -13,7 +13,7 @@ import CreateNewPassword from '../ui/auth/screen/create-new-password'
 import BottomNavigation from './bottom-route-config';
 import HotelDetailsSCreen from '../ui/hotel_details';
 import BookingScreen from '../ui/booking';
-import Booked from '../ui/home/Booked';
+import Booked from '../ui/home/components/Booked';
 import HotelPhotoScreen from '../ui/hotel_details/Screen/HotelPhoTos';
 import HotelLocationScreen from '../ui/hotel_details/Screen/HotelLocation';
 import HotelReviewScreen from '../ui/hotel_details/Screen/HotelReview';

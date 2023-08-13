@@ -15,7 +15,7 @@ const CustomTextInput = ({isHaveTitle,title, secureTextEntry, placeholder, onCha
     }
   }
   return (
-   <View style={{marginVertical:8}}>
+   <View style={{marginVertical:8,  width: "100%",}}>
           {isHaveTitle?   <Text style={styles.title}>{title}</Text>:<View></View>}
 
      <View style={[styles.container, isFocused ? styles.boxInputFocus : (checkValidate ? styles.boxInputBlur : styles.boxInput)]}>
@@ -41,7 +41,7 @@ const CustomTextInput = ({isHaveTitle,title, secureTextEntry, placeholder, onCha
   );
 };
 
-const CustomTextInput2 = ({ textPlaceHolder,title,onChangeText }) => {
+const CustomTextInput2 = ({ textPlaceHolder,isHaveHandle,onChangeText }) => {
   return (
     
     <View style={styles.container2}>
