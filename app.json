@@ -4,7 +4,7 @@
     "slug": "travel-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/icons/logo.png",
+    "icon": "./assets/icons/logo.png",
     "userInterfaceStyle": "light",
 
     "assetBundlePatterns": [
@@ -15,12 +15,20 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/icons/logo.png",
+        "foregroundImage": "./assets/icons/logo.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./src/assets/icons/logo.png"
-    }
+      "favicon": "./assets/icons/logo.png"
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ]
+    ]
   }
 }
