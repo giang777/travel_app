@@ -82,19 +82,13 @@ const BottomSheet = ({ visible, onCancel, onFinish }) => {
     { uri: " ", key: "5" },
     { uri: " ", key: "6" },
   ]);
-  const render_item = (item) => {
+
+  const renderItem = (props) => {
+    const { item } = props;
     console.log(item.uri);
-    return (
-      <TouchableOpacity
-        onPress={() => {
-          camerapressHandler(item.key);
-        }}
-      >
-        <View style={styles.item} key={item.key}>
-          <Image source={{ uri: item.uri }} style={styles.imageStyle} />
-        </View>
-      </TouchableOpacity>
-    );
+    // return (
+    
+    // );
   };
 
   const getUserInfor = () => {
@@ -154,12 +148,30 @@ const BottomSheet = ({ visible, onCancel, onFinish }) => {
                 width: "100%",
               }}
             >
-              <FlatList
+              {/* <FlatList
                 data={data}
                 renderItem={({ item }) => render_item(item)}
                 keyExtractor={(item) => item.key}
                 numColumns={3}
-              />
+              /> */}
+              <View style={styles.viewMedia}>
+                {
+                  data.map((item, index) => {
+                    return (
+                      <TouchableOpacity
+                        key={index}
+                        onPress={() => {
+                          camerapressHandler(item.key);
+                        }}
+                      >
+                        <View style={styles.item} key={item.key}>
+                          <Image source={{ uri: item.uri }} style={styles.imageStyle} />
+                        </View>
+                      </TouchableOpacity>
+                    )
+                  })
+                }
+              </View>
             </View>
           </View>
           <View style={styles.bodyModal}>
@@ -199,7 +211,7 @@ const BottomSheet = ({ visible, onCancel, onFinish }) => {
               }}
               defaultCode="VN"
               layout="first"
-              // withShadow
+            // withShadow
             />
             <CustomTextInput
               title="Place"
@@ -312,6 +324,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingVertical: 2,
   },
+
+  viewMedia: {
+    width: "100%",
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+
   textInput: {
     backgroundColor: ColorAssets.greyColor200,
     borderRadius: 18,
@@ -326,7 +345,7 @@ const styles = StyleSheet.create({
   item: {
     width: 120,
     height: 160,
-    margin: 3,
+    margin:2,
     borderRadius: 8,
     backgroundColor: "#D4D4D4",
     justifyContent: "center",
