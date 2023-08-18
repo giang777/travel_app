@@ -111,6 +111,6 @@ export const styleWelcomeV1_1 = StyleSheet.create({
     backgroundColor: ColorAssets.dotColor,
   },
   selectedDot: {
-    width: 35, backgroundColor: ColorAssets.greenColor, // Chọn màu tùy ý
+    width: 35, backgroundColor: ColorAssets.greenColor, 
   },
 })

@@ -18,6 +18,7 @@ import {
   useCameraPermissions,
   PermissionStatus,
 } from "expo-image-picker";
+import { Alert } from "react-native";
 
 const BottomSheet = ({ visible, onCancel, onFinish }) => {
   //choose phone number
@@ -73,7 +74,6 @@ const BottomSheet = ({ visible, onCancel, onFinish }) => {
       setData(updatedData);
     }
   }
-
   const [data, setData] = useState([
     { uri: " ", key: "1" },
     { uri: " ", key: "2" },
@@ -82,15 +82,6 @@ const BottomSheet = ({ visible, onCancel, onFinish }) => {
     { uri: " ", key: "5" },
     { uri: " ", key: "6" },
   ]);
-
-  const renderItem = (props) => {
-    const { item } = props;
-    console.log(item.uri);
-    // return (
-    
-    // );
-  };
-
   const getUserInfor = () => {
     SharedPreferences.GET_USER_INFOR()
       .then((userInfoString) => {
@@ -109,6 +100,15 @@ const BottomSheet = ({ visible, onCancel, onFinish }) => {
     getUserInfor();
   }, []);
   const addHotel = async () => {
+    const cleanedImageUrls = data.map((item) => item.uri);
+    const selectedImageCount = data.filter((item) => item.uri !== " ").length;
+    if (selectedImageCount < 6) {
+      Alert.alert(
+        "Incomplete Images",
+        "Please select at least 6 images before adding the hotel."
+      );
+      return;
+    }
     const response = await handleAddHotel(
       nameHotel,
       idUser,
@@ -117,7 +117,8 @@ const BottomSheet = ({ visible, onCancel, onFinish }) => {
       openTime,
       closeTime,
       phoneNumber,
-      place
+      place,
+      cleanedImageUrls
     );
 
     if (response === 200) onCancel();
@@ -134,29 +135,23 @@ const BottomSheet = ({ visible, onCancel, onFinish }) => {
       backdropTransitionInTiming={1000}
       backdropTransitionOutTiming={500}
     >
-      <ScrollView>
-        <View style={styles.boxModal}>
-          <View style={styles.topModal}>
-            <View style={styles.titleContainer}>
-              <Text style={styles.titleModal}>Add Hotel</Text>
-            </View>
-            <View style={styles.hrModal}></View>
-            <Text style={styles.text1Modal}>Media</Text>
-            <View
-              style={{
-                justifyContent: "center",
-                width: "100%",
-              }}
-            >
-              {/* <FlatList
-                data={data}
-                renderItem={({ item }) => render_item(item)}
-                keyExtractor={(item) => item.key}
-                numColumns={3}
-              /> */}
-              <View style={styles.viewMedia}>
-                {
-                  data.map((item, index) => {
+      <View>
+        <ScrollView>
+          <View style={styles.boxModal}>
+            <View style={styles.topModal}>
+              <View style={styles.titleContainer}>
+                <Text style={styles.titleModal}>Add Hotel</Text>
+              </View>
+              <View style={styles.hrModal}></View>
+              <Text style={styles.text1Modal}>Media</Text>
+              <View
+                style={{
+                  justifyContent: "center",
+                  width: "100%",
+                }}
+              >
+                <View style={styles.viewMedia}>
+                  {data.map((item, index) => {
                     return (
                       <TouchableOpacity
                         key={index}
@@ -165,73 +160,79 @@ const BottomSheet = ({ visible, onCancel, onFinish }) => {
                         }}
                       >
                         <View style={styles.item} key={item.key}>
-                          <Image source={{ uri: item.uri }} style={styles.imageStyle} />
+                          <Image
+                            source={{ uri: item.uri }}
+                            style={styles.imageStyle}
+                          />
                         </View>
                       </TouchableOpacity>
-                    )
-                  })
-                }
+                    );
+                  })}
+                </View>
               </View>
             </View>
-          </View>
-          <View style={styles.bodyModal}>
-            <CustomTextInput
-              title="Name"
-              isHaveTitle={true}
-              onChangeText={setNameHotel}
-            />
-            <CustomTextInput
-              title="Address"
-              isHaveTitle={true}
-              onChangeText={setAddress}
-            />
-            <CustomTextInput
-              title="Description"
-              isHaveTitle={true}
-              onChangeText={setDescription}
-            />
-            <View style={styles.rowTime}>
-              <CustomTextInput2
-                textPlaceHolder={"Open time"}
-                onChangeText={setOpenTime}
+            <View style={styles.bodyModal}>
+              <CustomTextInput
+                title="Name"
+                isHaveTitle={true}
+                onChangeText={setNameHotel}
               />
-              <CustomTextInput2
-                textPlaceHolder={"Close time"}
-                onChangeText={setCloseTime}
+              <CustomTextInput
+                title="Address"
+                isHaveTitle={true}
+                onChangeText={setAddress}
+              />
+              <CustomTextInput
+                title="Description"
+                isHaveTitle={true}
+                onChangeText={setDescription}
+              />
+              <View style={styles.rowTime}>
+                <CustomTextInput2
+                  textPlaceHolder={"Open time"}
+                  onChangeText={setOpenTime}
+                />
+                <CustomTextInput2
+                  textPlaceHolder={"Close time"}
+                  onChangeText={setCloseTime}
+                />
+              </View>
+              <Text style={styles.text1Modal}>Hotline</Text>
+              <PhoneInput
+                ref={phoneInput}
+                defaultValue={phoneNumber}
+                containerStyle={styles.phoneContainer}
+                textContainerStyle={styles.textInput}
+                onChangeFormattedText={(text) => {
+                  setPhoneNumber(text);
+                }}
+                defaultCode="VN"
+                layout="first"
+                // withShadow
+              />
+              <CustomTextInput
+                title="Place"
+                isHaveTitle={true}
+                onChangeText={setPlace}
               />
             </View>
-            <Text style={styles.text1Modal}>Hotline</Text>
-            <PhoneInput
-              ref={phoneInput}
-              defaultValue={phoneNumber}
-              containerStyle={styles.phoneContainer}
-              textContainerStyle={styles.textInput}
-              onChangeFormattedText={(text) => {
-                setPhoneNumber(text);
-              }}
-              defaultCode="VN"
-              layout="first"
-            // withShadow
-            />
-            <CustomTextInput
-              title="Place"
-              isHaveTitle={true}
-              onChangeText={setPlace}
-            />
+            <View style={styles.bottomModal}>
+              <TouchableOpacity
+                style={styles.btnContinueModal}
+                onPress={addHotel}
+              >
+                <Text style={styles.textContinueModal}>Finish</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.btnCancelModal}
+                onPress={onCancel}
+              >
+                <Text style={styles.textCancelModal}>Cancel</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-          <View style={styles.bottomModal}>
-            <TouchableOpacity
-              style={styles.btnContinueModal}
-              onPress={addHotel}
-            >
-              <Text style={styles.textContinueModal}>Finish</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.btnCancelModal} onPress={onCancel}>
-              <Text style={styles.textCancelModal}>Cancel</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
     </Modal>
   );
 };
@@ -329,6 +330,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     flexWrap: "wrap",
+    justifyContent: "center",
   },
 
   textInput: {
@@ -345,7 +347,7 @@ const styles = StyleSheet.create({
   item: {
     width: 120,
     height: 160,
-    margin:2,
+    margin: 2,
     borderRadius: 8,
     backgroundColor: "#D4D4D4",
     justifyContent: "center",

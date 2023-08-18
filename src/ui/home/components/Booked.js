@@ -53,7 +53,7 @@ const Booked = (props) => {
           style={{ padding: 10 }}
           data={listHotel}
           renderItem={RenderItemListVertical} //lấy ra từ trong mục component renderList nhé
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item._id}
         />
       )}
     </SafeAreaView>

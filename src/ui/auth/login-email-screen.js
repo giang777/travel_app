@@ -48,6 +48,7 @@ const LoginEmailScreen = ({ navigation }) => {
     try {
       setStatusLoading(true);
       const response = await handleLogIn(username, password);
+      console.log(response);
       if (response.status == 200) {
         // nếu return 200 =>
         dispatch(setToken(response.data.accessToken));

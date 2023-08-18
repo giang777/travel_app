@@ -74,125 +74,130 @@ const HomeScreen = (props) => {
       setIsScrolled(false);
     }
   };
+  console.log(listHotel[listHotel.length - 1]);
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.view}>
       {/*Header */}
       <View style={styles.header}>
-        <View style={styles.viewHeaderItemLeft}>
-          <Image source={IconAssets.logoApp} style={styles.logoApp} />
-          <Text style={styles.nameLogoApp}>
-            {isScrolled
-              ? `Hello, ${fullName.split(" ").at(2)} 👋`
-              : "Itinerary"}
-          </Text>
-        </View>
-        <View style={styles.viewHeaderItemRight}>
-          <TouchableOpacity>
-            <Notification color={ColorAssets.greyColor} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <BookMark color={ColorAssets.greyColor} />
-          </TouchableOpacity>
-        </View>
-      </View>
-      <ScrollView onScroll={handleScroll} scrollEventThrottle={16}>
-        {/*Search Bar*/}
-        <View style={styles.searchBar}>
-          <Text style={styles.textWelcome}>
-            Hello, {fullName.split(" ").at(2)} 👋
-          </Text>
-          <View style={styles.viewSearch}>
-            <Search color={ColorAssets.greyColor} size={20} />
-            <TextInput
-              placeholder="Search"
-              maxLength={225}
-              numberOfLines={1}
-              style={{ width: "100%", paddingHorizontal: 10, paddingEnd: 15 }}
-            />
+          <View style={styles.viewHeaderItemLeft}>
+            <Image source={IconAssets.logoApp} style={styles.logoApp} />
+            <Text style={styles.nameLogoApp}>
+              {isScrolled
+                ? `Hello, ${fullName.split(" ").at(2)} 👋`
+                : "Itinerary"}
+            </Text>
+          </View>
+          <View style={styles.viewHeaderItemRight}>
+            <TouchableOpacity>
+              <Notification color={ColorAssets.greyColor} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <BookMark color={ColorAssets.greyColor} />
+            </TouchableOpacity>
           </View>
         </View>
+        <ScrollView style={styles.scrollView} onScroll={handleScroll} scrollEventThrottle={16}>
+          {/*Search Bar*/}
+          <View style={styles.searchBar}>
+            <Text style={styles.textWelcome}>
+              Hello, {fullName.split(" ").at(2)} 👋
+            </Text>
+            <View style={styles.viewSearch}>
+              <Search color={ColorAssets.greyColor} size={20} />
+              <TextInput
+                placeholder="Search"
+                maxLength={225}
+                numberOfLines={1}
+                style={{ width: "100%", paddingHorizontal: 10, paddingEnd: 15 }}
+              />
+            </View>
+          </View>
 
-        {/*Options*/}
-        <ScrollView
-          horizontal={true}
-          style={styles.viewOptions}
-          showsHorizontalScrollIndicator={false}
-        >
-          {arrOptions.map((item, index) => {
-            return (
-              <TouchableOpacity
-                style={[
-                  styles.itemOptions,
-                  indexOptions === item.id
-                    ? styles.itemOptions_isActive
-                    : styles.itemOptions_noActive,
-                ]}
-                onPress={() => {
-                  setindexOptions(item.id);
-                }}
-                key={index}
-              >
-                <Text
-                  style={[
-                    { fontWeight: "bold", fontSize: 16 },
-                    indexOptions === item.id
-                      ? { color: "white" }
-                      : { color: ColorAssets.greenColor },
-                  ]}
-                >
-                  {item.title}
-                </Text>
-              </TouchableOpacity>
-            );
-          })}
-        </ScrollView>
-
-        {/*Contents*/}
-        {listHotel.length == 0 ? (
-          <FlatList
-            horizontal
-            style={styles.content}
-            data={arrFakeData}
-            renderItem={({ item }) => <AnimatedGradient typeLoad={1} />}
-            keyExtractor={(item) => item.id}
-          />
-        ) : (
-          <FlatList
-            horizontal
-            style={styles.content}
-            data={listHotel}
-            renderItem={({ item }) => <RenderItemListHorizontal item={item} />}
-            keyExtractor={(item) => item.id}
-          />
-        )}
-
-        {/*Booked*/}
-        <View style={styles.headerBooked}>
-          <Text style={styles.nameApp}>Recently Booked</Text>
-          <TouchableOpacity
-            onPress={() => {
-              props.navigation.navigate("RecentlyBookedScreen");
-            }}
+          {/*Options*/}
+          <ScrollView
+            horizontal={true}
+            style={styles.viewOptions}
+            showsHorizontalScrollIndicator={false}
           >
-            <Text style={styles.seeAll}>See all</Text>
-          </TouchableOpacity>
-        </View>
+            {arrOptions.map((item, index) => {
+              return (
+                <TouchableOpacity
+                  style={[
+                    styles.itemOptions,
+                    indexOptions === item.id
+                      ? styles.itemOptions_isActive
+                      : styles.itemOptions_noActive,
+                  ]}
+                  onPress={() => {
+                    setindexOptions(item.id);
+                  }}
+                  key={index}
+                >
+                  <Text
+                    style={[
+                      { fontWeight: "bold", fontSize: 16 },
+                      indexOptions === item.id
+                        ? { color: "white" }
+                        : { color: ColorAssets.greenColor },
+                    ]}
+                  >
+                    {item.title}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </ScrollView>
 
-        <View style={{ flex: 1 }}>
-          {listHotel.length == 0
-            ? arrFakeData.map((item, index) => {
-                return <AnimatedGradient key={index} typeLoad={2} />;
-              })
-            : arrFakeData.map((item, index) => {
-                return <RenderItemListVertical key={index} item={item} />;
-              })}
-        </View>
-      </ScrollView>
-      {isScrolled ? (
-        <View style={styles.fabContainer}>
-          <MyFloatingActionButton />
-        </View>
-      ) : null}
+          {/*Contents*/}
+          {listHotel.length == 0 ? (
+            <FlatList
+              horizontal
+              style={styles.content}
+              data={arrFakeData}
+              renderItem={({ item }) => <AnimatedGradient typeLoad={1} />}
+              keyExtractor={(item) => item.id}
+            />
+          ) : (
+            <FlatList
+              horizontal
+              style={styles.content}
+              data={listHotel}
+              renderItem={({ item }) => (
+                <RenderItemListHorizontal item={item} />
+              )}
+              keyExtractor={(item) => item._id}
+            />
+          )}
+
+          {/*Booked*/}
+          <View style={styles.headerBooked}>
+            <Text style={styles.nameApp}>Recently Booked</Text>
+            <TouchableOpacity
+              onPress={() => {
+                props.navigation.navigate("RecentlyBookedScreen");
+              }}
+            >
+              <Text style={styles.seeAll}>See all</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={{ flex: 1 }}>
+            {listHotel.length == 0
+              ? arrFakeData.map((item, index) => {
+                  return <AnimatedGradient key={index} typeLoad={2} />;
+                })
+              : arrFakeData.map((item, index) => {
+                  return <RenderItemListVertical key={index} item={item} />;
+                })}
+          </View>
+        </ScrollView>
+        {isScrolled ? (
+          <View style={styles.fabContainer}>
+            <MyFloatingActionButton />
+          </View>
+        ) : null}
+      </View>
     </SafeAreaView>
   );
 };
