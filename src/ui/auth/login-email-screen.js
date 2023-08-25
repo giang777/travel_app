@@ -1,7 +1,7 @@
 import {
   Dimensions,
   ScrollView,
-  StyleSheet,
+  styleLoginEmailheet,
   Text,
   TouchableOpacity,
   View,
@@ -28,8 +28,8 @@ import SharedPreferences from "../../database/share_preferences_helper";
 import { changeScreenWithOutTime } from "../../utils/navigation-utils";
 
 import { handleLogIn } from "../../api/auth/auth-services";
-const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
+import { styleLoginEmail } from "./styles";
+
 const LoginEmailScreen = ({ navigation }) => {
   // lấy dữ liệu user
   const getUserRes = useSelector((state) => state.register.user);
@@ -88,9 +88,9 @@ const LoginEmailScreen = ({ navigation }) => {
             style={containScreenAssets.scrollView}
             contentContainerStyle={containScreenAssets.scrollViewContent}
           >
-            <View style={styles.content}>
-              <Text style={styles.title}>Login to your Account</Text>
-              <Text style={styles.textError}>{textError}</Text>
+            <View style={styleLoginEmail.content}>
+              <Text style={styleLoginEmail.title}>Login to your Account</Text>
+              <Text style={styleLoginEmail.textError}>{textError}</Text>
               <CustomTextInput
                 iconName={"user"}
                 fillText={username ? true : false}
@@ -114,20 +114,20 @@ const LoginEmailScreen = ({ navigation }) => {
                 }}
               />
               <Sizebox height={20} />
-              <View style={styles.section}>
+              <View style={styleLoginEmail.section}>
                 <CheckBox
-                  style={styles.checkbox}
+                  style={styleLoginEmail.checkbox}
                   value={toggleCheckBox}
                   onValueChange={setToggleCheckBox}
                   color={toggleCheckBox ? "#1AB65C" : undefined}
                 />
-                <Text style={styles.paragraph}>Remmember me</Text>
+                <Text style={styleLoginEmail.paragraph}>Remmember me</Text>
               </View>
               <Sizebox height={30} />
 
               {username && password ? (
                 <CustomButton
-                  style={styles.button}
+                  style={styleLoginEmail.button}
                   title="Sign in"
                   onPress={handleFormSubmit}
                 />
@@ -137,16 +137,18 @@ const LoginEmailScreen = ({ navigation }) => {
 
               <Sizebox height={15} />
               <TouchableOpacity
-                style={styles.titleFogotPassword}
+                style={styleLoginEmail.titleFogotPassword}
                 onPress={() => {
                   navigation.navigate("ForgotPassword");
                 }}
               >
-                <Text style={styles.titleSignUp}>Forgot the password?</Text>
+                <Text style={styleLoginEmail.titleSignUp}>
+                  Forgot the password?
+                </Text>
               </TouchableOpacity>
             </View>
-            <View style={styles.footer}>
-              <Text style={styles.titleDontHaveAccount}>
+            <View style={styleLoginEmail.footer}>
+              <Text style={styleLoginEmail.titleDontHaveAccount}>
                 Dont have an account?
               </Text>
               <Sizebox width={5} />
@@ -155,13 +157,13 @@ const LoginEmailScreen = ({ navigation }) => {
                   navigation.dispatch(StackActions.replace("SignUpScreen"))
                 }
               >
-                <Text style={styles.titleSignUp}>Sign up</Text>
+                <Text style={styleLoginEmail.titleSignUp}>Sign up</Text>
               </TouchableOpacity>
             </View>
           </ScrollView>
         </KeyboardAvoidingView>
         {statusLoading ? (
-          <View style={styles.boxLoading}>
+          <View style={styleLoginEmail.boxLoading}>
             <ActivityIndicator size={"large"} color="#2196F3" />
           </View>
         ) : (
@@ -173,64 +175,3 @@ const LoginEmailScreen = ({ navigation }) => {
 };
 
 export default LoginEmailScreen;
-
-const styles = StyleSheet.create({
-  content: {
-    alignItems: "flex-start",
-    paddingHorizontal: 15,
-    flexGrow: 1,
-  },
-  title: {
-    marginVertical: windowHeight / 15,
-    fontWeight: "600",
-    letterSpacing: 1,
-    fontSize: windowWidth / 9.5,
-  },
-  footer: {
-    flexDirection: "row",
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  titleDontHaveAccount: {
-    color: ColorAssets.greyColor,
-  },
-  titleSignUp: {
-    color: ColorAssets.greenColor,
-    fontWeight: "bold",
-  },
-  titleFogotPassword: {
-    width: "100%",
-    alignItems: "center",
-  },
-  section: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-  },
-  paragraph: {
-    fontSize: 15,
-  },
-  checkbox: {
-    margin: 8,
-    borderRadius: 6,
-    borderColor: "#1AB65C",
-    borderWidth: 3,
-  },
-  textError: {
-    fontSize: 16,
-    color: "red",
-    marginHorizontal: 10,
-    marginBottom: 8,
-  },
-  boxLoading: {
-    position: "absolute",
-    height: "100%",
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-  },
-});

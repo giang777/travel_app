@@ -24,6 +24,7 @@ const CustomTextInput = ({isHaveTitle,title, secureTextEntry, placeholder, onCha
       </View> : <View></View>}
       <TextInput
         style={styles.input}
+        
         value={valueText}
         secureTextEntry={secureTextEntry ? statusPass : false}
         placeholder={placeholder}
@@ -41,11 +42,14 @@ const CustomTextInput = ({isHaveTitle,title, secureTextEntry, placeholder, onCha
   );
 };
 
-const CustomTextInput2 = ({ textPlaceHolder,isHaveHandle,onChangeText }) => {
+const CustomTextInput2 = ({ keyboardType,valueText,textPlaceHolder,isHaveHandle,onChangeText }) => {
   return (
     
     <View style={styles.container2}>
-      <TextInput style={styles.input} placeholder={textPlaceHolder}  onChangeText={onChangeText} />
+      <TextInput style={styles.input}
+        value={valueText}
+        keyboardType={keyboardType}
+      placeholder={textPlaceHolder}  onChangeText={onChangeText} />
     </View>
   );
 };

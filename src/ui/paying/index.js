@@ -1,7 +1,5 @@
 import {
     ScrollView,
-    StatusBar,
-    StyleSheet,
     Text,
     View,
     KeyboardAvoidingView,
@@ -11,13 +9,14 @@ import {
 import * as Device from 'expo-device'
 import React, { useEffect, useMemo, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { ColorAssets } from "../../utils/app-assets";
 import AppBar from "../../common/custom/custom-appbar";
 import { CustomButton, CustomHideButton } from "../../common/custom/custom-button";
-import { methodPayment } from './fakeData'
+import { methodPayment } from '../booking/fakeData'
 import { TouchableOpacity } from 'react-native';
 import { StackActions } from '@react-navigation/native';
-import styles from './styles'
+import styles from '../booking/styles'
+import ItemMethodPayment from './components/item-method-payment';
+import { ColorAssets } from '../../utils/app-assets';
 
 const PayScreen = ({ navigation }) => {
     const [showModal, setShowModal] = useState(false);
@@ -58,21 +57,9 @@ const PayScreen = ({ navigation }) => {
         </SafeAreaView>
     )
 }
-const ItemMethodPayment = ({ item, setItemChoose, isChose }) => {
-    return (
-        <TouchableOpacity style={[styles.boxMethodItem, styles.shadowBox]} onPress={() => { setItemChoose(item.id) }}>
-            <Image style={styles.imageMethod} source={item.image} />
-            <Text style={styles.textMethod}>{item.title}</Text>
-            <View style={{ alignItems: 'flex-end', flex: 1 }}>
-                {isChose == item.id ? <View style={styles.statusMethod}>
-                    <View style={{ height: 12, width: 12, backgroundColor: ColorAssets.greenColor, borderRadius: 10 }}>
-                    </View>
-                </View> : undefined}
-            </View>
-        </TouchableOpacity>
-    )
-}
-const ModalView = ({ show, navigation }) => {
+export default PayScreen
+
+  const ModalView = ({ show, navigation }) => {
     return (
         <View style={styles.centeredView}>
             <Modal
@@ -93,6 +80,4 @@ const ModalView = ({ show, navigation }) => {
             </Modal >
         </View >
     )
-}
-
-export default PayScreen
+  }

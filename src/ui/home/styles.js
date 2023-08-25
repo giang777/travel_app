@@ -3,12 +3,8 @@ import { ColorAssets } from "../../utils/app-assets";
 
 const styles = StyleSheet.create({
   container: {
-    height: "100%",
-  },
-  view: {
-    position: "relative",
-    flex: Platform.OS === 'android' ? 1 : 0,
-    paddingTop:8
+    flex: 1,
+    backgroundColor: ColorAssets.whiteColor,
   },
 
   header: {
@@ -23,7 +19,7 @@ const styles = StyleSheet.create({
   viewHeaderItemLeft: {
     flex: 8,
     flexDirection: "row",
-    alignItems:'center'
+    alignItems: "center",
   },
   viewHeaderItemRight: {
     marginTop: 3,
@@ -108,14 +104,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     justifyContent: "space-between",
   },
-  fabContainer: {
-    position: 'absolute',
-    bottom:  0,
-    right: 0,
-    zIndex: 1,
-  },
 
-  
+  fab: {
+    position: "absolute",
+    margin: 16,
+    right: 0,
+    bottom: 0,
+    backgroundColor: ColorAssets.greenColor,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    justifyContent: "center",
+    alignItems: "center",
+    elevation: 6,
+  },
 });
 
 export default styles;

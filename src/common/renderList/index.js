@@ -18,7 +18,6 @@ const RenderItemListHorizontal = ({item,onPressed}) => {
     setIsSaveBookmark((prevIsSaveBookmark) => !prevIsSaveBookmark);
   const imageUri = `http://103.122.163.148:3000/${item.images[0]}`;
   const modifiedImageUri = imageUri.replace("public/", "");
-  console.log(modifiedImageUri);
   return (
     <TouchableOpacity style={styles.viewBackgroundImage} onPress={onPressed}>
       <ImageBackground

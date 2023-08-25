@@ -26,7 +26,8 @@ export const handleAddHotel = async (
       imageFiles.push(imageFile);
 
       // Log the image file information
-      console.log('Converted image file:', imageFile);
+      // console.log('Converted image file:', imageFile);
+      // console.log('Converted name file:', imageFile.name);
     }
 
     // Create a FormData object

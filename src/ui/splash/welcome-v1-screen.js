@@ -12,8 +12,7 @@ import SharedPreferences from "../../database/share_preferences_helper";
 import { changeScreenWithOutTime } from "../../utils/navigation-utils";
 const WelcomeV1 = ({ navigation }) => {
   const welcomeFirst = async () => {
-     SharedPreferences.SET_NEW_USER("true");
-
+    SharedPreferences.SET_NEW_USER("true");
     changeScreenWithOutTime(navigation, "WelcomeV1_1");
   };
   return (

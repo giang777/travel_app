@@ -3,7 +3,6 @@ import {
   Image,
   ImageBackground,
   ScrollView,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
@@ -11,7 +10,6 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "./styles";
 import { ColorAssets, IconAssets, ImageAssets } from "../../utils/app-assets";
 import { arrOptions, arrFakeData } from "./fakeData";
@@ -19,14 +17,16 @@ import {
   RenderItemListHorizontal,
   RenderItemListVertical,
 } from "../../common/renderList";
+import Icon from "react-native-vector-icons/FontAwesome";
+
 import BookMark from "../../../assets/icons/Bookmark.svg";
 import Notification from "../../../assets/icons/Notification.svg";
 import Search from "../../../assets/icons/search.svg";
-import MyFloatingActionButton from "../../common/custom/custom-fab";
 import AnimatedGradient from "../../common/custom/custom-imgloading";
 import { useEffect } from "react";
 import { handleGetHotel } from "../../api/hotel/hotel-service";
 import SharedPreferences from "../../database/share_preferences_helper";
+import { SafeAreaFrameContext, SafeAreaView } from "react-native-safe-area-context";
 const HomeScreen = (props) => {
   //giang giang
   const [indexOptions, setindexOptions] = useState(1);
@@ -69,17 +69,14 @@ const HomeScreen = (props) => {
     const threshold = 0.2 * screenHeight;
     if (scrollY >= threshold && !isScrolled) {
       setIsScrolled(true);
-      console.log("Scrolled: 24%");
     } else if (scrollY < threshold && isScrolled) {
       setIsScrolled(false);
     }
   };
-  console.log(listHotel[listHotel.length - 1]);
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.view}>
-      {/*Header */}
-      <View style={styles.header}>
+     <SafeAreaView style={styles.container}>
+         {/*Header */}
+         <View style={styles.header}>
           <View style={styles.viewHeaderItemLeft}>
             <Image source={IconAssets.logoApp} style={styles.logoApp} />
             <Text style={styles.nameLogoApp}>
@@ -97,7 +94,11 @@ const HomeScreen = (props) => {
             </TouchableOpacity>
           </View>
         </View>
-        <ScrollView style={styles.scrollView} onScroll={handleScroll} scrollEventThrottle={16}>
+        <ScrollView
+          style={styles.scrollView}
+          onScroll={handleScroll}
+          scrollEventThrottle={16}
+        >
           {/*Search Bar*/}
           <View style={styles.searchBar}>
             <Text style={styles.textWelcome}>
@@ -193,11 +194,15 @@ const HomeScreen = (props) => {
           </View>
         </ScrollView>
         {isScrolled ? (
-          <View style={styles.fabContainer}>
-            <MyFloatingActionButton />
-          </View>
+          <TouchableOpacity
+            style={styles.fab}
+            onPress={() => props.navigation.navigate("AddHotelScreen")}
+            // test
+            // onPress={() => props.navigation.navigate("TypeOfRoom")}
+          >
+            <Icon name="plus" size={18} color={ColorAssets.whiteColor} />
+          </TouchableOpacity>
         ) : null}
-      </View>
     </SafeAreaView>
   );
 };

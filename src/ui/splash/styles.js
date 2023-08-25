@@ -15,7 +15,7 @@ export const styleSplashScreen=  StyleSheet.create({
     flex: 1,
   },
   imageLogo: {
-    width: windowWidth / 2,
+    width: windowWidth / 1.8,
     height: windowHeight / 4,
   },
   
