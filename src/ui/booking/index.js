@@ -24,6 +24,11 @@ import {
   ItemCanceled,
 } from "../../common/renderItemBooking/index";
 import Modal from "react-native-modal";
+import Search from "../../../assets/icons/search.svg";
+import OnGoingScreen from "./components/on-going-screen";
+import CompletedScreen from "./components/completed-screen";
+import CanceledScreen from "./components/canceled-screen";
+
 const BookingScreen = ({ navigation }) => {
   const [indexOptions, setindexOptions] = useState(1);
   const [modal, setshowModal] = useState(false);
@@ -36,7 +41,7 @@ const BookingScreen = ({ navigation }) => {
   useEffect(() => {}, [indexOptions]);
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ paddingHorizontal: 10, paddingTop: 10 }}>
+      <View style={{ paddingHorizontal: 15, paddingTop: 8 }}>
         {/*Header */}
         <View style={styles.header}>
           <View style={styles.viewHeaderItem}>
@@ -45,7 +50,7 @@ const BookingScreen = ({ navigation }) => {
           </View>
           <View style={styles.viewHeaderItem}>
             <TouchableOpacity>
-              <Icon name="search" size={30} />
+              <Search size={30} />
             </TouchableOpacity>
           </View>
         </View>
@@ -83,7 +88,7 @@ const BookingScreen = ({ navigation }) => {
       </View>
       {/*Body*/}
       {indexOptions == 1 ? (
-        <OngoingScreen showModal={showModal} />
+        <OnGoingScreen showModal={showModal} />
       ) : indexOptions == 2 ? (
         <CompletedScreen />
       ) : (
@@ -152,36 +157,6 @@ const WrapperComponent = ({ hide, hideModal, navigation }) => {
 };
 
 // // Màn hình Ongoing
-const OngoingScreen = ({ showModal }) => {
-  return (
-    <FlatList
-      style={{ paddingHorizontal: 10 }}
-      data={arrFakeDataOngoing}
-      renderItem={({ item }) => (
-        <ItemOngoing item={item} showModal={showModal} />
-      )}
-      keyExtractor={(item) => item.id}
-    />
-  );
-};
-const CompletedScreen = () => {
-  return (
-    <FlatList
-      style={{ paddingHorizontal: 10 }}
-      data={arrFakeDataCompleted}
-      renderItem={({ item }) => <ItemCompleted item={item} />}
-      keyExtractor={(item) => item.id}
-    />
-  );
-};
-const CanceledScreen = () => {
-  return (
-    <FlatList
-      style={{ paddingHorizontal: 10 }}
-      data={arrFakeDataCanceled}
-      renderItem={({ item }) => <ItemCanceled item={item} />}
-      keyExtractor={(item) => item.id}
-    />
-  );
-};
+
+
 export default BookingScreen;

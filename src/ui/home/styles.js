@@ -1,20 +1,17 @@
 import { StyleSheet, Dimensions, Text, View } from "react-native";
 import { ColorAssets } from "../../utils/app-assets";
 
-const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: ColorAssets.whiteColor,
-    paddingVertical: 15,
   },
+
   header: {
     paddingHorizontal: 15,
-
-    paddingBottom: 10,
+    paddingBottom: 8,
     flexDirection: "row",
+    position: "relative",
     alignItems: "center",
     justifyContent: "space-between",
   },
@@ -22,6 +19,7 @@ const styles = StyleSheet.create({
   viewHeaderItemLeft: {
     flex: 8,
     flexDirection: "row",
+    alignItems: "center",
   },
   viewHeaderItemRight: {
     marginTop: 3,
@@ -54,7 +52,7 @@ const styles = StyleSheet.create({
 
   searchBar: {
     paddingHorizontal: 15,
-    marginVertical: 20,
+    marginVertical: 10,
   },
 
   textWelcome: {
@@ -106,11 +104,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     justifyContent: "space-between",
   },
-  fabContainer: {
+
+  fab: {
     position: "absolute",
-    bottom: 0,
+    margin: 16,
     right: 0,
-    zIndex: 1,
+    bottom: 0,
+    backgroundColor: ColorAssets.greenColor,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    justifyContent: "center",
+    alignItems: "center",
+    elevation: 6,
   },
 });
 

@@ -12,29 +12,36 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import WhiteBookmark from "../../../assets/icons/WhiteBookmark.svg";
 import AddBookmark from "../../../assets/icons/AddBookmark.svg";
 import BookMark from "../../../assets/icons/Bookmark.svg";
-const RenderItemListHorizontal = (props) => {
-  const { item } = props;
+const RenderItemListHorizontal = ({item,onPressed}) => {
   const [isSaveBookmark, setIsSaveBookmark] = useState(false);
   const handleSetBookmark = () =>
     setIsSaveBookmark((prevIsSaveBookmark) => !prevIsSaveBookmark);
+  const imageUri = `http://103.122.163.148:3000/${item.images[0]}`;
+  const modifiedImageUri = imageUri.replace("public/", "");
   return (
-    <TouchableOpacity style={styles.viewBackgroundImage}>
+    <TouchableOpacity style={styles.viewBackgroundImage} onPress={onPressed}>
       <ImageBackground
-        source={{ uri: item.uri }}
+        source={{ uri: modifiedImageUri }}
         style={styles.viewItemHorizontal}
       >
-        <View style={styles.viewRateItemHoriontal}>
-          <Icon
-            name="star"
-            size={19}
-            style={{ marginRight: 8 }}
-            color={ColorAssets.whiteColor}
-          />
+        {item.rate ? (
+          <View style={styles.viewRateItemHoriontal}>
+            <Icon
+              name="star"
+              size={19}
+              style={{ marginRight: 8 }}
+              color={ColorAssets.whiteColor}
+            />
 
-          <Text style={{ color: ColorAssets.whiteColor }}>
-            {parseFloat(item.rate.toString()).toFixed(1)}
-          </Text>
-        </View>
+            <Text style={{ color: ColorAssets.whiteColor }}>
+              {/* {parseFloat(item.rate.toString()).toFixed(1)} */}
+              {/* {parseFloat('4.22222').toFixed(1)} */}
+            </Text>
+          </View>
+        ) : (
+          <View></View>
+        )}
+
         <View style={styles.backgroundLayer} />
         <View style={styles.informationItemHorizontal}>
           <Text style={styles.nameItemHorizontal}>{item.name}</Text>
@@ -68,11 +75,9 @@ const RenderItemListHorizontal = (props) => {
   );
 };
 
-const RenderItemListVertical = (props) => {
-  const { item } = props;
-
+const RenderItemListVertical = ({item,onPressed}) => {
   return (
-    <TouchableOpacity style={styles.viewContainerItemVertical}>
+    <TouchableOpacity style={styles.viewContainerItemVertical} onPress={onPressed}>
       <Image source={{ uri: item.uri }} style={styles.imgItemVertical} />
       <View style={styles.viewContentItemVertical}>
         <Text style={styles.nameApp}>{item.name}</Text>
@@ -86,7 +91,8 @@ const RenderItemListVertical = (props) => {
               marginLeft: 5,
             }}
           >
-            {parseFloat(item.rate.toString()).toFixed(1)}
+            {/* {parseFloat(item.rate.toString()).toFixed(1)} */}
+            {parseFloat("4.22222").toFixed(1)}
           </Text>
         </View>
       </View>

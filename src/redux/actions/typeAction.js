@@ -19,3 +19,7 @@ export const addHotel = (hotel) => ({
   type: "ADD_HOTEL",
   payload: hotel,
 });
+export const addTypeOfRoom = (typeOfRoom) => ({
+  type: "ADD_TYPE_OF_ROOM",
+  payload: typeOfRoom,
+});

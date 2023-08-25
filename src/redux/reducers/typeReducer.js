@@ -1,8 +1,8 @@
-export const initialState = {
+ const initialState = {
   first: 0,
 };
 
-export const register = {
+ const register = {
   user: {
     userName: '',
     passWord: ''
