@@ -13,7 +13,7 @@ import styles from "./styles";
 import { handleAddTOR } from "../../api/type_of_room/type-of-room-service";
 import { CommonActions } from "@react-navigation/native";
 
-const TypeOfRoom = ({navigation}) => {
+const TypeOfRoom = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const typeOfRoom = useSelector((state) => state.addTypeOfRoom.typeOfRoom);
   const hotelData = useSelector((state) => state.addHotel.hotel);
@@ -37,17 +37,21 @@ const TypeOfRoom = ({navigation}) => {
       hotelData.place,
       cleanedImageUrls
     );
-    const responseTOR = await handleAddTOR(typeOfRoom.name, typeOfRoom.price, typeOfRoom.slot);
+    const responseTOR = await handleAddTOR(
+      typeOfRoom.name,
+      typeOfRoom.price,
+      typeOfRoom.slot,
+      hotelData.id_owner
+    );
 
-    
     if (responseTOR.status === 200 && responseHotel === 200) {
-      setIsLoading(false)
-      dispatch({ type: 'RESET_STATE' });
+      setIsLoading(false);
+      dispatch({ type: "RESET_STATE" });
       //navigate to MainScreen và remove all previous Screen
       navigation.dispatch(
         CommonActions.reset({
           index: 0,
-          routes: [{ name: 'MainScreen' }],
+          routes: [{ name: "MainScreen" }],
         })
       );
     }
@@ -110,4 +114,3 @@ const TypeOfRoom = ({navigation}) => {
 };
 
 export default TypeOfRoom;
-

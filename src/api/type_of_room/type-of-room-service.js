@@ -2,7 +2,7 @@ import SharedPreferences from "../../database/share_preferences_helper";
 import axiosClient from "../axios-client";
 import { ADD_URL } from "./config";
 
-export const handleAddTOR = async (name, price, slot) => {
+export const handleAddTOR = async (name, price, slot,idOwner  ) => {
   try {
     const headers = {
       Authorization: await SharedPreferences.GET_TOKEN(),
@@ -14,6 +14,7 @@ export const handleAddTOR = async (name, price, slot) => {
         name,
         price,
         slot,
+        idOwner
       },
       {headers}
     );
