@@ -26,9 +26,13 @@ import Search from "../../../assets/icons/search.svg";
 import AnimatedGradient from "../../common/custom/custom-imgloading";
 import { useEffect } from "react";
 import { handleGetHotel } from "../../api/hotel/hotel-service";
+import {handledGetTOR} from "../../api/type_of_room/type-of-room-service";
 import SharedPreferences from "../../database/share_preferences_helper";
 import { SafeAreaFrameContext, SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from '@react-navigation/native';
 const HomeScreen = (props) => {
+  console.log(props);
+  const navigation = useNavigation();
   //animation header
   const scrollAnimationHeader = new Animated.Value(0)
   const diffClamp = Animated.diffClamp(scrollAnimationHeader, 0, 100)
@@ -83,7 +87,6 @@ const HomeScreen = (props) => {
     const scrollY = event.nativeEvent.contentOffset.y;
     const screenHeight = event.nativeEvent.layoutMeasurement.height;
     const threshold = 0.2 * screenHeight;
-
 
     if (scrollY >= threshold && !isScrolled) {
       setIsScrolled(true);
@@ -189,7 +192,9 @@ const HomeScreen = (props) => {
             style={styles.content}
             data={listHotel}
             renderItem={({ item }) => (
-              <RenderItemListHorizontal item={item} />
+              <RenderItemListHorizontal item={item} onPressed={ () => {
+             navigation.navigate("RoomInHotel");
+            }}/>
             )}
             keyExtractor={(item) => item._id}
           />
@@ -200,7 +205,7 @@ const HomeScreen = (props) => {
           <Text style={styles.nameApp}>Recently Booked</Text>
           <TouchableOpacity
             onPress={() => {
-              props.navigation.navigate("RecentlyBookedScreen");
+             navigation.navigate("RecentlyBookedScreen");
             }}
           >
             <Text style={styles.seeAll}>See all</Text>
@@ -218,16 +223,16 @@ const HomeScreen = (props) => {
         </View>
       </ScrollView>
       {isScrolled ? (
-        <Animated.View style={{opacity: translateButton}}>
+       
           <TouchableOpacity
             style={[styles.fab]}
-            onPress={() => props.navigation.navigate("AddHotelScreen")}
+            onPress={() => navigation.navigate("AddHotelScreen")}
           // test
           // onPress={() => props.navigation.navigate("TypeOfRoom")}
           >
             <Icon name="plus" size={18} color={ColorAssets.whiteColor} />
           </TouchableOpacity>
-        </Animated.View>
+
       ) : null}
     </SafeAreaView>
   );
