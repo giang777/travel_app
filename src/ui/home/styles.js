@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
 
   searchBar: {
     paddingHorizontal: 15,
-    marginVertical: 10,
+    marginBottom: 10,
+    marginTop: 60
   },
 
   textWelcome: {
