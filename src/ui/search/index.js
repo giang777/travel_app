@@ -32,36 +32,64 @@ import Category from "../../../assets/icons/Category.svg";
 import Document from "../../../assets/icons/document.svg";
 import SelectedRecommend from "../../../assets/icons/selectRecommend.svg";
 
+
+// searchbar
 const SearchBar = () => {
   const [isModalVisible, setModalVisible] = useState(false);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
-  const [indexOptions, setindexOptions] = useState(1);
-  const [data, setData] = useState([
+  const [indexOptionsCity, setindexOptionsCity] = useState(1);
+  const [indexOptionsRs, setindexOptionsRs] = useState(1);
+  const [indexOptionsSt, setindexOptionsSt] = useState(1);
+  const [data1, setData1] = useState([
     { id: 1, label: "Option 1", isChecked: false },
     { id: 2, label: "Option 2", isChecked: false },
     { id: 3, label: "Option 3", isChecked: false },
     // Add more options as needed
   ]);
-  const toggleCheckbox = (itemId) => {
-    setData((prevData) =>
+  const [data2, setData2] = useState([
+    { id: 1, label: "Option 1", isChecked: false },
+    { id: 2, label: "Option 2", isChecked: false },
+    { id: 3, label: "Option 3", isChecked: false },
+    // Add more options as needed
+  ]);
+  const toggleCheckbox1 = (itemId) => {
+    setData1((prevData) =>
       prevData.map((item) =>
         item.id === itemId ? { ...item, isChecked: !item.isChecked } : item
       )
     );
   };
-  const renderCheckboxItem = ({ item }) => (
+  const toggleCheckbox2 = (itemId) => {
+    setData2((prevData) =>
+        prevData.map((item) =>
+            item.id === itemId ? { ...item, isChecked: !item.isChecked } : item
+        )
+    );
+  };
+  const renderCheckboxItem1 = ({ item }) => (
     <View style={styles.checkboxContainer}>
       <Checkbox
         color={"#1AB65C"}
         value={item.isChecked}
-        onValueChange={() => toggleCheckbox(item.id)}
+        onValueChange={() => toggleCheckbox1(item.id)}
       />
 
       <Text style={styles.label}>{item.label}</Text>
     </View>
+  );
+  const renderCheckboxItem2 = ({ item }) => (
+      <View style={styles.checkboxContainer}>
+        <Checkbox
+            color={"#1AB65C"}
+            value={item.isChecked}
+            onValueChange={() => toggleCheckbox2(item.id)}
+        />
+
+        <Text style={styles.label}>{item.label}</Text>
+      </View>
   );
 
   const [priceRange, setPriceRange] = useState([0, 100]); // Khoảng giá mặc định
@@ -99,7 +127,7 @@ const SearchBar = () => {
           }}
         />
       </TouchableOpacity>
-      {/*//Bottom dialog*/}
+      {/*Bottom dialog*/}
       <Modal
         isVisible={isModalVisible}
         style={styles.modal}
@@ -109,8 +137,9 @@ const SearchBar = () => {
         onSwipeComplete={toggleModal}
       >
         <View style={styles.modalContent}>
-          <Text style={styles.label}>Country</Text>
           {/*Options*/}
+          {/*Country*/}
+          <Text style={styles.label}>Country</Text>
           <View style={styles.ViewFilter}>
             <ScrollView
               horizontal={true}
@@ -122,19 +151,19 @@ const SearchBar = () => {
                   <TouchableOpacity
                     style={[
                       styles.itemOptions,
-                      indexOptions === item.id
+                      indexOptionsCity === item.idcity
                         ? styles.itemOptions_isActive
                         : styles.itemOptions_noActive,
                     ]}
                     onPress={() => {
-                      setindexOptions(item.id);
+                      setindexOptionsCity(item.idcity);
                     }}
                     key={index}
                   >
                     <Text
                       style={[
                         { fontWeight: "bold", fontSize: 16 },
-                        indexOptions === item.id
+                        indexOptionsCity === item.idcity
                           ? { color: "white" }
                           : { color: ColorAssets.greenColor },
                       ]}
@@ -146,6 +175,7 @@ const SearchBar = () => {
               })}
             </ScrollView>
           </View>
+          {/*Results*/}
           <Text style={styles.label}>Results</Text>
           <View style={styles.ViewFilter}>
             <ScrollView
@@ -158,19 +188,19 @@ const SearchBar = () => {
                   <TouchableOpacity
                     style={[
                       styles.itemOptions,
-                      indexOptions === item.id
+                      indexOptionsRs === item.idRs
                         ? styles.itemOptions_isActive
                         : styles.itemOptions_noActive,
                     ]}
                     onPress={() => {
-                      setindexOptions(item.id);
+                      setindexOptionsRs(item.idRs);
                     }}
                     key={index}
                   >
                     <Text
                       style={[
                         { fontWeight: "bold", fontSize: 16 },
-                        indexOptions === item.id
+                        indexOptionsRs === item.idRs
                           ? { color: "white" }
                           : { color: ColorAssets.greenColor },
                       ]}
@@ -182,6 +212,7 @@ const SearchBar = () => {
               })}
             </ScrollView>
           </View>
+          {/*Star*/}
           <Text style={styles.label}>Star</Text>
           <View style={styles.ViewFilter}>
             <ScrollView
@@ -194,19 +225,19 @@ const SearchBar = () => {
                   <TouchableOpacity
                     style={[
                       styles.itemOptions,
-                      indexOptions === item.id
+                      indexOptionsSt === item.id
                         ? styles.itemOptions_isActive
                         : styles.itemOptions_noActive,
                     ]}
                     onPress={() => {
-                      setindexOptions(item.id);
+                      setindexOptionsSt(item.id);
                     }}
                     key={index}
                   >
                     <Text
                       style={[
                         { fontWeight: "bold", fontSize: 16 },
-                        indexOptions === item.id
+                        indexOptionsSt === item.id
                           ? { color: "white" }
                           : { color: ColorAssets.greenColor },
                       ]}
@@ -222,33 +253,25 @@ const SearchBar = () => {
           {/*slider*/}
           <Text style={styles.label}>Price Range:</Text>
           <Text>{`$${priceRange[0]} - $${priceRange[1]}`}</Text>
-          {/*<Slider*/}
-          {/*    style={styles.slider}*/}
-          {/*    minimumValue={0}*/}
-          {/*    maximumValue={100}*/}
-          {/*    step={1}*/}
-          {/*    thumbTintColor="#007AFF"*/}
-          {/*    minimumTrackTintColor="#007AFF"*/}
-          {/*    maximumTrackTintColor="#000000"*/}
-          {/*    value={priceRange}*/}
-          {/*    onValueChange={onPriceRangeChange}*/}
-          {/*/>*/}
 
-          {/*checkbox*/}
+
+          {/*checkbox1*/}
           <Text style={styles.label}>Checkbox</Text>
           <View style={styles.ViewFilter}>
-            {data.map((item) => (
-              <View key={item.id}>{renderCheckboxItem({ item })}</View>
+            {data1.map((item) => (
+              <View key={item.id}>{renderCheckboxItem1({ item })}</View>
             ))}
           </View>
-          {/*checkbox*/}
+          {/*checkbox2*/}
+
           <Text style={styles.label}>Checkbox</Text>
-          {/*button*/}
           <View style={styles.ViewFilter}>
-            {data.map((item) => (
-              <View key={item.id}>{renderCheckboxItem({ item })}</View>
+            {data2.map((item) => (
+              <View key={item.id}>{renderCheckboxItem2({ item })}</View>
             ))}
           </View>
+
+          {/*Button*/}
           <View style={styles.ViewBtn}>
             <TouchableOpacity style={styles.btnDialog}>
               <Text

@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
     color: "white",
   },
 
+
   itemOptions_noActive: {
     backgroundColor: "white",
     borderColor: ColorAssets.greenColor,
@@ -97,11 +98,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
 
-  nameApp: {
-    fontSize: 22,
-    fontWeight: "bold",
-    marginLeft: 10,
-  },
   modal: {
     justifyContent: "flex-end",
     margin: 0,
