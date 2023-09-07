@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Image, StyleSheet, Dimensions, View, ScrollView } from "react-native";
 import Swiper from "react-native-swiper/src";
-
+import styles from './styles';
 var { width, height } = Dimensions.get("window");
 
 const Slider = ({ gallery }) => {
@@ -16,8 +16,8 @@ const Slider = ({ gallery }) => {
 
   return (
     <ScrollView>
-      <View style={styles.container}>
-        <View style={styles.swiper}>
+      <View style={styles.slider_container}>
+        <View style={styles.slider_swiper}>
           <Swiper
             style={{ height: width / 3 }}
             showButtons={false}
@@ -29,7 +29,7 @@ const Slider = ({ gallery }) => {
               return (
                 <Image
                   key={item}
-                  style={styles.imageBanner}
+                  style={styles.slider_imageBanner}
                   resizeMode="contain"
                   source={{ uri: item }}
                 />
@@ -43,22 +43,5 @@ const Slider = ({ gallery }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  swiper: {
-    width: width,
-    alignItems: "center",
-    marginTop: 10,
-  },
-  imageBanner: {
-    height: width / 3,
-    width: width - 200,
-    borderRadius: 10,
-    marginHorizontal: 20,
-    backgroundColor: 'red',
-  },
-});
 
 export default Slider;
