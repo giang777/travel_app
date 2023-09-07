@@ -22,13 +22,14 @@ import {
   CustomHideButton,
 } from "../../../common/custom/custom-button";
 import {styleFogotPassword} from "../styles"
+import i18n from "../../../l10n/i18n";
 const ForgotPassword = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   return (
     <SafeAreaView style={containScreenAssets.safeAreaView}>
       <View style={containScreenAssets.container}>
-        <AppBar onPress={() => navigation.goBack()} title={"Forgot Password"} />
+        <AppBar onPress={() => navigation.goBack()} title=                {i18n.t("auth.fogotPassword.title")} />
         <ScrollView
           style={containScreenAssets.scrollView}
           contentContainerStyle={containScreenAssets.scrollViewContent}
@@ -38,7 +39,7 @@ const ForgotPassword = ({ navigation }) => {
               <Image source={IconAssets.fogotPassword} style={styleFogotPassword.icon} />
 
               <Text style={styleFogotPassword.textForgotPass}>
-                Please enter your email address
+              {i18n.t("auth.fogotPassword.pleaseEnterEmail")}
               </Text>
               <CustomTextInput
                 condition={emailRegex.test(email) ? true : false}
@@ -53,13 +54,15 @@ const ForgotPassword = ({ navigation }) => {
             <View >
               {emailRegex.test(email) ? (
                 <CustomButton
-                  title="Continue"
+                  title= {i18n.t("auth.fogotPassword.continue")}
+             
                   onPress={() => {
                     navigation.navigate("ForgotPasswordInputCode");
                   }}
                 />
               ) : (
-                <CustomHideButton title={"Continue"} />
+                <CustomHideButton title= {i18n.t("auth.fogotPassword.continue")}
+                />
               )}
             </View>
           </View>

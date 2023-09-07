@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity ,View} from 'react-native'
 import React from 'react'
 import { ColorAssets } from "../../utils/app-assets";
 
@@ -10,6 +10,22 @@ const CustomButton = ({ title, onPress }) => {
     >
       <Text style={styles.titleNext}>{title}</Text>
     </TouchableOpacity>
+  )
+}
+
+
+const CustomButtonProfile = ({ titleLeft,titleRight,colorLeft,colorRight, onPress,iconStart,iconEnd }) => {
+  return (
+    <TouchableOpacity style={styles.button} onPress={onPress}>
+    <View style={styles.left}>
+    {iconStart}
+      <Text style={{color:colorLeft,fontWeight:500}}>{titleLeft}</Text>
+    </View>
+    <View style={styles.right}>
+      <Text style={{fontSize:13,color:colorRight}}>{titleRight}</Text>
+      {iconEnd}
+    </View>
+  </TouchableOpacity>
   )
 }
 const CustomHideButton = ({ title }) => {
@@ -24,7 +40,7 @@ const CustomHideButton = ({ title }) => {
   )
 }
 
-export  {CustomButton, CustomHideButton}
+export  {CustomButton, CustomHideButton,CustomButtonProfile}
 
 const styles = StyleSheet.create({
   buttonNext: {
@@ -52,4 +68,23 @@ const styles = StyleSheet.create({
     color: ColorAssets.whiteColor,
     fontSize: 16,
   },
+  button: {
+    paddingHorizontal: 10,
+    flexDirection: "row",
+    paddingVertical: 11,
+    marginVertical:1.2,
+    alignItems: "center",
+    backgroundColor:ColorAssets.whiteColor,
+    justifyContent: "space-between",
+  },
+  left:{
+    flexDirection:'row',
+    alignItems:'center',
+    gap:3
+  },
+  right:{
+    flexDirection:'row',
+    alignItems:'center',
+    gap:2,
+  }
 })

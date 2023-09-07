@@ -16,6 +16,7 @@ import Sizebox from "../../common/custom/custom-sizebox";
 import { CustomButton } from "../../common/custom/custom-button";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styleLoginHome } from "./styles";
+import i18n from "../../l10n/i18n";
 
 const LoginHomeScreen = ({ navigation }) => {
 
@@ -27,7 +28,7 @@ const LoginHomeScreen = ({ navigation }) => {
           contentContainerStyle={containScreenAssets.scrollViewContent}
         >
           <View style={styleLoginHome.content}>
-            <Text style={styleLoginHome.title}>Let's you in</Text>
+            <Text style={styleLoginHome.title}>{i18n.t("auth.home.letsYouIn")}</Text>
             <TouchableOpacity
               style={styleLoginHome.buttonLoginGoogle}
               onPress={() => { }}
@@ -38,7 +39,7 @@ const LoginHomeScreen = ({ navigation }) => {
                   source={IconAssets.iconGoogle}
                 />
                 <Sizebox width={10} />
-                <Text style={styleLoginHome.titleGoogle}>Continue with Google</Text>
+                <Text style={styleLoginHome.titleGoogle}>{i18n.t("auth.home.continueWithGoogle")}</Text>
               </View>
             </TouchableOpacity>
             <Sizebox height={40} />
@@ -50,20 +51,20 @@ const LoginHomeScreen = ({ navigation }) => {
             <Sizebox height={40} />
             <CustomButton
               style={styleLoginHome.button}
-              title="Sign in with Username"
+              title={i18n.t("auth.home.signInWithUsername")}
               onPress={() => navigation.navigate("LoginEmailScreen")}
             />
           </View>
           <View style={styleLoginHome.footer}>
             <Text style={styleLoginHome.titleDontHaveAccount}>
-              Dont have an account?
+            {i18n.t("auth.dontHaveAccount")}
             </Text>
             <Sizebox width={5} />
             <TouchableOpacity
               onPress={() => navigation.navigate("SignUpScreen")}
               // onPress={() => navigation.navigate("ConfirmInformationScreen")}
             >
-              <Text style={styleLoginHome.titleSignUp}>Sign up</Text>
+              <Text style={styleLoginHome.titleSignUp}> {i18n.t("auth.signUp")}</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>

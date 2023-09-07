@@ -25,6 +25,7 @@ import { CustomTextInput } from "../../../common/custom/custom-textInput";
 import { changeScreenWithOutTime } from "../../../utils/navigation-utils";
 import ModalView from "../components/modal-view";
 import { styleCreateNewPWD } from "../styles";
+import i18n from "../../../l10n/i18n";
 const CreateNewPassword = ({ navigation }) => {
   const [showModal, setShowModal] = useState(false);
   const [password, setPassword] = useState("");
@@ -52,7 +53,7 @@ const CreateNewPassword = ({ navigation }) => {
               style={{ width: 250, height: 300 }}
             />
             <Text style={styleCreateNewPWD.title}>
-              Create Your New Password
+              {i18n.t("auth.newPassword.createNewPassword")}
             </Text>
             <Sizebox height={10} />
             <CustomTextInput
@@ -64,7 +65,7 @@ const CreateNewPassword = ({ navigation }) => {
               onChangeText={(text) => {
                 setPassword(text);
               }}
-              placeholder={"Password (at least 6 characters)"}
+              placeholder= {i18n.t("auth.register.password")}
             />
             <CustomTextInput
               condition={rePassword == password ? true : false}
@@ -75,19 +76,19 @@ const CreateNewPassword = ({ navigation }) => {
               onChangeText={(text) => {
                 setRePassword(text);
               }}
-              placeholder={"Confirm password"}
+              placeholder={i18n.t("auth.newPassword.confirmPassword")}
             />
           </View>
           <View style={styleCreateNewPWD.footer}>
             {password.length > 5 && rePassword == password ? (
               <CustomButton
-                title="Continue"
+                title={i18n.t("auth.fogotPassword.continue")}
                 onPress={() => {
                   setShowModal(true);
                 }}
               />
             ) : (
-              <CustomHideButton title={"Continue"} />
+              <CustomHideButton title={i18n.t("auth.fogotPassword.continue")} />
             )}
           </View>
           <ModalView

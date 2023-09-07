@@ -1,5 +1,128 @@
 {
-  "home": "Home",
-  "profile": "Profile",
-  "settings": "Settings"
+  "navbar": {
+    "home": "Home",
+    "profile": "Me",
+    "search": "Search",
+    "booking": "Booking"
+  },
+  "home": {
+    "hello": "Hello",
+    "search": "Search Hotels",
+    "recommended": "Recommended",
+    "popular": "Popular",
+    "trending": "Trending",
+    "top": "Top",
+    "recentylyBooked": "Recently Booked",
+    "seeAll": "See All",
+    "rememberPassword": "would you like to save your password for future logins?",
+    "later":"Later",
+    "saveAccount":"Yes, save password."
+  },
+  "addHotel": {
+    "insufficientPermission": "Insufficient Permission!",
+    "grantCameraAccess": "You need to grant camera access to use this app",
+    "incompleteImages": "Incomplete Images",
+    "selectAtLeast6Images": "Please select at least 6 images before adding the hotel.",
+    "addHotel": "Add Hotel",
+    "media": "Media",
+    "hotelName": "Hotel Name",
+    "hotelAddress": "Hotel Address",
+    "hotelDescription": "Hotel Description",
+    "openTime": "Open Time",
+    "closeTime": "Close Time",
+    "hotline": "Hotline",
+    "place": "Place",
+    "cancel": "Cancel",
+    "continue": "Continue"
+  },
+  "booking": {
+    "title": "Booking History",
+    "onGoing": "On Going",
+    "completed": "Completed",
+    "canceled": "Canceled",
+    "status": {
+      "paid": "Paid",
+      "completed": "Completed",
+      "canceled": "Canceled & Refunded"
+    },
+    "cancelBooking": "Cancel Booking",
+    "cancelConfirmation": "Are you sure you want to cancel your hotel booking?",
+    "refundPolicy": "Only 80% of the money you can refund from your payment according to our policy",
+    "cancel": "Cancel",
+    "yesContinue": "Yes, Continue",
+    "viewTicket": "View Ticket",
+    "completionMessage": "Yeay. You have completed it!",
+    "cancellationMessage": "You canceled this hotel booking"
+  },
+  "profile": {
+    "title": "Profile",
+    "payment": "Payment",
+    "startSelling": "Start Selling",
+    "freeRegistration": "Free Registration",
+    "myLikes": "My Likes",
+    "followingHotels": "Following Hotels",
+    "recentlyViewed": "Recently Viewed",
+    "myRating": "My Rating",
+    "notifications": "Notifications",
+    "security": "Security",
+    "help": "Help",
+    "darkTheme": "Dark Theme",
+    "logOut": "Log Out"
+  },
+  "auth": {
+    "home": {
+      "letsYouIn": "Let's you in",
+      "continueWithGoogle": "Continue with Google",
+      "signInWithUsername": "Sign in with Username"
+    },
+    "email": {
+      "loginToYourAccount": "Login to your Account",
+      "fogotThePassword": "Forgot the Password?",
+      "rememberMe": "Remember Me"
+    },
+    "register": {
+      "createYourAccount": "Create your Account",
+      "usernameAtLeastFiveCharacters": "Username (at least 5 characters)",
+      "fullName": "Full Name",
+      "password": "Password (at least 6 characters)",
+      "rePassword": "Confirm Password"
+    },
+    "fogotPassword": {
+      "title": "Forgot Password",
+      "pleaseEnterEmail": "Please enter your email address",
+      "continue": "Continue",
+      "FGPInput": {
+        "codeHasBeenSentTo": "Code has been sent to ...",
+        "resendCodeIn": "Resend code in",
+        "verify": "Verify"
+      }
+    },
+    "newPassword": {
+      "createNewPassword": "Create Your New Password",
+      "confirmPassword": "Confirm Password"
+    },
+    "modal": {
+      "congratulations": "Congratulations!",
+      "accountReadyToUse": "Your account is ready to use",
+      "goToLogin": "Go to Login",
+      "doYouWantToBack": "Do you want to back?",
+      "cancel": "Cancel",
+      "yes": "Yes"
+    },
+    "dontHaveAccount": "Don't have an account?",
+    "signUp": "Sign up",
+    "alreadyHaveAccount": "Already have an account?",
+    "signIn": "Sign in"
+  },
+  "paying": {
+    "selectPaymentRefundMethod": "Please select a payment refund method (only 80% will be refunded)",
+    "textPaid": "Paid: ",
+    "textRefund": "Refund: ",
+    "confirmCancellation": "Confirm Cancellation",
+    "successfulText": {
+      "title": "Successful!",
+      "description": "You have successfully canceled your order. 80% funds will be returned to your account"
+    },
+    "goBackButtonText": "OK"
+  }
 }

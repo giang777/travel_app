@@ -72,7 +72,7 @@ const HotelDetailsSCreen = (props) => {
     <View style={{ flex: 1 }}>
       <ScrollView>
         <Banner></Banner>
-        <Details item={item} navigation={navigation}></Details>
+        {/* <Details item={item} navigation={navigation}></Details> */}
 
 
         <View style={styles.flex}>

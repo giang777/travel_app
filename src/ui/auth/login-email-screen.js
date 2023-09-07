@@ -21,7 +21,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CheckBox from "expo-checkbox";
-import { setToken } from "../../redux/actions/typeAction";
+import { saveAccount, setToken } from "../../redux/actions/typeAction";
 import { CustomTextInput } from "../../common/custom/custom-textInput";
 import { StackActions } from "@react-navigation/native";
 import SharedPreferences from "../../database/share_preferences_helper";
@@ -29,6 +29,7 @@ import { changeScreenWithOutTime } from "../../utils/navigation-utils";
 
 import { handleLogIn } from "../../api/auth/auth-services";
 import { styleLoginEmail } from "./styles";
+import i18n from "../../l10n/i18n";
 
 const LoginEmailScreen = ({ navigation }) => {
   // lấy dữ liệu user
@@ -36,7 +37,6 @@ const LoginEmailScreen = ({ navigation }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [textError, setTextError] = useState("");
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [statusLoading, setStatusLoading] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -52,11 +52,12 @@ const LoginEmailScreen = ({ navigation }) => {
       if (response.status == 200) {
         // nếu return 200 =>
         dispatch(setToken(response.data.accessToken));
-        SharedPreferences.SET_USER_DATA({ username, password });
+        dispatch(saveAccount( {username, password }));
+
+        // SharedPreferences.SET_USER_DATA({ username, password });
         SharedPreferences.SET_TOKEN(response.data.refreshToken);
         const fullName = response.data.user.fullname;
         const id = response.data.user._id;
-        console.log(id);
         SharedPreferences.SET_USER_INFO({ fullName, id });
         changeScreenWithOutTime(navigation, "MainScreen");
       }
@@ -89,7 +90,9 @@ const LoginEmailScreen = ({ navigation }) => {
             contentContainerStyle={containScreenAssets.scrollViewContent}
           >
             <View style={styleLoginEmail.content}>
-              <Text style={styleLoginEmail.title}>Login to your Account</Text>
+              <Text style={styleLoginEmail.title}>
+                {i18n.t("auth.email.loginToYourAccount")}
+              </Text>
               <Text style={styleLoginEmail.textError}>{textError}</Text>
               <CustomTextInput
                 iconName={"user"}
@@ -113,26 +116,17 @@ const LoginEmailScreen = ({ navigation }) => {
                   setPassword(e);
                 }}
               />
-              <Sizebox height={20} />
-              <View style={styleLoginEmail.section}>
-                <CheckBox
-                  style={styleLoginEmail.checkbox}
-                  value={toggleCheckBox}
-                  onValueChange={setToggleCheckBox}
-                  color={toggleCheckBox ? "#1AB65C" : undefined}
-                />
-                <Text style={styleLoginEmail.paragraph}>Remmember me</Text>
-              </View>
+             
               <Sizebox height={30} />
 
               {username && password ? (
                 <CustomButton
                   style={styleLoginEmail.button}
-                  title="Sign in"
+                  title={i18n.t("auth.signIn")}
                   onPress={handleFormSubmit}
                 />
               ) : (
-                <CustomHideButton title={"Sign in"} />
+                <CustomHideButton title={i18n.t("auth.signIn")} />
               )}
 
               <Sizebox height={15} />
@@ -143,13 +137,13 @@ const LoginEmailScreen = ({ navigation }) => {
                 }}
               >
                 <Text style={styleLoginEmail.titleSignUp}>
-                  Forgot the password?
+                  {i18n.t("auth.email.fogotThePassword")}
                 </Text>
               </TouchableOpacity>
             </View>
             <View style={styleLoginEmail.footer}>
               <Text style={styleLoginEmail.titleDontHaveAccount}>
-                Dont have an account?
+                {i18n.t("auth.dontHaveAccount")}
               </Text>
               <Sizebox width={5} />
               <TouchableOpacity
@@ -157,7 +151,9 @@ const LoginEmailScreen = ({ navigation }) => {
                   navigation.dispatch(StackActions.replace("SignUpScreen"))
                 }
               >
-                <Text style={styleLoginEmail.titleSignUp}>Sign up</Text>
+                <Text style={styleLoginEmail.titleSignUp}>
+                  {i18n.t("auth.signUp")}
+                </Text>
               </TouchableOpacity>
             </View>
           </ScrollView>

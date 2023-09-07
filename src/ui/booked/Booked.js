@@ -8,6 +8,7 @@ import styles from "../home/styles";
 import { arrFakeData } from "../home/fakeData";
 import { RenderItemListVertical } from "../../common/renderList";
 import { handleGetHotel } from "../../api/hotel/hotel-service";
+import i18n from "../../l10n/i18n";
 
 const Booked = (props) => {
   const [listHotel, setlistHotel] = useState([]);
@@ -33,7 +34,7 @@ const Booked = (props) => {
   return (
     <SafeAreaView >
       <HeaderNavigation
-        titel={"Recently Booked"}
+        titel={i18n.t("home.recentylyBooked")}
         arrIcon={IconRight}
         onBack={() => {
           props.navigation.goBack();

@@ -1,8 +1,10 @@
+import i18n from "../../l10n/i18n";
+
 const arrOptions = [
-    { id: 1, title: "Recommended" },
-    { id: 2, title: "Popular" },
-    { id: 3, title: 'Trending' },
-    { id: 4, title: 'Top' },
+    { id: 1, title: i18n.t("home.recommended") },
+    { id: 2, title: i18n.t("home.popular") },
+    { id: 3, title: i18n.t("home.trending")},
+    { id: 4, title: i18n.t("home.top") },
 ];
 
 const arrFakeData = [
