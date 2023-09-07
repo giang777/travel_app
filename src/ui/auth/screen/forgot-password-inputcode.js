@@ -5,6 +5,7 @@ import { ColorAssets, containScreenAssets } from "../../../utils/app-assets";
 import AppBar from "../../../common/custom/custom-appbar";
 import { CustomButton, CustomHideButton } from '../../../common/custom/custom-button';
 import { styleFGPInputCode } from '../styles'
+import i18n from "../../../l10n/i18n"
 
 
 const ForgotPasswordInputCode = ({ navigation }) => {
@@ -32,7 +33,7 @@ const ForgotPasswordInputCode = ({ navigation }) => {
                         style={containScreenAssets.scrollView}
                         contentContainerStyle={containScreenAssets.scrollViewContent}>
                         <View style={styleFGPInputCode.content}>
-                            <Text style={styleFGPInputCode.text16}>Code has been send to ....</Text>
+                            <Text style={styleFGPInputCode.text16}>{i18n.t("auth.fogotPassword.FGPInput.codeHasBeenSentTo")}</Text>
                             <View style={styleFGPInputCode.formInput}>
                                 {inputRefs.map((item, index) => (
                                     <React.Fragment key={index}>
@@ -49,16 +50,16 @@ const ForgotPasswordInputCode = ({ navigation }) => {
                                 ))}
                             </View>
                             <View style={styleFGPInputCode.timeCounterForm}>
-                                <Text style={styleFGPInputCode.text15}>Resend code in </Text>
+                                <Text style={styleFGPInputCode.text15}>{i18n.t("auth.fogotPassword.FGPInput.resendCodeIn")}</Text>
                                 <Text style={styleFGPInputCode.timeCounter}>55</Text>
                                 <Text style={styleFGPInputCode.text15}> s</Text>
                             </View>
                         </View>
                         <View style={styleFGPInputCode.footer}>
                             {checkButtonShow ? <CustomButton
-                                title="Verify"
+                                title={i18n.t("auth.fogotPassword.FGPInput.verify")}
                                 onPress={() => { navigation.navigate("CreateNewPassword"); }}
-                            /> : <CustomHideButton title={"Verify"} />}
+                            /> : <CustomHideButton title={i18n.t("auth.fogotPassword.FGPInput.verify")} />}
                         </View>
                     </ScrollView>
             </View>

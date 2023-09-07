@@ -3,6 +3,7 @@ import React from "react";
 import styles from "./styles";
 import { ColorAssets } from "../../utils/app-assets";
 import Icon from "react-native-vector-icons/FontAwesome";
+import i18n from "../../l10n/i18n";
 const ItemOngoing = ({ item, showModal }) => {
   return (
     <View>
@@ -21,10 +22,10 @@ const ItemOngoing = ({ item, showModal }) => {
           <View style={styles.hr}></View>
           <View style={styles.boxBottom}>
             <TouchableOpacity style={styles.btnCancel} onPress={showModal}>
-              <Text style={styles.textCancel}>Cancel Booking</Text>
+              <Text style={styles.textCancel}>{i18n.t("booking.cancelBooking")}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.btnView}>
-              <Text style={styles.textView}>View Ticket</Text>
+              <Text style={styles.textView}>{i18n.t("booking.viewTicket")}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -56,8 +57,7 @@ const ItemCompleted = ({ item }) => {
               color={ColorAssets.greenColor}
               style={{ margin: 8 }}
             />
-            <Text style={styles.textBottomCompleted}>
-              Yeay. You have completed it!
+            <Text style={styles.textBottomCompleted}>{i18n.t("booking.completionMessage")}
             </Text>
           </View>
         </View>
@@ -89,8 +89,7 @@ const ItemCanceled = ({ item }) => {
               color={"#F75555"}
               style={{ margin: 8 }}
             />
-            <Text style={styles.textBottomCanceled}>
-              You canceled this hotel booking
+            <Text style={styles.textBottomCanceled}>{i18n.t("booking.cancellationMessage")}
             </Text>
           </View>
         </View>

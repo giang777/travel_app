@@ -28,6 +28,7 @@ import Search from "../../../assets/icons/search.svg";
 import OnGoingScreen from "./components/on-going-screen";
 import CompletedScreen from "./components/completed-screen";
 import CanceledScreen from "./components/canceled-screen";
+import i18n from "../../l10n/i18n";
 
 const BookingScreen = ({ navigation }) => {
   const [indexOptions, setindexOptions] = useState(1);
@@ -46,7 +47,7 @@ const BookingScreen = ({ navigation }) => {
         <View style={styles.header}>
           <View style={styles.viewHeaderItem}>
             <Image source={IconAssets.logoApp} style={styles.logoApp} />
-            <Text style={styles.nameApp}>My Booking</Text>
+            <Text style={styles.nameApp}>{i18n.t("booking.title")}</Text>
           </View>
           <View style={styles.viewHeaderItem}>
             <TouchableOpacity>
@@ -127,27 +128,26 @@ const WrapperComponent = ({ hide, hideModal, navigation }) => {
         <View style={styles.boxModal}>
           <View style={styles.topModal}>
             <View style={styles.iconBar}></View>
-            <Text style={styles.titleModal}>Cancel Booking</Text>
+            <Text style={styles.titleModal}>{i18n.t("booking.cancelBooking")}</Text>
             <View style={styles.hrModal}></View>
-            <Text style={styles.text1Modal}>
-              Are you sure you want to cancel your hotel booking?
-            </Text>
+            <Text style={styles.text1Modal}>{i18n.t("booking.cancelConfirmation")}</Text>
           </View>
 
-          <Text style={styles.text2Modal}>
-            Only 80% of the money you can refund from your payment according to
-            our policy
-          </Text>
+          <Text style={styles.text2Modal}>{i18n.t("booking.refundPolicy")}</Text>
 
           <View style={styles.bottomModal}>
             <TouchableOpacity style={styles.btnCancelModal} onPress={hideModal}>
-              <Text style={styles.textCancelModal}>Cancel</Text>
+              <Text style={styles.textCancelModal}>
+                {i18n.t("booking.cancel")}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.btnContinueModal}
               onPress={confirmCancel}
             >
-              <Text style={styles.textContinueModal}>Yes, Continue</Text>
+              <Text style={styles.textContinueModal}>
+                {i18n.t("booking.yesContinue")}
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -157,6 +157,5 @@ const WrapperComponent = ({ hide, hideModal, navigation }) => {
 };
 
 // // Màn hình Ongoing
-
 
 export default BookingScreen;

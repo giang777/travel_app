@@ -22,6 +22,11 @@
     "web": {
       "favicon": "./assets/icons/logo.png"
     },
+    "locales": {
+      "en": "./src/l10n/en.json",
+      "vi": "./src/l10n/vi.json"
+    },
+    "defaultLocale": "en",
     "plugins": [
       [
         "expo-image-picker",

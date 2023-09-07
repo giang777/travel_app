@@ -27,6 +27,7 @@ import { registerUser } from "../../../redux/actions/typeAction";
 import LoadingCustom from "../../../common/custom/custom-loading";
 import ModalView from "../components/modal-view";
 import { styleSignUp } from "../styles";
+import i18n from "../../../l10n/i18n";
 const SignUpScreen = ({ navigation }) => {
   const [username, setUsername] = useState("");
   const [fullName, setFullName] = useState("");
@@ -106,7 +107,7 @@ const SignUpScreen = ({ navigation }) => {
               contentContainerStyle={containScreenAssets.scrollViewContent}
             >
               <View style={styleSignUp.content}>
-                <Text style={styleSignUp.title}>Create your Account</Text>
+                <Text style={styleSignUp.title}>{i18n.t("auth.register.createYourAccount")}</Text>
                 <CustomTextInput
                   condition={username.length > 4 ? true : false}
                   fillText={username ? true : false}
@@ -114,7 +115,7 @@ const SignUpScreen = ({ navigation }) => {
                   onChangeText={(text) => {
                     setUsername(text);
                   }}
-                  placeholder={"Username (at least 5 characters)"}
+                  placeholder={i18n.t("auth.register.usernameAtLeastFiveCharacters")}
                 />
                 <Sizebox height={20} />
                 <CustomTextInput
@@ -124,7 +125,7 @@ const SignUpScreen = ({ navigation }) => {
                   onChangeText={(text) => {
                     setFullName(text);
                   }}
-                  placeholder={"Full name *(Nguyen Thi Hoa Hong)"}
+                  placeholder={i18n.t("auth.register.fullName")}
                 />
                 <Sizebox height={20} />
                 <CustomTextInput
@@ -146,7 +147,7 @@ const SignUpScreen = ({ navigation }) => {
                   onChangeText={(text) => {
                     setPassword(text);
                   }}
-                  placeholder={"Password (at least 6 characters)"}
+                  placeholder={i18n.t("auth.register.password")}
                 />
                 <Sizebox height={20} />
                 <CustomTextInput
@@ -158,7 +159,7 @@ const SignUpScreen = ({ navigation }) => {
                   onChangeText={(text) => {
                     setRePassword(text);
                   }}
-                  placeholder={"Confirm password"}
+                  placeholder={i18n.t("auth.register.rePassword")}
                 />
                 <Sizebox height={10} />
                 <View
@@ -180,22 +181,22 @@ const SignUpScreen = ({ navigation }) => {
                 rePassword == password &&
                 emailRegex.test(email) ? (
                   <CustomButton
-                    title="Sign up"
+                    title={i18n.t("auth.signUp")}
                     onPress={registerConfirmAccount}
                   />
                 ) : (
-                  <CustomHideButton title={"Sign up"} />
+                  <CustomHideButton title={i18n.t("auth.signUp")} />
                 )}
               </View>
               <View style={styleSignUp.footer}>
                 <Text style={styleSignUp.titleAlreadyHaveAccount}>
-                  Already have an account?
+                {i18n.t("auth.alreadyHaveAccount")}
                 </Text>
                 <Sizebox width={5} />
                 <TouchableOpacity
                   onPress={() => navigation.navigate("LoginEmailScreen")}
                 >
-                  <Text style={styleSignUp.titleSignIn}>Sign in</Text>
+                  <Text style={styleSignUp.titleSignIn}>{i18n.t("auth.signIn")}</Text>
                 </TouchableOpacity>
               </View>
               <ModalView

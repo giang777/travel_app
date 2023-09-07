@@ -34,7 +34,7 @@ export default styles = StyleSheet.create({
         marginBottom: 5
     },
    
-    borderStatusOngoing: { borderRadius: 6, backgroundColor: '#E3F6EB', width: '60%', justifyContent: 'center', alignItems: 'center' },
+    borderStatusOngoing: { borderRadius: 6, backgroundColor: '#E3F6EB', justifyContent: 'center', alignItems: 'center' },
     hotelAddress: { fontSize: 15, marginBottom: 10, color: 'grey' },
     hotelStatus: { fontSize: 15, color: ColorAssets.greenColor, fontWeight: '500', paddingHorizontal: 15, paddingVertical: 5 },
     hr: { backgroundColor: '#ccc', height: 1, marginBottom: 20, marginHorizontal: 20 },
