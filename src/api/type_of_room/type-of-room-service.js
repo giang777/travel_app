@@ -1,5 +1,6 @@
 import SharedPreferences from "../../database/share_preferences_helper";
 import axiosClient from "../axios-client";
+import { app_api } from "../config";
 import { ADD_URL } from "./config";
 
 export const handleAddTOR = async (name, price, slot,idOwner  ) => {
@@ -9,7 +10,7 @@ export const handleAddTOR = async (name, price, slot,idOwner  ) => {
       RefreshToken: await SharedPreferences.GET_TOKEN(),
     };
     const response = await axiosClient.post(
-      `/${ADD_URL}`,
+      `${app_api}/${ADD_URL}`,
       {
         name,
         price,
@@ -37,7 +38,7 @@ export const handledGetTOR = async () => {
       RefreshToken: await SharedPreferences.GET_TOKEN(),
     };
     const response = await axiosClient.get(
-      `/${ADD_URL}`,
+      `${app_api}/${ADD_URL}`,
       {headers}
     );
     return response;

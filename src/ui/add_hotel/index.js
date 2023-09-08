@@ -134,7 +134,9 @@ const AddHotelScreen = ({ navigation }) => {
           <View style={styles.boxModal}>
             <View style={styles.topModal}>
               <View style={styles.titleContainer}>
-                <Text style={styles.titleModal}>{i18n.t("addHotel.addHotel")}</Text>
+                <Text style={styles.titleModal}>
+                  {i18n.t("addHotel.addHotel")}
+                </Text>
               </View>
               <View style={styles.hrModal}></View>
               <Text style={styles.text1Modal}>{i18n.t("addHotel.media")}</Text>
@@ -174,32 +176,43 @@ const AddHotelScreen = ({ navigation }) => {
                 onChangeText={(e) => handleInputChange("name", e)}
               />
               <CustomTextInput
+                onTouchStart={() => navigation.navigate("AddressScreen")}
                 title={i18n.t("addHotel.hotelAddress")}
-                placeholder={hotelData?.address || i18n.t("addHotel.hotelAddress")}
+                placeholder={
+                  hotelData?.address || i18n.t("addHotel.hotelAddress")
+                }
                 isHaveTitle={true}
+                editable={false}
                 valueText={hotelData.address}
-                onChangeText={(e) => handleInputChange("address", e)}
               />
               <CustomTextInput
                 title={i18n.t("addHotel.hotelDescription")}
                 isHaveTitle={true}
                 valueText={hotelData.description}
-                placeholder={hotelData?.description || i18n.t("addHotel.hotelDescription")}
+                placeholder={
+                  hotelData?.description || i18n.t("addHotel.hotelDescription")
+                }
                 onChangeText={(e) => handleInputChange("description", e)}
               />
               <View style={styles.rowTime}>
                 <CustomTextInput2
                   valueText={hotelData?.open_time}
-                  textPlaceHolder={hotelData?.open_time || i18n.t("addHotel.openTime")}
+                  textPlaceHolder={
+                    hotelData?.open_time || i18n.t("addHotel.openTime")
+                  }
                   onChangeText={(e) => handleInputChange("open_time", e)}
                 />
                 <CustomTextInput2
                   valueText={hotelData?.close_time}
-                  textPlaceHolder={hotelData?.close_time || i18n.t("addHotel.closeTime")}
+                  textPlaceHolder={
+                    hotelData?.close_time || i18n.t("addHotel.closeTime")
+                  }
                   onChangeText={(e) => handleInputChange("close_time", e)}
                 />
               </View>
-              <Text style={styles.text1Modal}>{i18n.t("addHotel.hotline")}</Text>
+              <Text style={styles.text1Modal}>
+                {i18n.t("addHotel.hotline")}
+              </Text>
               <PhoneInput
                 ref={phoneInput}
                 disableArrowIcon={true}
@@ -223,13 +236,17 @@ const AddHotelScreen = ({ navigation }) => {
                 style={styles.btnContinueModal}
                 onPress={addHotel}
               >
-                <Text style={styles.textContinueModal}>{i18n.t("addHotel.continue")}</Text>
+                <Text style={styles.textContinueModal}>
+                  {i18n.t("addHotel.continue")}
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.btnCancelModal}
                 onPress={() => navigation.pop()}
               >
-                <Text style={styles.textCancelModal}>{i18n.t("addHotel.cancel")}</Text>
+                <Text style={styles.textCancelModal}>
+                  {i18n.t("addHotel.cancel")}
+                </Text>
               </TouchableOpacity>
             </View>
           </View>

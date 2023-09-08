@@ -22,6 +22,9 @@ import TypeOfRoom from '../ui/type_of_room';
 import AddHotelScreen from '../ui/add_hotel';
 import Room_in_hotel from '../ui/room';
 import AddRoomScreen from '../ui/room/add_room';
+import AddressScreen from '../ui/add_hotel/screen/add_province';
+import AddDistrictScreen from '../ui/add_hotel/screen/add_district';
+import AddWardScreen from '../ui/add_hotel/screen/add_ward';
 
 
 
@@ -56,6 +59,9 @@ export default TabsNavigation = () => {
       <Stack.Screen name="AddHotelScreen" component={AddHotelScreen} options={{animation:'slide_from_bottom'}}/>
       <Stack.Screen name="RoomInHotel" component={Room_in_hotel} options={{animation:'slide_from_bottom'}}/>
       <Stack.Screen name="AddRoomScreen" component={AddRoomScreen} options={{animation:'slide_from_bottom'}}/>
+      <Stack.Screen name="AddressScreen" component={AddressScreen} options={{animation:'slide_from_bottom'}}/>
+      <Stack.Screen name="AddDistrictScreen" component={AddDistrictScreen} options={{animation:'slide_from_right'}}/>
+      <Stack.Screen name="AddWardScreen" component={AddWardScreen} options={{animation:'slide_from_right'}}/>
 
     </Stack.Navigator>
   );
