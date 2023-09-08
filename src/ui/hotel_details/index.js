@@ -106,6 +106,7 @@ const HotelDetailsSCreen = (props) => {
           <View style={{ height: 30 }}></View>
         </View>
       </View>
+      
         {/* <Details item={item} navigation={navigation}></Details> */}
 
 

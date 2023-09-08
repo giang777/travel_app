@@ -5,6 +5,7 @@ import { ADD_HOTEL } from "./reducers/addHotelReducer";
 import { ADD_TYPE_OF_ROOM } from "./reducers/addTypeOfRoomReducer";
 import { REMEMBER_ACCOUNT } from "./reducers/rememberAccount";
 import { SAVE_ACCOUNT } from "./reducers/accountReducer";
+import {locationReducer} from "./reducers/locationReducer";
 
 const rootReducer = combineReducers({
   typeReducer: TYPE_REDUCER,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   addHotel: ADD_HOTEL,
   rememberAccount: REMEMBER_ACCOUNT,
   saveAccount: SAVE_ACCOUNT,
+  location: locationReducer, 
 });
 const Store = createStore(rootReducer);
 

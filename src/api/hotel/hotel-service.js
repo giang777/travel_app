@@ -3,6 +3,7 @@ import axiosClient from "../axios-client";
 import { ADD_URL, GET_URL } from "./config";
 import SharedPreferences from "../../database/share_preferences_helper";
 import * as FileSystem from 'expo-file-system';
+import { app_api } from "../config";
 export const handleAddHotel = async (
   name,
   id_owner,
@@ -52,7 +53,7 @@ export const handleAddHotel = async (
       'Content-Type': 'multipart/form-data', // Set content type to multipart/form-data
     };
 
-    const response = await axiosClient.post(`/${ADD_URL}`, formData, { headers });
+    const response = await axiosClient.post(`${app_api}/${ADD_URL}`, formData, { headers });
     return response.status;
   } catch (error) {
     console.log(`error hotel-service: ${error.message}`);
@@ -66,7 +67,7 @@ export const handleGetHotel = async () => {
       Authorization: await SharedPreferences.GET_TOKEN(),
       RefreshToken: await SharedPreferences.GET_TOKEN(),
     };
-    const response = await axiosClient.get(`/${GET_URL}`, { headers });
+    const response = await axiosClient.get(`${app_api}/${GET_URL}`, { headers });
     return response.data; 
   } catch (error) {
     console.log("error hotel-service " + error.message);
