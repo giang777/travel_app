@@ -88,6 +88,15 @@ export default styles = StyleSheet.create({
     paddingVertical: 2,
   },
 
+  phoneContainerBlur: {
+    width: "100%",
+    borderColor: "#FF5722",
+    backgroundColor: "#FFCCBC",
+    borderRadius: 18,
+    fontSize: 16,
+    paddingVertical: 2,
+  },
+
   viewMedia: {
     width: "100%",
     flexDirection: "row",
@@ -125,4 +134,15 @@ export default styles = StyleSheet.create({
     fontSize: 40,
     color: ColorAssets.whiteColor,
   },
+
+  text_error: {
+    paddingStart:20,
+    fontSize:12,
+    color:'#FF5722',
+    fontWeight:'bold',
+    marginBottom:20,
+   },
+
+
+
 });

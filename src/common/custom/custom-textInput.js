@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { ColorAssets } from "../../utils/app-assets";
 import Icon from "react-native-vector-icons/FontAwesome";
-
+import DatePicker from 'react-native-date-picker'
 const CustomTextInput = ({
   onTouchStart,
   errorText,
@@ -22,11 +22,12 @@ const CustomTextInput = ({
   fillText,
   showHide,
   valueText,
-  condition,
+  condition
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [statusPass, setStatusPass] = useState(true);
   const [checkValidate, setCheckValidate] = useState(false);
+  
   const checkEmty = () => {
     if (!fillText || (!condition && condition != undefined)) {
       setCheckValidate(true);
@@ -36,7 +37,7 @@ const CustomTextInput = ({
   };
   return (
     //on touch start để chọn tỉnh, thàn phố, thằng nào onTouchStart xoá cắt chim
-    <View style={{ marginVertical: 8, width: "100%" }} onTouchStart={onTouchStart}>
+    <View style={{ marginVertical: 15, width: "100%" }} onTouchStart={onTouchStart}>
       {isHaveTitle ? <Text style={styles.title}>{title}</Text> : <View></View>}
 
       <View
@@ -123,21 +124,32 @@ const CustomTextInput = ({
 };
 
 const CustomTextInput2 = ({
+  title,
   keyboardType,
   valueText,
+  editable,
   textPlaceHolder,
   isHaveHandle,
   onChangeText,
+  onPress,
+  isSelect
 }) => {
+  const [isFocused2, setIsFocused2] = useState(false);
+  
   return (
-    <View style={styles.container2}>
-      <TextInput
-        style={[styles.input,{paddingHorizontal:10}]}
-        value={valueText}
-        keyboardType={keyboardType}
-        placeholder={textPlaceHolder}
-        onChangeText={onChangeText}
-      />
+    <View style={{width:"45%"}}>
+      <Text style={styles.title}>{title}</Text>
+      <TouchableOpacity style={[styles.container2,isFocused2 ? null : isSelect ? valueText ? styles.boxInput : styles.boxInputBlur : null]} onPress={onPress}>
+        <TextInput
+          editable={editable}
+          style={[styles.input,{paddingHorizontal:10}]}
+          value={valueText}
+          keyboardType={keyboardType}
+          placeholder={textPlaceHolder}
+          onChangeText={onChangeText}
+          onFocus={() => setIsFocused2(true)}
+        />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -160,13 +172,15 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   input: {
+    width:"85%",
     borderRadius: 5,
     paddingVertical: 16,
     fontSize: 16,
+    color:ColorAssets.blackolor
   },
   container2: {
     marginVertical: 8,
-    width: "48%",
+    width: "100%",
     backgroundColor: ColorAssets.greyColor200,
     borderRadius: 20,
     flexDirection: "row",
