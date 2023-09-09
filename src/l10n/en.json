@@ -124,5 +124,12 @@
       "description": "You have successfully canceled your order. 80% funds will be returned to your account"
     },
     "goBackButtonText": "OK"
+  },
+
+  "alert":{
+    "warning":"Warning",
+    "string_emty":"Please do not leave comments",
+    "numberPhone_emty":"Do not leave the phone number blank",
+    "address_emty":"Do not leave the address blank"
   }
 }
