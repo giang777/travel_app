@@ -41,7 +41,7 @@ export const handledGetTOR = async () => {
       `${app_api}/${ADD_URL}`,
       {headers}
     );
-    return response;
+    return response.data;
   } catch (error) {
     console.log(`error type-of-room-service: ${error.message}`);   
   }

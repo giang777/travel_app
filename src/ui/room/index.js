@@ -12,6 +12,7 @@ import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { ColorAssets, IconAssets, ImageAssets } from "../../utils/app-assets";
+import { handleGetRoom } from "../../api/room/room-service";
 
 const Room_in_hotel = (props) => {
   const arrOptions = [
@@ -22,6 +23,14 @@ const Room_in_hotel = (props) => {
 
   const [indexOptions, setindexOptions] = useState(1);
 
+  const get_data_room = async ()=>{
+    const data = await handleGetRoom();
+    console.log("data_room",data);
+  };
+
+  useEffect(()=>{
+    get_data_room();
+  },[])
 
   return (
     <SafeAreaView style={styles.container}>
