@@ -15,7 +15,7 @@ export const styleSplashScreen=  StyleSheet.create({
     flex: 1,
   },
   imageLogo: {
-    width: windowWidth / 2,
+    width: windowWidth / 1.8,
     height: windowHeight / 4,
   },
   
@@ -111,6 +111,6 @@ export const styleWelcomeV1_1 = StyleSheet.create({
     backgroundColor: ColorAssets.dotColor,
   },
   selectedDot: {
-    width: 35, backgroundColor: ColorAssets.greenColor, // Chọn màu tùy ý
+    width: 35, backgroundColor: ColorAssets.greenColor, 
   },
 })

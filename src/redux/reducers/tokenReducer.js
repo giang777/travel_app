@@ -2,7 +2,7 @@ const tokenUser = {
     token: ''
 }
 
-export default TOKEN_REDUCER = (state = tokenUser, action) => {
+export const TOKEN_REDUCER = (state = tokenUser, action) => {
     switch (action.type) {
         case 'SET_TOKEN':
             return {

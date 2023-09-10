@@ -1,5 +1,5 @@
 // NavigationUtils.js
-import { StackActions } from "@react-navigation/native";
+import { StackActions} from "@react-navigation/native";
 
 export const changeScreen = (navigation, nameScreen, second) => {
   setTimeout(() => {
@@ -7,4 +7,6 @@ export const changeScreen = (navigation, nameScreen, second) => {
   }, second ?? 3000);
 };
 export const changeScreenWithOutTime = (navigation, nameScreen) =>
-  navigation.dispatch(StackActions.replace(nameScreen));
+navigation.dispatch(StackActions.replace(nameScreen));
+
+

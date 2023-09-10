@@ -1,5 +1,5 @@
 import {
-  StyleSheet,
+  styleLoginHomeheet,
   StatusBar,
   Text,
   View,
@@ -11,13 +11,12 @@ import {
 } from "react-native";
 import * as Device from 'expo-device'
 import React from "react";
-import { ColorAssets, IconAssets, containScreenAssets } from "../../utils/app-assets";
+import { IconAssets, containScreenAssets } from "../../utils/app-assets";
 import Sizebox from "../../common/custom/custom-sizebox";
 import { CustomButton } from "../../common/custom/custom-button";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
+import { styleLoginHome } from "./styles";
+import i18n from "../../l10n/i18n";
 
 const LoginHomeScreen = ({ navigation }) => {
 
@@ -28,43 +27,44 @@ const LoginHomeScreen = ({ navigation }) => {
           style={containScreenAssets.scrollView}
           contentContainerStyle={containScreenAssets.scrollViewContent}
         >
-          <View style={styles.content}>
-            <Text style={styles.title}>Let's you in</Text>
+          <View style={styleLoginHome.content}>
+            <Text style={styleLoginHome.title}>{i18n.t("auth.home.letsYouIn")}</Text>
             <TouchableOpacity
-              style={styles.buttonLoginGoogle}
+              style={styleLoginHome.buttonLoginGoogle}
               onPress={() => { }}
             >
-              <View style={styles.contentButton}>
+              <View style={styleLoginHome.contentButton}>
                 <Image
-                  style={styles.imageIcon}
+                  style={styleLoginHome.imageIcon}
                   source={IconAssets.iconGoogle}
                 />
                 <Sizebox width={10} />
-                <Text style={styles.titleGoogle}>Continue with Google</Text>
+                <Text style={styleLoginHome.titleGoogle}>{i18n.t("auth.home.continueWithGoogle")}</Text>
               </View>
             </TouchableOpacity>
             <Sizebox height={40} />
             <View style={{ flexDirection: 'row', width: '96%', alignItems: 'center', justifyContent: 'center' }}>
-              <View style={styles.hr}></View>
+              <View style={styleLoginHome.hr}></View>
               <Text style={{ marginHorizontal: 15 }}>or</Text>
-              <View style={styles.hr}></View>
+              <View style={styleLoginHome.hr}></View>
             </View>
             <Sizebox height={40} />
             <CustomButton
-              style={styles.button}
-              title="Sign in with Username"
+              style={styleLoginHome.button}
+              title={i18n.t("auth.home.signInWithUsername")}
               onPress={() => navigation.navigate("LoginEmailScreen")}
             />
           </View>
-          <View style={styles.footer}>
-            <Text style={styles.titleDontHaveAccount}>
-              Dont have an account?
+          <View style={styleLoginHome.footer}>
+            <Text style={styleLoginHome.titleDontHaveAccount}>
+            {i18n.t("auth.dontHaveAccount")}
             </Text>
             <Sizebox width={5} />
             <TouchableOpacity
               onPress={() => navigation.navigate("SignUpScreen")}
+              // onPress={() => navigation.navigate("ConfirmInformationScreen")}
             >
-              <Text style={styles.titleSignUp}>Sign up</Text>
+              <Text style={styleLoginHome.titleSignUp}> {i18n.t("auth.signUp")}</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
@@ -75,57 +75,3 @@ const LoginHomeScreen = ({ navigation }) => {
 
 export default LoginHomeScreen;
 
-const styles = StyleSheet.create({
-  content: {
-    alignItems: "center",
-    paddingHorizontal: 15,
-    flexGrow: 1,
-  },
-  title: {
-    marginVertical:
-      Device.osName === 'iOS' ? windowHeight / 6.2 : windowHeight / 5,
-    fontWeight: "600",
-    letterSpacing: 1,
-    fontSize: windowWidth / 9.5,
-  },
-  contentButton: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  imageIcon: {
-    width: windowWidth / 15,
-    height: windowWidth / 15,
-  },
-  buttonLoginGoogle: {
-    paddingVertical: 14,
-    width: "100%",
-    borderRadius: 15,
-    backgroundColor: ColorAssets.transparentColor,
-    borderColor: ColorAssets.greyColor200,
-    alignItems: "center",
-    borderWidth: 1,
-  },
-  titleGoogle: {
-    fontWeight: "bold",
-    color: ColorAssets.blackolor,
-    fontSize: windowWidth / 24,
-  },
-  footer: {
-    flexDirection: "row",
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  titleDontHaveAccount: {
-    color: ColorAssets.greyColor,
-  },
-  titleSignUp: {
-    color: ColorAssets.greenColor,
-    fontWeight: "bold",
-  },
-  hr: {
-    backgroundColor: ColorAssets.greyColor200, height: 1, width: '44%'
-  }
-});

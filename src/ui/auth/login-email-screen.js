@@ -1,7 +1,7 @@
 import {
   Dimensions,
   ScrollView,
-  StyleSheet,
+  styleLoginEmailheet,
   Text,
   TouchableOpacity,
   View,
@@ -21,22 +21,22 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CheckBox from "expo-checkbox";
-import { setToken } from "../../redux/actions/typeAction";
+import { saveAccount, setToken } from "../../redux/actions/typeAction";
 import { CustomTextInput } from "../../common/custom/custom-textInput";
 import { StackActions } from "@react-navigation/native";
 import SharedPreferences from "../../database/share_preferences_helper";
 import { changeScreenWithOutTime } from "../../utils/navigation-utils";
 
 import { handleLogIn } from "../../api/auth/auth-services";
-const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
+import { styleLoginEmail } from "./styles";
+import i18n from "../../l10n/i18n";
+
 const LoginEmailScreen = ({ navigation }) => {
   // lấy dữ liệu user
   const getUserRes = useSelector((state) => state.register.user);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [textError, setTextError] = useState("");
-  const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [statusLoading, setStatusLoading] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -48,14 +48,16 @@ const LoginEmailScreen = ({ navigation }) => {
     try {
       setStatusLoading(true);
       const response = await handleLogIn(username, password);
+      console.log(response);
       if (response.status == 200) {
         // nếu return 200 =>
         dispatch(setToken(response.data.accessToken));
-        SharedPreferences.SET_USER_DATA({ username, password });
+        dispatch(saveAccount( {username, password }));
+
+        // SharedPreferences.SET_USER_DATA({ username, password });
         SharedPreferences.SET_TOKEN(response.data.refreshToken);
         const fullName = response.data.user.fullname;
         const id = response.data.user._id;
-        console.log(id);
         SharedPreferences.SET_USER_INFO({ fullName, id });
         changeScreenWithOutTime(navigation, "MainScreen");
       }
@@ -87,13 +89,17 @@ const LoginEmailScreen = ({ navigation }) => {
             style={containScreenAssets.scrollView}
             contentContainerStyle={containScreenAssets.scrollViewContent}
           >
-            <View style={styles.content}>
-              <Text style={styles.title}>Login to your Account</Text>
-              <Text style={styles.textError}>{textError}</Text>
+            <View style={styleLoginEmail.content}>
+              <Text style={styleLoginEmail.title}>
+                {i18n.t("auth.email.loginToYourAccount")}
+              </Text>
+              <Text style={styleLoginEmail.textError}>{textError}</Text>
               <CustomTextInput
                 iconName={"user"}
                 fillText={username ? true : false}
                 placeholder={"Username"}
+                errorText={"Vui lòng không để trống"}
+
                 showHide={false}
                 valueText={username}
                 onChangeText={(e) => {
@@ -105,6 +111,7 @@ const LoginEmailScreen = ({ navigation }) => {
                 iconName={"lock"}
                 fillText={password ? true : false}
                 placeholder={"Password"}
+                errorText={"Vui lòng không để trống"}
                 secureTextEntry={true}
                 showHide={true}
                 valueText={password}
@@ -112,41 +119,34 @@ const LoginEmailScreen = ({ navigation }) => {
                   setPassword(e);
                 }}
               />
-              <Sizebox height={20} />
-              <View style={styles.section}>
-                <CheckBox
-                  style={styles.checkbox}
-                  value={toggleCheckBox}
-                  onValueChange={setToggleCheckBox}
-                  color={toggleCheckBox ? "#1AB65C" : undefined}
-                />
-                <Text style={styles.paragraph}>Remmember me</Text>
-              </View>
+             
               <Sizebox height={30} />
 
               {username && password ? (
                 <CustomButton
-                  style={styles.button}
-                  title="Sign in"
+                  style={styleLoginEmail.button}
+                  title={i18n.t("auth.signIn")}
                   onPress={handleFormSubmit}
                 />
               ) : (
-                <CustomHideButton title={"Sign in"} />
+                <CustomHideButton title={i18n.t("auth.signIn")} />
               )}
 
               <Sizebox height={15} />
               <TouchableOpacity
-                style={styles.titleFogotPassword}
+                style={styleLoginEmail.titleFogotPassword}
                 onPress={() => {
                   navigation.navigate("ForgotPassword");
                 }}
               >
-                <Text style={styles.titleSignUp}>Forgot the password?</Text>
+                <Text style={styleLoginEmail.titleSignUp}>
+                  {i18n.t("auth.email.fogotThePassword")}
+                </Text>
               </TouchableOpacity>
             </View>
-            <View style={styles.footer}>
-              <Text style={styles.titleDontHaveAccount}>
-                Dont have an account?
+            <View style={styleLoginEmail.footer}>
+              <Text style={styleLoginEmail.titleDontHaveAccount}>
+                {i18n.t("auth.dontHaveAccount")}
               </Text>
               <Sizebox width={5} />
               <TouchableOpacity
@@ -154,13 +154,15 @@ const LoginEmailScreen = ({ navigation }) => {
                   navigation.dispatch(StackActions.replace("SignUpScreen"))
                 }
               >
-                <Text style={styles.titleSignUp}>Sign up</Text>
+                <Text style={styleLoginEmail.titleSignUp}>
+                  {i18n.t("auth.signUp")}
+                </Text>
               </TouchableOpacity>
             </View>
           </ScrollView>
         </KeyboardAvoidingView>
         {statusLoading ? (
-          <View style={styles.boxLoading}>
+          <View style={styleLoginEmail.boxLoading}>
             <ActivityIndicator size={"large"} color="#2196F3" />
           </View>
         ) : (
@@ -172,64 +174,3 @@ const LoginEmailScreen = ({ navigation }) => {
 };
 
 export default LoginEmailScreen;
-
-const styles = StyleSheet.create({
-  content: {
-    alignItems: "flex-start",
-    paddingHorizontal: 15,
-    flexGrow: 1,
-  },
-  title: {
-    marginVertical: windowHeight / 15,
-    fontWeight: "600",
-    letterSpacing: 1,
-    fontSize: windowWidth / 9.5,
-  },
-  footer: {
-    flexDirection: "row",
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  titleDontHaveAccount: {
-    color: ColorAssets.greyColor,
-  },
-  titleSignUp: {
-    color: ColorAssets.greenColor,
-    fontWeight: "bold",
-  },
-  titleFogotPassword: {
-    width: "100%",
-    alignItems: "center",
-  },
-  section: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-  },
-  paragraph: {
-    fontSize: 15,
-  },
-  checkbox: {
-    margin: 8,
-    borderRadius: 6,
-    borderColor: "#1AB65C",
-    borderWidth: 3,
-  },
-  textError: {
-    fontSize: 16,
-    color: "red",
-    marginHorizontal: 10,
-    marginBottom: 8,
-  },
-  boxLoading: {
-    position: "absolute",
-    height: "100%",
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-  },
-});

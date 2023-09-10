@@ -8,16 +8,28 @@ import LoginEmailScreen from '../ui/auth/login-email-screen';
 import SignUpScreen from '../ui/auth/screen/sign-up-screen';
 import ForgotPassword from '../ui/auth/screen/forgot-password'
 import ForgotPasswordInputCode from '../ui/auth/screen/forgot-password-inputcode'
-import ConfirmInformationScreen from '../ui/auth/screen/confirm-information-screen';
+import ConfirmInformationScreen from '../ui/auth/screen/confirm-information-screen-not-apply';
 import CreateNewPassword from '../ui/auth/screen/create-new-password'
 import BottomNavigation from './bottom-route-config';
 import HotelDetailsSCreen from '../ui/hotel_details';
 import BookingScreen from '../ui/booking';
-import Booked from '../ui/home/components/Booked';
+import Booked from '../ui/booked/Booked';
 import HotelPhotoScreen from '../ui/hotel_details/Screen/HotelPhoTos';
 import HotelLocationScreen from '../ui/hotel_details/Screen/HotelLocation';
 import HotelReviewScreen from '../ui/hotel_details/Screen/HotelReview';
-import PayScreen from '../ui/booking/payScreen';
+import PayScreen from '../ui/paying/index';
+import TypeOfRoom from '../ui/type_of_room';
+import AddHotelScreen from '../ui/add_hotel';
+import Room_in_hotel from '../ui/room';
+import AddRoomScreen from '../ui/room/add_room';
+import AddressScreen from '../ui/add_hotel/screen/add_province';
+import AddDistrictScreen from '../ui/add_hotel/screen/add_district';
+import AddWardScreen from '../ui/add_hotel/screen/add_ward';
+
+
+
+
+
 const Stack = createNativeStackNavigator();
 
 export default TabsNavigation = () => {
@@ -43,6 +55,13 @@ export default TabsNavigation = () => {
       <Stack.Screen name="HotelLocationScreen" component={HotelLocationScreen} options={{animation:'slide_from_right'}}/>
       <Stack.Screen name="HotelReviewScreen" component={HotelReviewScreen} options={{animation:'slide_from_right'}}/>
       <Stack.Screen name="PayScreen" component={PayScreen} options={{animation:'slide_from_right'}}/>
+      <Stack.Screen name="TypeOfRoom" component={TypeOfRoom} options={{animation:'slide_from_right'}}/>
+      <Stack.Screen name="AddHotelScreen" component={AddHotelScreen} options={{animation:'slide_from_bottom'}}/>
+      <Stack.Screen name="RoomInHotel" component={Room_in_hotel} options={{animation:'slide_from_bottom'}}/>
+      <Stack.Screen name="AddRoomScreen" component={AddRoomScreen} options={{animation:'slide_from_bottom'}}/>
+      <Stack.Screen name="AddressScreen" component={AddressScreen} options={{animation:'slide_from_bottom'}}/>
+      <Stack.Screen name="AddDistrictScreen" component={AddDistrictScreen} options={{animation:'slide_from_right'}}/>
+      <Stack.Screen name="AddWardScreen" component={AddWardScreen} options={{animation:'slide_from_right'}}/>
 
     </Stack.Navigator>
   );

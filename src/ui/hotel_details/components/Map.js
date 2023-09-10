@@ -1,12 +1,8 @@
 
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react'
-import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete"
 import MapView, { Callout, Circle, Marker } from "react-native-maps"
-import { Dimensions } from 'react-native'
-import Ionicons from "react-native-vector-icons/Ionicons";
-import { Image } from 'react-native'
-
+import styles from './styles';
 export default function Maps(props) {
     const [pin, setPin] = React.useState({
         latitude: 37.78825,
@@ -23,7 +19,7 @@ export default function Maps(props) {
         console.log(isSmall);
     }, [])
     return (
-        <View style={isSmall ? styles.containerTrue : styles.containerFalse}>
+        <View style={isSmall ? styles.map_containerTrue : styles.map_containerFalse}>
             {/* <GooglePlacesAutocomplete
 				placeholder="Search"
 				fetchDetails={true}
@@ -54,7 +50,7 @@ export default function Maps(props) {
 				}}
 			/> */}
             <MapView
-                style={isSmall ? styles.mapTrue : styles.mapFalse}
+                style={isSmall ? styles.map_mapTrue : styles.map_mapFalse}
                 initialRegion={{
                     latitude: 37.78825,
                     longitude: -122.4324,
@@ -86,30 +82,3 @@ export default function Maps(props) {
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    containerFalse: {
-        alignSelf: 'center',
-        width: Dimensions.get("window").width * 0.9,
-        height: Dimensions.get("window").width * 0.5,
-        borderRadius: 10,
-        overflow: 'hidden',
-        marginTop: 20,
-    },
-    containerTrue: {
-        alignSelf: 'center',
-        width: Dimensions.get("window").width,
-        height: Dimensions.get("window").height,
-        borderRadius: 10,
-        overflow: 'hidden',
-        marginTop: 100
-    },
-    mapFalse: {
-        width: Dimensions.get("window").width * 0.9,
-        height: Dimensions.get("window").width * 0.5,
-    },
-    mapTrue: {
-        width: Dimensions.get("window").width,
-        height: Dimensions.get("window").height,
-    }
-})
