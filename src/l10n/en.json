@@ -35,6 +35,12 @@
     "cancel": "Cancel",
     "continue": "Continue"
   },
+  "addRoom":{
+    "RoomAcreage":"Room Acreage",
+    "Description":"Description",
+    "TypeRoom":"Type room",
+    "SelectTypeOfRoom":"Select type of room"
+  },
   "booking": {
     "title": "Booking History",
     "onGoing": "On Going",

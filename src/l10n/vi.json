@@ -37,6 +37,12 @@
     "continue": "Tiếp tục"
     
   },
+  "addRoom":{
+    "RoomAcreage":"Diện tích phòng",
+    "Description":"Mô tả",
+    "TypeRoom":"Loại phòng",
+    "SelectTypeOfRoom":"Chọn loại phòng"
+  },
   "booking": {
     "title": "Lịch sử đặt phòng",
     "onGoing": "Đang diễn ra",
