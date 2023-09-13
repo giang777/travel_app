@@ -1,16 +1,16 @@
 const arrCity = [
 
-    { id: 2, city: "Đà Nẵng" },
-    { id: 3, city: 'Hà Nội' },
-    { id: 4, city: 'TP Hồ Chí Minh' },
-    { id: 5, city: 'Nha Trang' },
+    { idcity: 1, city: "Đà Nẵng" },
+    { idcity: 2, city: 'Hà Nội' },
+    { idcity: 3, city: 'TP Hồ Chí Minh' },
+    { idcity: 4, city: 'Nha Trang' },
 ];
 
 const arrResults = [
-    { id: 1, title: "Highest Popularity" },
-    { id: 2, title: "Highest Price" },
-    { id: 3, title: 'Low Popularity' },
-    { id: 4, title: 'Low Price' },
+    { idRs: 1, title: "Highest Popularity" },
+    { idRs: 2, title: "Highest Price" },
+    { idRs: 3, title: 'Low Popularity' },
+    { idRs: 4, title: 'Low Price' },
 
 ]
 const arrStar = [

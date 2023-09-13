@@ -6,7 +6,7 @@ import { arrFakeDataOngoing } from "../fakeData";
 export default OngoingScreen = ({ showModal }) => {
   return (
     <FlatList
-      style={{ paddingHorizontal: 10 }}
+      style={{ paddingHorizontal: 10}}
       data={arrFakeDataOngoing}
       renderItem={({ item }) => (
         <ItemOngoing item={item} showModal={showModal} />

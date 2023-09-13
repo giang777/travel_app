@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { Image, StyleSheet, Dimensions, View, ScrollView, Text } from "react-native";
 import HeaderCustom from "../../../common/HeaderCustom";
-import Maps from "../Map";
-
+import Maps from "../components/Map";
+import styles from './styles';
 var { width } = Dimensions.get("window");
 
 const HotelLocationScreen = (props) => {
@@ -17,25 +17,5 @@ const HotelLocationScreen = (props) => {
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    imageBanner: {
-        height: width * 0.4,
-        width: width * 0.4,
-        borderWidth: 2,
-        borderRadius: 10
-    },
-    item: {
-        width: width * 0.4,
-        margin: width * 0.05
-    },
-    flex: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginTop:80
-    },
-});
 
 export default HotelLocationScreen;

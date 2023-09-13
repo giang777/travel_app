@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Image, StyleSheet, Dimensions, View, ScrollView, Text } from "react-native";
 import HeaderCustom from "../../../common/HeaderCustom";
-
+import styles from './styles';
 var { width } = Dimensions.get("window");
 
 const HotelPhotoScreen = (props) => {
@@ -19,10 +19,10 @@ const HotelPhotoScreen = (props) => {
     return (
         <View style={{ flex: 1 }}>
             <ScrollView>
-                <View style={styles.flex}>
+                <View style={styles.HotelPhotoScreen_flex}>
                     {list.map((item, index) => {
-                        return (<View key={index} style={styles.item}>
-                            <Image resizeMode={"cover"} style={styles.imageBanner} source={{ uri: item ? item : 'https://toppng.com/uploads/preview/file-upload-image-icon-115632290507ftgixivqp.png' }} />
+                        return (<View key={index} style={styles.HotelPhotoScreen_item}>
+                            <Image resizeMode={"cover"} style={styles.HotelPhotoScreen_imageBanner} source={{ uri: item ? item : 'https://toppng.com/uploads/preview/file-upload-image-icon-115632290507ftgixivqp.png' }} />
                         </View>)
                     })}
                 </View>
@@ -31,25 +31,5 @@ const HotelPhotoScreen = (props) => {
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    imageBanner: {
-        height: width * 0.4,
-        width: width * 0.4,
-        borderWidth: 2,
-        borderRadius: 10
-    },
-    item: {
-        width: width * 0.4,
-        margin: width * 0.05
-    },
-    flex: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginTop:80
-    },
-});
 
 export default HotelPhotoScreen;

@@ -15,7 +15,31 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
-
+  rememberPassword: {
+    paddingVertical: 5,
+    paddingVertical:8,
+    paddingHorizontal: 15,
+    backgroundColor: ColorAssets.greyColor100,
+  },
+  viewButton: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    gap: 10,
+  },
+  rememberButton: {
+    width: 110,
+    height: 40,
+    paddingHorizontal:8,
+    borderRadius: 100 / 2,
+    backgroundColor: ColorAssets.greenColor,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  textRememberPassword: {
+    fontSize: 19,
+    fontWeight: 600,
+  },
   viewHeaderItemLeft: {
     flex: 8,
     flexDirection: "row",
@@ -51,14 +75,15 @@ const styles = StyleSheet.create({
   },
 
   searchBar: {
-    paddingHorizontal: 15,
     marginBottom: 10,
-    marginTop: 60
+    marginTop: 60,
   },
 
   textWelcome: {
     fontSize: 30,
     fontWeight: "700",
+    marginLeft:15,
+
   },
 
   viewSearch: {
@@ -70,6 +95,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginTop: 20,
     paddingHorizontal: 15,
+    marginHorizontal: 15,
   },
 
   viewOptions: {

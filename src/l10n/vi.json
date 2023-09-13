@@ -1,5 +1,131 @@
 {
-  "home": "Trang chủ",
-  "profile": "Hồ sơ",
-  "settings": "Cài đặt"
+  "navbar": {
+    "home": "Trang chủ",
+    "profile": "Tôi",
+    "search": "Tìm kiếm",
+    "booking": "Đặt phòng"
+  },
+  "home": {
+    "hello": "Xin chào",
+    "search": "Tìm kiếm Khách sạn",
+    "recommended": "Đề xuất",
+    "popular": "Phổ biến",
+    "trending": "Đang thịnh hành",
+    "top": "Top",
+    "recentylyBooked": "Các giao dịch gần đây",
+    "seeAll": "Xem thêm",
+    "rememberPassword": "Bạn có muốn lưu mật khẩu để sử dụng cho lần đăng nhập sau này không?",
+    "later":"Lúc khác",
+    "saveAccount":"Có, lưu mật khẩu"
+
+  },
+  "addHotel": {
+    "insufficientPermission": "Không đủ quyền!",
+    "grantCameraAccess": "Bạn cần cấp quyền truy cập máy ảnh để sử dụng ứng dụng này",
+    "incompleteImages": "Hình ảnh chưa đầy đủ.",
+    "selectAtLeast6Images": "Vui lòng chọn ít nhất 6 hình ảnh trước khi thêm Khách sạn.",
+    "addHotel": "Thêm Khách sạn",
+    "media": "Ảnh",
+    "hotelName": "Tên Khách sạn",
+    "hotelAddress": "Địa chỉ Khách sạn",
+    "hotelDescription": "Mô tả Khách sạn",
+    "openTime": "Thời gian mở cửa",
+    "closeTime": "Thời gian đóng cửa",
+    "hotline": "Hotline",
+    "place": "Địa điểm",
+    "cancel": "Huỷ",
+    "continue": "Tiếp tục"
+    
+  },
+  "booking": {
+    "title": "Lịch sử đặt phòng",
+    "onGoing": "Đang diễn ra",
+    "completed": "Hoàn thành",
+    "canceled": "Đã hủy",
+    "status": {
+      "paid": "Đã thanh toán",
+      "completed": "Hoàn thành",
+      "canceled": "Đã hủy & Hoàn tiền"
+    },
+    "cancelBooking": "Hủy Đặt Phòng",
+    "cancelConfirmation": "Bạn có chắc chắn muốn hủy đặt phòng Khách sạn của bạn không?",
+    "refundPolicy": "Chỉ có thể hoàn lại 80% số tiền từ thanh toán của bạn theo chính sách của chúng tôi",
+    "cancel": "Huỷ",
+    "yesContinue": "Có, Tiếp tục",
+    "viewTicket": "Xem Vé",
+    "completionMessage": "Yeay. Bạn đã hoàn thành nó!",
+    "cancellationMessage": "Bạn đã hủy đặt phòng Khách sạn này"
+  },
+  "profile": {
+    "title": "Trang cá nhân",
+    "payment": "Thanh toán",
+    "startSelling": "Bắt đầu bán hàng",
+    "freeRegistration": "Đăng ký miễn phí",
+    "myLikes": "Yêu thích của tôi",
+    "followingHotels": "Các Khách sạn theo dõi",
+    "recentlyViewed": "Mới xem gần đây",
+    "myRating": "Đánh giá của tôi",
+    "notifications": "Thông báo",
+    "security": "Bảo mật",
+    "help": "Trợ giúp",
+    "darkTheme": "Chế độ tối",
+    "logOut": "Đăng xuất"
+  },
+  "auth": {
+    "home": {
+      "letsYouIn": "Mời đăng nhập",
+      "continueWithGoogle": "Đăng nhập bằng Google",
+      "signInWithUsername": "Đăng nhập bằng Username"
+    },
+    "email": {
+      "loginToYourAccount": "Đăng nhập vào tài khoản của bạn",
+      "fogotThePassword": "Quên mật khẩu?",
+      "rememberMe": "Nhớ tài khoản"
+    },
+    "register": {
+      "createYourAccount": "Tạo tài khoản của bạn",
+      "usernameAtLeastFiveCharacters": "Username (ít nhất 5 ký tự)",
+      "fullName": "Họ và tên",
+      "password": "Mật khẩu (ít nhất 6 ký tự)",
+      "rePassword": "Nhập lại mật khẩu"
+    },
+    "fogotPassword": {
+      "title": "Quên mật khẩu",
+      "pleaseEnterEmail": "Vui lòng nhập địa chỉ email của bạn",
+      "continue": "Tiếp tục",
+      "FGPInput": {
+        "codeHasBeenSentTo": "Mã đã được gửi đến...",
+        "resendCodeIn": "Gửi lại mã sau ",
+        "verify": "Xác minh"
+      }
+    },
+    "newPassword": {
+      "createNewPassword": "Tạo mật khẩu mới của bạn",
+      "confirmPassword": "Xác nhận mật khẩu"
+    },
+    "modal": {
+      "congratulations": "Chúc mừng!",
+      "accountReadyToUse": "Tài khoản của bạn đã sẵn sàng để sử dụng",
+      "goToLogin": "Đi đến Đăng nhập",
+      "doYouWantToBack": "Bạn có muốn quay lại không?",
+      "cancel": "Huỷ",
+      "yes": "Quay lại"
+    },
+    "dontHaveAccount": "Chưa có tài khoản?",
+    "signUp": "Đăng ký",
+    "alreadyHaveAccount": "Đã có tài khoản?",
+    "signIn": "Đăng nhập"
+  },
+  "paying":{
+    "selectPaymentRefundMethod": "Vui lòng chọn phương thức hoàn tiền thanh toán (chỉ hoàn lại 80%).",
+    "textPaid": "Đã thanh toán: ",
+    "textRefund": "Hoàn tiền: ",
+    "confirmCancellation": "Xác nhận Hủy đặt hàng",
+    "successfulText": {
+      "title": "Thành công!",
+      "description": "Bạn đã hủy đơn hàng thành công. 80% số tiền sẽ được hoàn lại vào tài khoản của bạn"
+    },
+    "goBackButtonText": "OK"
+  }
+ 
 }

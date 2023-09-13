@@ -29,3 +29,19 @@ export const handleAddTOR = async (name, price, slot,idOwner  ) => {
       
   }
 };
+
+export const handledGetTOR = async () => {
+  try {
+    const headers = {
+      Authorization: await SharedPreferences.GET_TOKEN(),
+      RefreshToken: await SharedPreferences.GET_TOKEN(),
+    };
+    const response = await axiosClient.get(
+      `/${ADD_URL}`,
+      {headers}
+    );
+    return response;
+  } catch (error) {
+    console.log(`error type-of-room-service: ${error.message}`);   
+  }
+};

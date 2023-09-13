@@ -4,6 +4,7 @@ import { Modal } from "react-native";
 import { changeScreenWithOutTime } from "../../../utils/navigation-utils";
 import { styleFGPSuccess, styleModalView } from "../styles";
 import { IconAssets } from "../../../utils/app-assets";
+import i18n from "../../../l10n/i18n";
 const ModalView = ({
   show,
   navigation,
@@ -19,10 +20,10 @@ const ModalView = ({
           <View style={styleFGPSuccess.modalView}>
             <Image source={IconAssets.done} style={styleFGPSuccess.icon} />
             <Text style={styleFGPSuccess.congratulationView}>
-              Congratulations!
+              {i18n.t("auth.modal.congratulations")}
             </Text>
             <Text style={styleFGPSuccess.success}>
-              Your account is ready to use
+            {i18n.t("auth.modal.accountReadyToUse")}
             </Text>
             <TouchableOpacity
               style={styleFGPSuccess.btngohome}
@@ -30,7 +31,7 @@ const ModalView = ({
                 changeScreenWithOutTime(navigation, "LoginEmailScreen");
               }}
             >
-              <Text style={styleFGPSuccess.textgohome}>Go to Login</Text>
+              <Text style={styleFGPSuccess.textgohome}>{i18n.t("auth.modal.goToLogin")}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -43,7 +44,7 @@ const ModalView = ({
           style={[styleModalView.centeredView, show ? { flex: 1 } : undefined]}
         >
           <View style={styleModalView.modalView}>
-            <Text style={styleModalView.titleModal}>Do you want to back?</Text>
+            <Text style={styleModalView.titleModal}>{i18n.t("auth.modal.doYouWantToBack")}</Text>
             <View style={styleModalView.button}>
               <TouchableOpacity
                 style={[styleModalView.btncancel, styleModalView.shadowButton]}
@@ -51,7 +52,7 @@ const ModalView = ({
                   hideDialogBackScreen();
                 }}
               >
-                <Text style={styleModalView.textcancel}>Cancel</Text>
+                <Text style={styleModalView.textcancel}>{i18n.t("auth.modal.cancel")}</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={[styleModalView.btngohome, styleModalView.shadowButton]}
@@ -60,7 +61,7 @@ const ModalView = ({
                   navigation.pop();
                 }}
               >
-                <Text style={styleModalView.textgohome}>Yes</Text>
+                <Text style={styleModalView.textgohome}>{i18n.t("auth.modal.yes")}</Text>
               </TouchableOpacity>
             </View>
           </View>
