@@ -126,5 +126,32 @@ export default styles = StyleSheet.create({
     color: ColorAssets.whiteColor,
   },
 
+  title: {
+    fontSize: 17,
+    width: "100%",
+    fontWeight: "bold",
+    textAlign: "left",
+    marginBottom: 8,
+  },
+
+  container_type_room:{
+    width: "100%",
+    zIndex: 1,
+    borderRadius: 20,
+    paddingHorizontal: 15,
+    alignItems: "center",
+    flexDirection: "row",
+    position: "relative",
+  },
+
+  boxLoading: {
+    position: "absolute",
+    height: "100%",
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: ColorAssets.greyColor300,
+  },
+   
   
 });

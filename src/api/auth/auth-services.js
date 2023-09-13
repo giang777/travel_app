@@ -2,11 +2,12 @@
 
 import SharedPreferences from "../../database/share_preferences_helper";
 import axiosClient from "../axios-client";
+import { app_api } from "../config";
 import { LOGIN_URL, LOGOUT_URL } from "./config";
 
 export const handleLogOut = async () => {
   try {
-    const response = await axiosClient.post(`/${LOGOUT_URL}`, {
+    const response = await axiosClient.post(`${app_api}/${LOGOUT_URL}`, {
       token: await SharedPreferences.GET_TOKEN(),
     });
     return response.status;
@@ -17,7 +18,7 @@ export const handleLogOut = async () => {
 
 export const handleLogIn = async (username, password) => {
   try {
-    const response = await axiosClient.post(`/${LOGIN_URL}`, {
+    const response = await axiosClient.post(`${app_api}/${LOGIN_URL}`, {
       username,
       password,
     });

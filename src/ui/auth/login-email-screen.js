@@ -98,6 +98,8 @@ const LoginEmailScreen = ({ navigation }) => {
                 iconName={"user"}
                 fillText={username ? true : false}
                 placeholder={"Username"}
+                errorText={"Vui lòng không để trống"}
+
                 showHide={false}
                 valueText={username}
                 onChangeText={(e) => {
@@ -109,6 +111,7 @@ const LoginEmailScreen = ({ navigation }) => {
                 iconName={"lock"}
                 fillText={password ? true : false}
                 placeholder={"Password"}
+                errorText={"Vui lòng không để trống"}
                 secureTextEntry={true}
                 showHide={true}
                 valueText={password}

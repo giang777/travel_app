@@ -35,6 +35,12 @@
     "cancel": "Cancel",
     "continue": "Continue"
   },
+  "addRoom":{
+    "RoomAcreage":"Room Acreage",
+    "Description":"Description",
+    "TypeRoom":"Type room",
+    "SelectTypeOfRoom":"Select type of room"
+  },
   "booking": {
     "title": "Booking History",
     "onGoing": "On Going",
@@ -124,5 +130,12 @@
       "description": "You have successfully canceled your order. 80% funds will be returned to your account"
     },
     "goBackButtonText": "OK"
+  },
+
+  "alert":{
+    "warning":"Warning",
+    "string_emty":"Please do not leave comments",
+    "numberPhone_emty":"Do not leave the phone number blank",
+    "address_emty":"Do not leave the address blank"
   }
 }

@@ -37,6 +37,12 @@
     "continue": "Tiếp tục"
     
   },
+  "addRoom":{
+    "RoomAcreage":"Diện tích phòng",
+    "Description":"Mô tả",
+    "TypeRoom":"Loại phòng",
+    "SelectTypeOfRoom":"Chọn loại phòng"
+  },
   "booking": {
     "title": "Lịch sử đặt phòng",
     "onGoing": "Đang diễn ra",
@@ -126,6 +132,13 @@
       "description": "Bạn đã hủy đơn hàng thành công. 80% số tiền sẽ được hoàn lại vào tài khoản của bạn"
     },
     "goBackButtonText": "OK"
+  },
+
+  "alert":{
+    "warning":"Thông báo",
+    "string_emty":"Vui lòng không để trống",
+    "numberPhone_emty":"Không để chống số điện thoại",
+    "address_emty":"Vui lòng nhập địa chỉ"
   }
  
 }

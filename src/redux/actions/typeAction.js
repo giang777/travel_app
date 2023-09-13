@@ -32,3 +32,16 @@ export const saveAccount = (account) => ({
   type: "SAVE_ACCOUNT",
   payload: account,
 });
+export const setProvinces = (provinces) => ({
+  type: 'SET_PROVINCES',
+  payload: provinces,
+});
+
+export const setDistricts = (districts) => ({
+  type: 'SET_DISTRICTS',
+  payload: districts,
+});
+export const setWards = (wards) => ({
+  type: 'SET_WARDS',
+  payload: wards,
+});

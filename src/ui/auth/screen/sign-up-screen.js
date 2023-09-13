@@ -82,11 +82,7 @@ const SignUpScreen = ({ navigation }) => {
   };
   console.log(statusFillText);
   return (
-    <View
-      style={
-        containScreenAssets.container
-      }
-    >
+    <View style={containScreenAssets.container}>
       {statusLoading ? (
         <LoadingCustom
           avatar={
@@ -94,12 +90,16 @@ const SignUpScreen = ({ navigation }) => {
           }
         />
       ) : (
-        <SafeAreaView style={[
-          containScreenAssets.safeAreaView,
-         { backgroundColor: statusFillText
-          ? ColorAssets.greyColor300
-          : ColorAssets.whiteColor,}
-        ]}>
+        <SafeAreaView
+          style={[
+            containScreenAssets.safeAreaView,
+            {
+              backgroundColor: statusFillText
+                ? ColorAssets.greyColor300
+                : ColorAssets.whiteColor,
+            },
+          ]}
+        >
           <View style={[containScreenAssets.container]}>
             <AppBar onPress={showDialogBackScreen} />
             <ScrollView
@@ -107,21 +107,27 @@ const SignUpScreen = ({ navigation }) => {
               contentContainerStyle={containScreenAssets.scrollViewContent}
             >
               <View style={styleSignUp.content}>
-                <Text style={styleSignUp.title}>{i18n.t("auth.register.createYourAccount")}</Text>
+                <Text style={styleSignUp.title}>
+                  {i18n.t("auth.register.createYourAccount")}
+                </Text>
                 <CustomTextInput
                   condition={username.length > 4 ? true : false}
                   fillText={username ? true : false}
                   iconName={"user"}
+                  errorText={"Vui lòng không để trống"}
                   onChangeText={(text) => {
                     setUsername(text);
                   }}
-                  placeholder={i18n.t("auth.register.usernameAtLeastFiveCharacters")}
+                  placeholder={i18n.t(
+                    "auth.register.usernameAtLeastFiveCharacters"
+                  )}
                 />
                 <Sizebox height={20} />
                 <CustomTextInput
                   condition={fullNameRegex.test(fullName) ? true : false}
                   fillText={fullName ? true : false}
                   iconName={"pencil"}
+                  errorText={"Vui lòng không để trống"}
                   onChangeText={(text) => {
                     setFullName(text);
                   }}
@@ -132,6 +138,7 @@ const SignUpScreen = ({ navigation }) => {
                   condition={emailRegex.test(email) ? true : false}
                   fillText={email ? true : false}
                   iconName={"envelope"}
+                  errorText={"Vui lòng không để trống"}
                   onChangeText={(text) => {
                     setEmail(text);
                   }}
@@ -143,6 +150,7 @@ const SignUpScreen = ({ navigation }) => {
                   fillText={password ? true : false}
                   secureTextEntry={true}
                   showHide={true}
+                  errorText={"Vui lòng không để trống"}
                   iconName={"lock"}
                   onChangeText={(text) => {
                     setPassword(text);
@@ -154,6 +162,7 @@ const SignUpScreen = ({ navigation }) => {
                   condition={rePassword == password ? true : false}
                   fillText={rePassword ? true : false}
                   secureTextEntry={true}
+                  errorText={"Vui lòng không để trống"}
                   showHide={true}
                   iconName={"lock"}
                   onChangeText={(text) => {
@@ -190,13 +199,15 @@ const SignUpScreen = ({ navigation }) => {
               </View>
               <View style={styleSignUp.footer}>
                 <Text style={styleSignUp.titleAlreadyHaveAccount}>
-                {i18n.t("auth.alreadyHaveAccount")}
+                  {i18n.t("auth.alreadyHaveAccount")}
                 </Text>
                 <Sizebox width={5} />
                 <TouchableOpacity
                   onPress={() => navigation.navigate("LoginEmailScreen")}
                 >
-                  <Text style={styleSignUp.titleSignIn}>{i18n.t("auth.signIn")}</Text>
+                  <Text style={styleSignUp.titleSignIn}>
+                    {i18n.t("auth.signIn")}
+                  </Text>
                 </TouchableOpacity>
               </View>
               <ModalView
