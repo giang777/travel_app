@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View,Image } from 'react-native'
+import { ScrollView, StyleSheet, Text, View, Image } from 'react-native'
 import React, { useState, useEffect } from "react";
 import HeaderCustom from '../../common/HeaderCustom';
 import styles from './styles';
@@ -65,7 +65,7 @@ const HotelDetailsSCreen = (props) => {
       "https://idsb.tmgrup.com.tr/ly/uploads/images/2020/07/02/thumbs/1200x600/44180.jpg",
     ]
 
-    
+
   }
 
   const [bannerData, setBannerData] = useState([]);
@@ -85,28 +85,28 @@ const HotelDetailsSCreen = (props) => {
   return (
     <View style={{ flex: 1 }}>
       <ScrollView>
-      {/*Banner */}
-         <View style={styles.banner_container}>
-        <View style={styles.banner_swiper}>
-          <Swiper
-            showButtons={false}
-            showsPagination={false}
-          >
-            {bannerData.map((item) => {
-              return (
-                <Image
-                  key={item}
-                  style={styles.banner_imageBanner}
-                  resizeMode="contain"
-                  source={{ uri: item }}
-                />
-              );
-            })}
-          </Swiper>
-          <View style={{ height: 30 }}></View>
+        {/*Banner */}
+        <View style={styles.banner_container}>
+          <View style={styles.banner_swiper}>
+            <Swiper
+              showButtons={false}
+              showsPagination={false}
+            >
+              {bannerData.map((item) => {
+                return (
+                  <Image
+                    key={item}
+                    style={styles.banner_imageBanner}
+                    resizeMode="contain"
+                    source={{ uri: item }}
+                  />
+                );
+              })}
+            </Swiper>
+            <View style={{ height: 30 }}></View>
+          </View>
         </View>
-      </View>
-      
+
         {/* <Details item={item} navigation={navigation}></Details> */}
 
 
@@ -122,17 +122,17 @@ const HotelDetailsSCreen = (props) => {
       <HeaderCustom style={styles.Top} navigation={navigation}></HeaderCustom>
 
       {/*Bottom */}
-      <View style={[styles.bottom_flex,styles.bottom_align,styles.bottom_border]}>
-            <View style={[styles.bottom_flex,styles.bottom_align]}>
-                <Text style={styles.bottom_price}>${28}</Text>
-                <Text style={styles.bottom_normal}>/night</Text>
-            </View>
-            <TouchableOpacity style={styles.bottom_button} onPress={() => {
-
-            }}>
-                <Text style={styles.bottom_booking}>Book now !</Text>
-            </TouchableOpacity>
+      <View style={[styles.bottom_flex, styles.bottom_align, styles.bottom_border]}>
+        <View style={[styles.bottom_flex, styles.bottom_align]}>
+          <Text style={styles.bottom_price}>${28}</Text>
+          <Text style={styles.bottom_normal}>/night</Text>
         </View>
+        <TouchableOpacity style={styles.bottom_button} onPress={() => {
+          navigation.navigate('BillScreen')
+        }}>
+          <Text style={styles.bottom_booking}>Book now !</Text>
+        </TouchableOpacity>
+      </View>
     </View >
   )
 }

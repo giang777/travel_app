@@ -307,7 +307,7 @@ const HomeScreen = (props) => {
                   <RenderItemListVertical
                     key={index}
                     item={item}
-                    onPressed={() => navigation.navigate("HotelDetailsScreen")}
+                    onPressed={() => navigation.navigate("HotelDetailsScreen")} 
                   />
                 );
               })}
