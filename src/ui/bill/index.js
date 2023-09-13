@@ -8,22 +8,23 @@ import { FontAwesome, Entypo, MaterialCommunityIcons, Fontisto, AntDesign } from
 import { ColorAssets } from '../../utils/app-assets';
 import { CustomTextInput } from '../../common/custom/custom-textInput';
 import { CustomButton } from '../../common/custom/custom-button';
+import styles from './style'
 
 const BillScreen = ({ navigation }) => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10, paddingVertical: 10, backgroundColor: ColorAssets.greenColor }}>
+            <View style={styles.boxHeader}>
                 <TouchableOpacity onPress={() => {
                     navigation.goBack()
                 }}>
                     <AntdesignIcon style={styles.left} name='arrowleft' size={30} color={'white'} />
                 </TouchableOpacity>
-                <Text style={{ fontSize: 20, fontWeight: 'bold', marginLeft: 8, color: 'white' }}>Payment details</Text>
+                <Text style={styles.textHeader}>Payment details</Text>
             </View>
             <ScrollView>
-                <View style={{ backgroundColor: 'white', paddingVertical: 15 }}>
+                <View style={styles.box1}>
                     <View style={{ flexDirection: 'row' }}>
-                        <Image source={{ uri: 'https://static.leonardo-hotels.com/image/leonardohotelbucharestcitycenter_room_comfortdouble2_2022_4000x2600_7e18f254bc75491965d36cc312e8111f_1200x780_mobile_3.jpeg' }} style={{ height: 100, width: 100, borderRadius: 10, marginHorizontal: 15 }} />
+                        <Image source={{ uri: 'https://static.leonardo-hotels.com/image/leonardohotelbucharestcitycenter_room_comfortdouble2_2022_4000x2600_7e18f254bc75491965d36cc312e8111f_1200x780_mobile_3.jpeg' }} style={styles.img1} />
                         <View style={{ justifyContent: 'space-between' }}>
                             <Text style={{ fontSize: 22, fontWeight: 'bold' }}>My Hotel</Text>
                             <View style={{ flexDirection: 'row' }}>
@@ -31,12 +32,12 @@ const BillScreen = ({ navigation }) => {
                                 <FontAwesome name='star' size={18} color={'yellow'} />
                                 <FontAwesome name='star' size={18} color={'yellow'} />
                             </View>
-                            <View style={{ backgroundColor: ColorAssets.greenColor, padding: 5, borderRadius: 5 }}>
+                            <View style={styles.viewBox1}>
                                 <Text style={{ fontSize: 16, color: 'white' }}>A perfect view</Text>
                             </View>
                         </View>
                     </View>
-                    <View style={{ height: 1, backgroundColor: '#ccc', marginVertical: 15, marginHorizontal: 20 }}></View>
+                    <View style={styles.hr}></View>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 15 }}>
                         <View style={{ flex: 0.8, flexDirection: 'row', justifyContent: 'space-between' }}>
                             <View style={{ flexDirection: 'row' }}>
@@ -140,16 +141,3 @@ const BillScreen = ({ navigation }) => {
 }
 
 export default BillScreen
-
-const styles = StyleSheet.create({
-    shadow: {
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 2,
-    }
-})
