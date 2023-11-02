@@ -37,7 +37,7 @@ const CustomTextInput = ({
   };
   return (
     //on touch start để chọn tỉnh, thàn phố, thằng nào onTouchStart xoá cắt chim
-    <View style={{ marginVertical: 15, width: "100%" }} onTouchStart={onTouchStart}>
+    <View style={{ marginVertical: 5, width: "100%" }} onTouchStart={onTouchStart}>
       {isHaveTitle ? <Text style={styles.title}>{title}</Text> : <View></View>}
 
       <View

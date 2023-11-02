@@ -39,35 +39,35 @@ const LoginEmailScreen = ({ navigation }) => {
   const [textError, setTextError] = useState("");
   const [statusLoading, setStatusLoading] = useState(false);
   const dispatch = useDispatch();
-  useEffect(() => {
-    setUsername(getUserRes.userName);
-    setPassword(getUserRes.passWord);
-  }, [getUserRes.userName, getUserRes.passWord]);
+  // useEffect(() => {
+  //   setUsername(getUserRes.userName);
+  //   setPassword(getUserRes.passWord);
+  // }, [getUserRes.userName, getUserRes.passWord]);
   // hàm refresh accessToken
   const handleFormSubmit = async () => {
-    try {
-      setStatusLoading(true);
-      const response = await handleLogIn(username, password);
-      console.log(response);
-      if (response.status == 200) {
-        // nếu return 200 =>
-        dispatch(setToken(response.data.accessToken));
-        dispatch(saveAccount( {username, password }));
+    changeScreenWithOutTime(navigation, "MainScreen");
+    // try {
+    //   setStatusLoading(true);
+    //   const response = await handleLogIn(username, password);
+    //   console.log(response);
+    //   if (response.status == 200) {
+    //     // nếu return 200 =>
+    //     dispatch(setToken(response.data.accessToken));
+    //     dispatch(saveAccount( {username, password }));
 
-        // SharedPreferences.SET_USER_DATA({ username, password });
-        SharedPreferences.SET_TOKEN(response.data.refreshToken);
-        const fullName = response.data.user.fullname;
-        const id = response.data.user._id;
-        SharedPreferences.SET_USER_INFO({ fullName, id });
-        changeScreenWithOutTime(navigation, "MainScreen");
-      }
+    //     // SharedPreferences.SET_USER_DATA({ username, password });
+    //     SharedPreferences.SET_TOKEN(response.data.refreshToken);
+    //     const fullName = response.data.user.fullname;
+    //     const id = response.data.user._id;
+    //     SharedPreferences.SET_USER_INFO({ fullName, id });
+    //   }
 
-      setStatusLoading(false);
-    } catch (error) {
-      setStatusLoading(false);
-      setTextError(error.response.data.message);
-      console.log(error);
-    }
+    //   setStatusLoading(false);
+    // } catch (error) {
+    //   setStatusLoading(false);
+    //   setTextError(error.response.data.message);
+    //   console.log(error);
+    // }
   };
 
   return (
