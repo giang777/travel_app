@@ -29,3 +29,17 @@ This project built with Expo.
 - npm install
 - npm start
 ```
+
+## Contributors ✨
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a  href="https://github.com/zukhen"><img src="https://avatars.githubusercontent.com/u/103345372?v=4?s=100" width="100px;" alt="VueJSKah"/><br /><sub><b>VueJSKah</b></sub></a></td>
+      <td align="center" valign="top" width="14.28%"><a  href="https://github.com/khanhhehehe"><img src="https://avatars.githubusercontent.com/u/117183565?v=4?s=100" width="100px;" alt="khanhhehehe"/><br /><sub><b>khanhhehehe</b></sub></a></td>
+      <td align="center" valign="top" width="14.28%"><a  href="https://github.com/giang777"><img src="https://avatars.githubusercontent.com/u/117396536?v=4?s=100" width="100px;" alt="giang777"/><br /><sub><b>giang777</b></sub></a></td>
+      <td align="center" valign="top" width="14.28%"><a  href="https://github.com/Nguyendat2109"><img src="https://avatars.githubusercontent.com/u/115649820?v=4?s=100" width="100px;" alt="Nguyendat2109"/><br /><sub><b>Nguyendat2109</b></sub></a> </td>
+      <td align="center" valign="top" width="14.28%"><a  href="https://github.com/sondt2003vn"><img src="https://avatars.githubusercontent.com/u/116846547?v=4?s=100" width="100px;" alt="sondt2003vn"/><br /><sub><b>sondt2003vn</b></sub></a> </td>
+      <td align="center" valign="top" width="14.28%"><a  href="https://github.com/hungtrinhh" ><img src="https://avatars.githubusercontent.com/u/101351150?v=4?s=100" width="100px;" alt="hungtrinhh "/><br /><sub><b>Hung di code dao</b></sub></a> </td>
+    </tr>
+  </tbody>
+</table>
